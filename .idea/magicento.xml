@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MagicentoSettings">
+    <option name="pathToMage" value="Y:/Entwicklung/Neusta/Actindo/connector/app/Mage.php" />
+    <option name="enabled" value="false" />
+    <option name="pathToPhp" value="" />
+    <option name="urlToMagento" value="" />
+    <option name="packages" value="" />
+    <option name="themes" value="" />
+    <option name="projectClosedCorrectly" value="false" />
+    <option name="pathsToMagentoSerialized" value="$PROJECT_DIR$" />
+    <option name="pathToMagentoForNewFiles" value="Y:/Entwicklung/Neusta/Actindo/connector" />
+    <option name="modmanProjectChecked" value="true" />
+    <option name="customSignatures" value="Mage_Sales_Model_Order.getPaymentsCollection = Mage_Sales_Model_Resource_Order_Payment_Collection;;MODEL=sales/order.getPaymentsCollection==RESOURCEMODEL=sales/order_payment_collection&#10;" />
+    <option name="d" value="qlHYFdyXi05jCzg+kOefnwCwqOseHFAR1/oMXU6XBpd7DlX2TCJftb6YpEtlquWfFPVb9eSv6B0V&#13;&#10;KuxVbuEnvDsOiI2OyfFJcLnL7Xriem3/5MAuFli8uTtyOmNa/0RPL9FA81gQgUIDqb0A1wKI9EKz&#13;&#10;nGZnKzGPElNFX0xj0WI=&#13;&#10;" />
+    <option name="advancedTypeInferenceEnabled" value="false" />
+  </component>
+</project>

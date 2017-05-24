@@ -1,0 +1,23 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    api.customer.create:
+      class: AppBundle\Service\CustomerCreate
+      arguments: ['%shop_url%']
+    api.customer.login:
+      class: AppBundle\Service\CustomerLogin
+      arguments: ['%shop_url%']
+    api.customer.data:
+      class: AppBundle\Service\CustomerData
+      arguments: ['%shop_url%']
+
+
+    security.authenticator.api:
+      class: AppBundle\Security\Authenticator\Api
+      arguments: ["@api.customer.login"]
+
+    security.provider.customer:
+      class: AppBundle\Security\Provider\CustomerProvider

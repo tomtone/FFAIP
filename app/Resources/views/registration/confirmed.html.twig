@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'text_success' | trans }}</h1>
+    <a href="{{ path('security_login_form') }}">{{ 'text_login' | trans }}</a>
+{% endblock %}
