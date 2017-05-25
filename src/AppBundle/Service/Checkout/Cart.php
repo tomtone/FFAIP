@@ -159,4 +159,26 @@ class Cart
 
         return $payLoad;
     }
+
+    public function getTotals()
+    {
+        $request = new \GuzzleHttp\Psr7\Request(
+            'GET',
+            $this->shopUrl . 'rest/V1/carts/mine/payment-information',
+            [
+                "Content-Type" => "application/json",
+                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
+            ]
+        );
+        $client = new Client();
+        try {
+            $response = $client->send($request);
+        } catch (RequestException $e) {
+            echo '<pre>';
+            print_r($e->getResponse()->getBody()->getContents());
+            die();
+        }
+        $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        return $responseData;
+    }
 }

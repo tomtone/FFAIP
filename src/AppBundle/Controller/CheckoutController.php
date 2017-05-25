@@ -40,7 +40,28 @@ class CheckoutController extends Controller
     public function cartAction()
     {
         $items = $this->get('api.checkout.cart')->getCartItems();
+        $totals = $this->get('api.checkout.cart')->getTotals();
         
-        return $this->render('checkout/cart.html.twig', ['items' => $items]);
+        return $this->render('checkout/cart.html.twig', [
+            'items' => $items,
+            'totals' => $totals
+        ]);
+    }
+
+    /**
+     * @Route("/checkout/shipping", name="checkout_shipping")
+     */
+    public function checkoutShippingAction()
+    {
+        $shipping = $this->get('api.checkout.shipping')->getShipping();
+        return $this->render('checkout/shipping.html.twig');
+    }
+
+    /**
+     * @Route("/checkout/payment", name="checkout_payment")
+     */
+    public function checkoutPaymentAction()
+    {
+
     }
 }
