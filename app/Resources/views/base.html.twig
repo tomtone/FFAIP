@@ -11,6 +11,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body style="padding-top: 70px;">
@@ -48,6 +50,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('customer') }}">Welcome, {{ app.user }}</a></li>
                     <li><a href="{{ path('security_logout') }}">Logout</a></li>
+                    <li>
+                        <a href="{{ path('checkout_cart')}}">
+                            <i class="fa fa-shopping-cart fa-3" aria-hidden="true"></i>
+                            {{ mini_cart.items }}
+                        </a>
+                    </li>
                 </ul>
             {% endif %}
         </div><!--/.navbar-collapse -->

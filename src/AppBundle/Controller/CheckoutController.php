@@ -31,4 +31,14 @@ class CheckoutController extends Controller
 
         return $this->redirect($this->generateUrl('catalog_product', ['sku' => $sku]));
     }
+
+    /**
+     * @Route("/checkout/cart", name="checkout_cart")
+     */
+    public function cartAction()
+    {
+        $items = $this->get('api.checkout.cart')->getCartItems();
+        
+        return $this->render('checkout/cart.html.twig', ['items' => $items]);
+    }
 }

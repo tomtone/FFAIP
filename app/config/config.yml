@@ -40,6 +40,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
       base_url: "%shop_url%"
+      mini_cart: '@api.checkout.cart'
 
 # Doctrine Configuration
 doctrine:
