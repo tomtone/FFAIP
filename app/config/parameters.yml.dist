@@ -20,3 +20,5 @@ parameters:
 
     # Magento Shop URL
     shop_url: ~
+    shop_admin_user: ~
+    shop_admin_password: ~

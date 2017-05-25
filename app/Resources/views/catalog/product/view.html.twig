@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="col-md-12">
+        <div class="col-md-4">
+            {% for image in product.media_gallery_entries %}
+                <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" style="max-width: 250px"/>
+            {% endfor %}
+        </div>
+        <div class="col-md-8">
+            <h2>{{ product.name }}</h2>
+            {% for attribute in product.custom_attributes %}
+                {% if attribute.attribute_code == 'description' %}
+                    {{ attribute.value|raw }}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-12">
+            <form method="post" action="{{ path('checkout_add') }}">
+                <div class="form-group">
+                    <label for="qty">Qty</label>
+                    <input type="text" class="form-control" id="qty" name="_qty" value="1">
+                </div>
+                <input type="hidden" name="_sku" value="{{ product.sku }}">
+                <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+{{ dump(product) }}
+{% endblock %}

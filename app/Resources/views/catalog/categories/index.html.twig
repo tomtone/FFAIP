@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ul class="nav nav-pills nav-stacked">
+    {% for category in categories %}
+        <li role="presentation" class="active"><a href="{{ path('catalog_category', {'id': category.id}) }}">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

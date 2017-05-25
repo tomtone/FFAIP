@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+    {% for product in category %}
+        <div class="col-md-4" style="padding: 10px;">
+            <div class="inner"  style="border: 1px solid black;padding: 10px;min-height:300px">
+                <div class="media">
+                    {% for image in product.product.media_gallery_entries %}
+                        <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" style="max-width: 150px"/>
+                    {% endfor %}
+                </div>
+                <p>{{ product.product.name|raw }}</p>
+                <p>{{ product.product.sku }}</p>
+                <a href="{{ path('catalog_product', {sku: product.product.sku}) }}" class="btn btn-default">Details</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

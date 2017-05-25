@@ -40,19 +40,21 @@ class MagentoTokenFactory
      */
     public function authenticateToken(TokenInterface $token, $providerKey)
     {
-        $bearerToken = $this->customerLogin->login($token->getUsername(), $token->getCredentials());
+        $username = $token->getUsername();
+        if(strlen($username) <=0){
+            $username = $token->getUser();
+        }
+        $bearerToken = $this->customerLogin->login($username, $token->getCredentials());
         $customer = $this->customerData->request($bearerToken);
-        $customer->setBearerToken($bearerToken);
 
         $token = new MagentoToken(
             $customer,
             $token->getCredentials(),
             $providerKey,
             $bearerToken,
-            ['ROLE_USER']
+            ['ROLE_CUSTOMER']
         );
-        $token->setAttribute('some', 'value');
-        $token->setBearerToken($bearerToken);
+        $token->setAttribute('bearerToken', $bearerToken);
         return $token;
     }
 }

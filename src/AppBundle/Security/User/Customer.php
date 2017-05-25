@@ -6,29 +6,33 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
 
 class Customer implements UserInterface, EquatableInterface
 {
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
     /**
      * @var array
      */
     protected $roles = ['ROLE_USER'];
-    
+
     /**
      * @var
      */
-    private $username;
+    public $username;
 
-    private $firstname;
-    private $lastname;
-    private $group_id;
-    private $id;
-    private $created_at;
-    private $updated_at;
-    private $created_id;
-    private $email;
-    private $store_id;
-    private $website_id;
-    private $address;
-    private $disable_auto_group_change;
-    private $bearerToken;
+    public $firstname;
+    public $lastname;
+    public $group_id;
+    public $id;
+    public $created_at;
+    public $updated_at;
+    public $created_id;
+    public $email;
+    public $store_id;
+    public $website_id;
+    public $address;
+    public $disable_auto_group_change;
 
     /**
      * Customer constructor.
@@ -36,14 +40,14 @@ class Customer implements UserInterface, EquatableInterface
      */
     public function __construct($data = [])
     {
-        if(is_array($data)) {
+        if (is_array($data)) {
             foreach ($data as $key => $value) {
                 if (property_exists($this, $key)) {
                     $this->$key = $value;
                 }
             }
             $this->username = $data['firstname'] . " " . $data['lastname'];
-        }else {
+        } else {
             $this->username = $data;
         }
     }
@@ -63,16 +67,13 @@ class Customer implements UserInterface, EquatableInterface
         if ($this->username !== $user->getUsername()) {
             return false;
         }
+
+        return true;
     }
 
     public function getRoles()
     {
         return $this->roles;
-    }
-
-    public function getPassword()
-    {
-        return '';
     }
 
     public function getSalt()
@@ -335,9 +336,40 @@ class Customer implements UserInterface, EquatableInterface
     public function serialize()
     {
         return serialize([
+            $this->roles,
+            $this->username,
+            $this->firstname,
+            $this->lastname,
+            $this->group_id,
             $this->id,
-            $this->__toString(),
+            $this->created_at,
+            $this->updated_at,
+            $this->created_id,
             $this->email,
+            $this->store_id,
+            $this->website_id,
+            $this->address,
+            $this->disable_auto_group_change,
         ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->roles,
+            $this->username,
+            $this->firstname,
+            $this->lastname,
+            $this->group_id,
+            $this->id,
+            $this->created_at,
+            $this->updated_at,
+            $this->created_id,
+            $this->email,
+            $this->store_id,
+            $this->website_id,
+            $this->address,
+            $this->disable_auto_group_change,
+            ) = unserialize($serialized);
     }
 }
