@@ -14,10 +14,12 @@ services:
       class: AppBundle\Service\CustomerData
       arguments: ['%shop_url%']
 
-
+    security.token.factory:
+      class: AppBundle\Security\Token\MagentoTokenFactory
+      arguments: ["@api.customer.login", "@api.customer.data"]
     security.authenticator.api:
       class: AppBundle\Security\Authenticator\Api
-      arguments: ["@api.customer.login"]
+      arguments: ["@security.token.factory"]
 
     security.provider.customer:
       class: AppBundle\Security\Provider\CustomerProvider

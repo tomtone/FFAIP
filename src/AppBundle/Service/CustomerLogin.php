@@ -13,28 +13,6 @@ class CustomerLogin
         $this->shopUrl = $shopUrl;
     }
 
-    public function create()
-    {
-        $userData = \json_encode(
-            [
-                'username' => 'info@von-gostomski.eu',
-                'password' => 'paSSword11'
-            ]
-        );
-
-        $request = new \GuzzleHttp\Psr7\Request(
-            'POST',
-            $this->shopUrl . 'rest/V1/integration/customer/token',
-            [
-                "Content-Type" => "application/json",
-                "Content-Lenght" => strlen(json_encode($userData))
-            ],
-            $userData
-        );
-
-        return $request;
-    }
-
     public function login($username, $credentials)
     {
         $userData = \json_encode(
@@ -55,7 +33,6 @@ class CustomerLogin
         );
 
         $response = $this->request($request);
-
         return $response;
     }
 

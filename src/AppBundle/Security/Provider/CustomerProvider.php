@@ -16,7 +16,7 @@ class CustomerProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        return new Customer('SomeUser');
+        return $username;
         #throw new UsernameNotFoundException('Username nicht gefunden');
     }
 
@@ -32,7 +32,7 @@ class CustomerProvider implements UserProviderInterface
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );
         }
-        return $this->loadUserByUsername($user->getUsername());
+        return $this->loadUserByUsername($user);
     }
 
     /**

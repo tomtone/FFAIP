@@ -2,10 +2,15 @@
 namespace AppBundle\Security\Authenticator;
 
 use AppBundle\Security\Token\MagentoToken;
+use AppBundle\Security\Token\MagentoTokenFactory;
+use AppBundle\Security\User\Customer;
+use AppBundle\Service\CustomerData;
 use AppBundle\Service\CustomerLogin;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimpleFormAuthenticatorInterface;
 
@@ -16,18 +21,19 @@ use Symfony\Component\Security\Http\Authentication\SimpleFormAuthenticatorInterf
 class Api implements SimpleFormAuthenticatorInterface
 {
     /**
-     * @var CustomerLogin
+     * @var MagentoTokenFactory
      */
-    private $customerLogin;
+    private $tokenFactory;
 
     /**
      * Api constructor.
-     * @param CustomerLogin $customerLogin
+     * @param MagentoTokenFactory $tokenFactory
      */
-    public function __construct(CustomerLogin $customerLogin)
+    public function __construct(MagentoTokenFactory $tokenFactory)
     {
-        $this->customerLogin = $customerLogin;
+        $this->tokenFactory = $tokenFactory;
     }
+
     /**
      * Create AuthenticationToken for valid User.
      *
@@ -38,15 +44,12 @@ class Api implements SimpleFormAuthenticatorInterface
      */
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-        $bearerToken = $this->customerLogin->login($token->getUsername(), $token->getCredentials());
-        var_dump($bearerToken);
-        die();
-        return new MagentoToken(
-            $token->getUsername(),
-            $token->getCredentials(),
-            $providerKey,
-            ['ROLE_USER']
-        );
+        if ($token->getUsername() !== null && $token->getCredentials() !== null) {
+
+            return $this->tokenFactory->authenticateToken($token, $providerKey);
+        }
+
+        return new AnonymousToken('', 'anon.');
     }
 
     /**
@@ -75,6 +78,6 @@ class Api implements SimpleFormAuthenticatorInterface
      */
     public function createToken(Request $request, $username, $password, $providerKey)
     {
-        return new MagentoToken($username, $password, $providerKey);
+        return $this->tokenFactory->createToken($username, $password, $providerKey);
     }
 }

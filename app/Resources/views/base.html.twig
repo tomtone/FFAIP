@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
         </head>
-    <body style="padding-top: 50px;">
+    <body style="padding-top: 70px;">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -34,6 +34,8 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <input type="submit" value="submit" class="btn btn-success"/>
                 </form>
+                    {{ dump(app.user) }}
+                    <p>Willkommen {{ app.user }}</p>
             </div><!--/.navbar-collapse -->
         </div>
     </nav>

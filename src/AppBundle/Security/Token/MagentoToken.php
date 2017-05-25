@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Security\Token;
+use AppBundle\Security\User\Customer;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
@@ -17,30 +18,33 @@ class MagentoToken extends AbstractToken
      */
     private $credentials;
     /**
-     * @var array
-     */
-    private $roles = array();
-    /**
      * @var
      */
     private $providerKey;
+    /**
+     * @var
+     */
+    private $bearerToken;
 
     /**
      * MagentoToken constructor.
-     * @param array $username
+     * @param Customer|string $user
      * @param $password
-     * @param array $roles
+     * @param $bearerToken
      * @param $providerKey
+     * @param array $roles
      */
-    public function __construct($username, $password, $providerKey, array $roles = array()){
-        parent::__construct($roles);
-        $this->username = $username;
-        $this->setUser($username);
+    public function __construct($user, $password, $providerKey, $bearerToken = null, array $roles = array()){
+        if($user instanceof Customer){
+            $this->username = $user->__toString();
+        }
+        $this->setUser($user);
         $this->credentials = $password;
-        $this->roles = $roles;
         $this->providerKey = $providerKey;
 
-        $this->setAuthenticated(count($roles) > 0);
+        $this->setAuthenticated(true);
+        $this->bearerToken = $bearerToken;
+        parent::__construct($roles);
     }
     /**
      * {@inheritdoc}
@@ -50,6 +54,15 @@ class MagentoToken extends AbstractToken
         return $this->credentials;
     }
 
+    public function setBearerToken($bearerToken)
+    {
+        $this->bearerToken = $bearerToken;
+    }
+
+    public function getBearerToken()
+    {
+        return $this->bearerToken;
+    }
     /**
      * Returns the provider key.
      *
