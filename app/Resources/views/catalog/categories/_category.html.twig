@@ -1,0 +1,11 @@
+<ul class="nav nav-pills nav-stacked level-{{ level }}" style="padding-left: {{ level }}0px">
+    <li>
+    <li role="presentation" class="active level-{{ level }}">
+        <a href="{{ path('catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
+        {% if category.children_data|length > 0 %}
+            {% for category_child in category.children_data %}
+                {% include 'catalog/categories/_category.html.twig' with {'category': category_child, 'level': level+1} %}
+            {% endfor %}
+        {% endif %}
+    </li>
+</ul>

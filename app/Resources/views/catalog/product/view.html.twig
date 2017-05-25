@@ -17,6 +17,9 @@
         </div>
         <div class="col-md-12">
             <form method="post" action="{{ path('checkout_add') }}">
+                {% if product.type_id == 'configurable'  %}
+                    {% include 'catalog/product/options/configurable.html.twig' with {'options': product.extension_attributes.configurable_product_options} %}
+                {% endif %}
                 <div class="form-group">
                     <label for="qty">Qty</label>
                     <input type="text" class="form-control" id="qty" name="_qty" value="1">

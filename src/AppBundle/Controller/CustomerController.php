@@ -18,5 +18,4 @@ class CustomerController extends Controller
             'customer' => $this->get('security.token_storage')->getToken()->getUser(),
         ]);
     }
-
 }

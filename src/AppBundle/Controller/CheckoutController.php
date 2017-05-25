@@ -25,8 +25,10 @@ class CheckoutController extends Controller
     {
         $qty = $request->request->get('_qty');
         $sku = $request->request->get('_sku');
-        
-        $this->get('api.checkout.cart')->addToCart($sku, $qty);
+
+        $attributes = $request->request->get('_attributes');
+
+        $this->get('api.checkout.cart')->addToCart($sku, $qty, $attributes);
 
 
         return $this->redirect($this->generateUrl('catalog_product', ['sku' => $sku]));

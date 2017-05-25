@@ -3,7 +3,14 @@
 {% block body %}
     <ul class="nav nav-pills nav-stacked">
     {% for category in categories %}
-        <li role="presentation" class="active"><a href="{{ path('catalog_category', {'id': category.id}) }}">{{ category.name }}</a></li>
+        <li role="presentation" class="active level-1">
+            <a href="{{ path('catalog_category', {'id': category.id}) }}">{{ category.name }}</a>
+        {% if category.children_data|length > 0 %}
+            {% for category_child in category.children_data %}
+                {% include 'catalog/categories/_category.html.twig' with {'category': category_child, 'level': 2} %}
+            {% endfor %}
+        {% endif %}
+        </li>
     {% endfor %}
     </ul>
 {% endblock %}

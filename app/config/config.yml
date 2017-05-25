@@ -38,9 +38,11 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_theme: ['bootstrap_3_horizontal_layout.html.twig']
     globals:
       base_url: "%shop_url%"
       mini_cart: '@api.checkout.cart'
+      product_helper: "@api.catalog.product.helper"
 
 # Doctrine Configuration
 doctrine:

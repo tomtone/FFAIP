@@ -24,6 +24,10 @@ services:
       class: AppBundle\Service\Checkout\Cart
       arguments: ['%shop_url%', "@security.token_storage"]
 
+    api.catalog.product.helper:
+      class: AppBundle\Service\Catalog\ProductHelper
+      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@cache.app"]
+
     security.token.factory:
       class: AppBundle\Security\Token\MagentoTokenFactory
       arguments: ["@api.customer.login", "@api.customer.data"]
