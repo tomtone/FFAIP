@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Service\Checkout;
 
+use AppBundle\Http\RequestFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -12,32 +13,22 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class Cart
 {
     /**
-     * @var TokenStorage
+     * @var RequestFactory
      */
-    private $tokenStorage;
-    private $shopUrl;
+    private $requestFactory;
 
     /**
      * Cart constructor.
-     * @param $shopUrl
-     * @param TokenStorage $tokenStorage
+     * @param RequestFactory $requestFactory
      */
-    public function __construct($shopUrl, TokenStorage $tokenStorage)
+    public function __construct(RequestFactory $requestFactory)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->shopUrl = $shopUrl;
+        $this->requestFactory = $requestFactory;
     }
 
     public function getItems()
     {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/carts/mine/items',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ]
-        );
+        $request = $this->requestFactory->getCartItemRequest();
         $client = new Client();
         try {
             $response = $client->send($request);
@@ -57,14 +48,7 @@ class Cart
 
     public function getCartItems()
     {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/carts/mine/items',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ]
-        );
+        $request = $this->requestFactory->getCartItemRequest();
         $client = new Client();
         try {
             $response = $client->send($request);
@@ -80,15 +64,7 @@ class Cart
 
     public function addToCart($sku, $qty, $attributes = [])
     {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/carts/mine',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ]
-        );
-
+        $request = $this->requestFactory->getCartRequest();
         $client = new Client();
         try {
             $response = $client->send($request);
@@ -103,15 +79,7 @@ class Cart
 
         $productData = $this->createAddToCartPayload($quoteId, $sku, $qty, $attributes);
 
-        $addToCartRequest = new \GuzzleHttp\Psr7\Request(
-            'POST',
-            $this->shopUrl . 'rest/V1/carts/mine/items',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ],
-            \GuzzleHttp\json_encode($productData)
-        );
+        $addToCartRequest = $this->requestFactory->getAddToCartRequest($productData);
 
         try {
             $response = $client->send($addToCartRequest);
@@ -162,14 +130,7 @@ class Cart
 
     public function getTotals()
     {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/carts/mine/payment-information',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ]
-        );
+        $request = $this->requestFactory->getPaymentInformationRequest();
         $client = new Client();
         try {
             $response = $client->send($request);

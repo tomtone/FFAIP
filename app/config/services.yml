@@ -4,6 +4,10 @@ parameters:
     #parameter_name: value
 
 services:
+    app.factory.request:
+      class: AppBundle\Http\RequestFactory
+      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@security.token_storage","@session","@cache.app"]
+
     api.customer.create:
       class: AppBundle\Service\CustomerCreate
       arguments: ['%shop_url%']
@@ -22,7 +26,7 @@ services:
       arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@cache.app"]
     api.checkout.cart:
       class: AppBundle\Service\Checkout\Cart
-      arguments: ['%shop_url%', "@security.token_storage"]
+      arguments: ["@app.factory.request"]
     api.checkout.shipping:
       class: AppBundle\Service\Checkout\Shipping
       arguments: ['%shop_url%', "%shop_admin_user%", "%shop_admin_password%", "@cache.app", "@security.token_storage"]

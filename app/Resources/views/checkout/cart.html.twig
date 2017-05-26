@@ -22,6 +22,10 @@
                         <td>{{ item.price }}</td>
                         <td>{{ item.price * item.qty }}</td>
                     </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No Items in Cart.</td>
+                    </tr>
                 {% endfor %}
                 <tbody>
             </table>
