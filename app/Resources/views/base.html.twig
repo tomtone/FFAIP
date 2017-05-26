@@ -32,6 +32,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('catalog_categories') }}">Categories</a></li>
             </ul>
+            <ul id="minicart" class="nav navbar-nav navbar-right">
+            </ul>
+
             {% if not is_granted('ROLE_CUSTOMER') %}
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -55,12 +58,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('customer') }}">Welcome, {{ app.user }}</a></li>
                     <li><a href="{{ path('security_logout') }}">Logout</a></li>
-                    <li>
-                        <a href="{{ path('checkout_cart')}}">
-                            <i class="fa fa-shopping-cart fa-3" aria-hidden="true"></i>
-                            {{ mini_cart.items }}
-                        </a>
-                    </li>
                 </ul>
             {% endif %}
         </div><!--/.navbar-collapse -->
@@ -70,12 +67,21 @@
     {% block body %}{% endblock %}
 </div>
 <!-- Latest slim.min jquery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.3/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script type="text/babel" src="{{ asset('js/minicart.react.js') }}"></script>
+<script type="text/babel">
+    ReactDOM.render(
+      <MiniCartButton cartUrl="{{ path('checkout_cart')}}" checkoutUrl="{{ path('checkout_shipping') }}"/>,
+      document.getElementById('minicart')
+    );
+</script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
