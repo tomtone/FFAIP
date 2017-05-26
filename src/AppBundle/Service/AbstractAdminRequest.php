@@ -2,6 +2,7 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Http\RequestFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Cache\CacheItemPoolInterface;
@@ -27,40 +28,24 @@ abstract class AbstractAdminRequest
      * @var CacheItemPoolInterface
      */
     protected $cacheAdapter;
+    /**
+     * @var RequestFactory
+     */
+    protected $requestFactory;
 
     /**
      * AbstractAdminRequest constructor.
-     * @param string $shopUrl
-     * @param string $adminUser
-     * @param string $adminPassword
-     * @param CacheItemPoolInterface $cacheAdapter
+     * @param RequestFactory $requestFactory
      */
-    public function __construct(string $shopUrl, string $adminUser, string $adminPassword, CacheItemPoolInterface $cacheAdapter)
+    public function __construct(RequestFactory $requestFactory)
     {
-        $this->shopUrl = $shopUrl;
-        $this->adminUser = $adminUser;
-        $this->adminPassword = $adminPassword;
-        $this->cacheAdapter = $cacheAdapter;
+        $this->requestFactory = $requestFactory;
+        $this->cacheAdapter = $requestFactory->getCache();
     }
 
     public function getBearerToken()
     {
-        $userData = \json_encode(
-            [
-                'username' => $this->adminUser,
-                'password' => $this->adminPassword
-            ]
-        );
-
-        $request = new \GuzzleHttp\Psr7\Request(
-            'POST',
-            $this->shopUrl . 'rest/V1/integration/admin/token',
-            [
-                "Content-Type" => "application/json",
-                "Content-Lenght" => strlen(json_encode($userData))
-            ],
-            $userData
-        );
+        $request = $this->requestFactory->getAdminTokenRequest();
 
         $response = $this->request($request);
         return $response;
@@ -72,6 +57,7 @@ abstract class AbstractAdminRequest
         try {
             $response = $client->send($request);
         }catch (RequestException $e){
+            dump($e);
             $responseData = \GuzzleHttp\json_decode($e->getResponse()->getBody()->getContents());
             if(property_exists($responseData, 'message')) {
                 return $responseData->message;
@@ -79,7 +65,6 @@ abstract class AbstractAdminRequest
                 return 'An Error occured';
             }
         }
-
         return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
     }
 }

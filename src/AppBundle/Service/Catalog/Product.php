@@ -9,7 +9,7 @@ class Product extends \AppBundle\Service\AbstractAdminRequest
         $response = $cachedItem->get();
         if($response == null) {
             $bearerToken = $this->getBearerToken();
-            $request = $this->prepareRequest($bearerToken, $sku);
+            $request = $this->requestFactory->getProductDataRequest($bearerToken, $sku);
             $response = $this->request($request);
             $cachedItem->set($response);
             $cachedItem->expiresAfter(300);

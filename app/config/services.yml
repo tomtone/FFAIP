@@ -20,21 +20,21 @@ services:
 
     api.catalog.categories:
       class: AppBundle\Service\Catalog\Categories
-      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@cache.app"]
+      arguments: ["@app.factory.request"]
     api.catalog.product:
       class: AppBundle\Service\Catalog\Product
-      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@cache.app"]
+      arguments: ["@app.factory.request"]
     api.checkout.cart:
       class: AppBundle\Service\Checkout\Cart
       arguments: ["@app.factory.request"]
     api.checkout.shipping:
       class: AppBundle\Service\Checkout\Shipping
-      arguments: ['%shop_url%', "%shop_admin_user%", "%shop_admin_password%", "@cache.app", "@security.token_storage"]
+      arguments: ["@app.factory.request"]
 
 
     api.catalog.product.helper:
       class: AppBundle\Service\Catalog\ProductHelper
-      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@cache.app"]
+      arguments: ["@app.factory.request"]
 
     security.token.factory:
       class: AppBundle\Security\Token\MagentoTokenFactory

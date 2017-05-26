@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Form\ShippingFormType;
 use AppBundle\Traits\Referer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -54,7 +55,12 @@ class CheckoutController extends Controller
     public function checkoutShippingAction()
     {
         $shipping = $this->get('api.checkout.shipping')->getShipping();
-        return $this->render('checkout/shipping.html.twig');
+        $form = $this->get('form.factory')->create(ShippingFormType::class, null, [
+            'requestFactory' => $this->get('app.factory.request')
+        ]);
+        return $this->render('checkout/shipping.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
     /**

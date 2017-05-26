@@ -76,7 +76,6 @@ class Cart
 
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
         $quoteId = $responseData['id'];
-
         $productData = $this->createAddToCartPayload($quoteId, $sku, $qty, $attributes);
 
         $addToCartRequest = $this->requestFactory->getAddToCartRequest($productData);

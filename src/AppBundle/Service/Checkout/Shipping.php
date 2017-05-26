@@ -9,9 +9,11 @@
 namespace AppBundle\Service\Checkout;
 
 
+use AppBundle\Http\RequestFactory;
 use AppBundle\Service\AbstractAdminRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -22,55 +24,51 @@ class Shipping extends AbstractAdminRequest
      */
     private $tokenStorage;
     protected $shopUrl;
+    /**
+     * @var RequestFactory
+     */
+    protected $requestFactory;
 
     /**
      * Cart constructor.
-     * @param string $shopUrl
-     * @param string $adminUser
-     * @param string $adminPassword
-     * @param CacheItemPoolInterface $cacheAdapter
-     * @param TokenStorage $tokenStorage
+     * @param RequestFactory $requestFactory
+     * @internal param string $shopUrl
+     * @internal param string $adminUser
+     * @internal param string $adminPassword
+     * @internal param CacheItemPoolInterface $cacheAdapter
+     * @internal param TokenStorage $tokenStorage
      */
-    public function __construct($shopUrl, string $adminUser, string $adminPassword, CacheItemPoolInterface $cacheAdapter, TokenStorage $tokenStorage)
+    public function __construct(RequestFactory $requestFactory)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->shopUrl = $shopUrl;
-        parent::__construct($shopUrl, $adminUser, $adminPassword, $cacheAdapter);
+        $this->requestFactory = $requestFactory;
+        parent::__construct($requestFactory);
     }
 
     public function getShipping()
     {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/customers/me/shippingAddress',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $this->tokenStorage->getToken()->getAttribute('bearerToken')
-            ]
-        );
+        $request = $this->requestFactory->getShippingAddressRequest();
+        
         $client = new Client();
+
         try {
-            $response = $client->send($request);
+            if($request !== false) {
+                $response = $client->send($request);
+            }else{
+                $response = new Response(200,[],'{}');
+            }
         } catch (RequestException $e) {
             echo '<pre>';
             print_r($e->getResponse()->getBody()->getContents());
             die();
         }
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        if(empty($responseData)) {
-            $request = new \GuzzleHttp\Psr7\Request(
-                'GET',
-                $this->shopUrl . 'rest/V1/attributeMetadata/customerAddress',
-                [
-                    "Content-Type" => "application/json",
-                    "Authorization" => "Bearer " . $this->getBearerToken()
-                ]
-            );
-
-            $responseData = $this->request($request);
-        }
-        var_dump($responseData);
-        die();
+        #if(empty($responseData)) {
+        #    $request = $this->requestFactory->getAddressMetadataRequest($this->getBearerToken());
+#
+ #           $responseData = $this->request($request);
+  #      }
+   #     var_dump($responseData);
+    #    die();
         return $responseData;
     }
 }

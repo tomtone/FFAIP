@@ -9,7 +9,7 @@ class Categories extends \AppBundle\Service\AbstractAdminRequest
         $response = $cachedItem->get();
         if($response == null) {
             $bearerToken = $this->getBearerToken();
-            $request = $this->prepareRequest($bearerToken);
+            $request = $this->requestFactory->getCategoriesRequest($bearerToken);
             $response = $this->request($request);
             $response = $response['children_data'];
             $cachedItem->set($response);
@@ -25,10 +25,10 @@ class Categories extends \AppBundle\Service\AbstractAdminRequest
         $response = $cachedItem->get();
         if($response == null) {
             $bearerToken = $this->getBearerToken();
-            $request = $this->prepareCategoryRequest($bearerToken, $categoryId);
+            $request = $this->requestFactory->getCategoryRequest($bearerToken, $categoryId);
             $response = $this->request($request);
             foreach ($response as $key => $product) {
-                $product['product'] = $this->getProductData($bearerToken, $product['sku']);
+                $product['product'] = $this->request($this->requestFactory->getProductDataRequest($bearerToken, $product['sku']));
                 $response[$key] = $product;
             }
             $cachedItem->set($response);

@@ -117,12 +117,14 @@ class RequestFactory
     public function getAddToCartRequest($productData)
     {
         if($this->token instanceof AnonymousToken){
+            $cartId = $this->session->get('cart_id');
             $data = $productData['cart_item'];
+            $data['quote_id'] = $cartId;
             unset($productData);
             $productData = ['cartItem' => $data];
-            $addToCartRequest = $this->buildRequest('POST', '/V1/guest-carts/' . $this->session->get('cart_id') . '/items', $productData);
+            $addToCartRequest = $this->buildRequest('POST', '/V1/guest-carts/' . $cartId . '/items', false, $productData);
         }else {
-            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/item',$productData, $this->token->getAttribute('bearerToken'));
+            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/item',$this->token->getAttribute('bearerToken'), $productData);
         }
         return $addToCartRequest;
     }
@@ -134,7 +136,7 @@ class RequestFactory
      * @param bool $token
      * @return Request
      */
-    private function buildRequest($action, $uri, $payload = [], $token = false) : Request
+    private function buildRequest($action, $uri, $token = false, $payload = []) : Request
     {
         $headers = [
             "Content-Type" => "application/json",
@@ -165,5 +167,62 @@ class RequestFactory
         $response = (new Client())->send($request);
         $cartId = \GuzzleHttp\json_decode($response->getBody()->getContents());
         $this->session->set('cart_id', $cartId);
+    }
+
+    public function getShippingAddressRequest()
+    {
+        if($this->token instanceof AnonymousToken){
+            return false;
+        }else {
+            $request = $this->buildRequest('POST', 'V1/customers/me/shippingAddress',$this->token->getAttribute('bearerToken'));
+        }
+        return $request;
+    }
+
+    public function getAdminTokenRequest()
+    {
+        $userData = \json_encode(
+            [
+                'username' => $this->adminUser,
+                'password' => $this->adminPassword
+            ]
+        );
+        $request = $this->buildRequest('POST', 'V1/integration/admin/token',false, $userData);
+        return $request;
+    }
+
+    public function getAddressMetadataRequest($bearerToken)
+    {
+        $request = $this->buildRequest('GET', 'V1/attributeMetadata/customerAddress',$bearerToken);
+        return $request;
+    }
+
+    public function getCategoriesRequest($bearerToken)
+    {
+        $request = $this->buildRequest('GET', 'V1/categories', $bearerToken);
+        return $request;
+    }
+
+    public function getCategoryRequest($bearerToken, $categoryId)
+    {
+        $request = $this->buildRequest('GET', 'V1/categories/'.$categoryId . '/products', $bearerToken);
+        return $request;
+    }
+
+    public function getProductDataRequest($bearerToken, $sku)
+    {
+        $request = $this->buildRequest('GET', 'V1/products/'. $sku, $bearerToken);
+        return $request;
+    }
+
+    public function getAttributeValueRequest($bearerToken, $attributeId)
+    {
+        $request = $this->buildRequest('GET', 'V1/products/attributes/'. $attributeId .'/options', $bearerToken);
+        return $request;
+    }
+
+    public function getCache()
+    {
+        return $this->cacheAdapter;
     }
 }
