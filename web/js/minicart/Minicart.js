@@ -51,6 +51,7 @@ module.exports = React.createClass({
         refresh={this.refresh}
         gotoCheckout={this.gotoCheckout.bind(this)}
         loading={this.state.loading}
+        mediaUrl={this.props.mediaUrl}
       />
       </li>
     );

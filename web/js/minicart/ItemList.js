@@ -3,9 +3,9 @@ var Item = require('./Item');
 
 module.exports = React.createClass({
   render: function() {
-    var mediaUrl = this.props.mediaUrl;
     var refresh = this.props.refresh;
     var loading = this.props.loading;
+    var mediaUrl = this.props.mediaUrl;
     var items = this.props.items.map(function(item) {
       return (
         <Item
@@ -14,9 +14,9 @@ module.exports = React.createClass({
           price={item.price}
           qty={item.qty}
           itemId={item.item_id}
-          imageUrl={mediaUrl + "w/b/wb06-red-0_alt1.jpg"}
           refresh={refresh}
           loading={loading}
+          mediaUrl={mediaUrl}
         />
       );
     });

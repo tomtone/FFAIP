@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Alert = require('react-bootstrap').Alert;
 var Client = require('../remote/Client');
+var ProductImage = require('../product/Image');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -53,14 +54,11 @@ module.exports = React.createClass({
     );
   },
   render: function() {
-    var style = {
-      width: '100px'
-    };
     return (
       <li className="list-group-item">
         <small>{this.props.name} - {this.props.sku}</small>
         <small>{this.props.price}</small>
-        <p><img style={style} src={this.props.imageUrl} /></p>
+        <ProductImage sku={this.props.sku} mediaUrl={this.props.mediaUrl}/>
         <div className="form-group">
           <label>Qty</label>
           <input

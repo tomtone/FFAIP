@@ -31,4 +31,11 @@ module.exports = {
       success: successCallback
     });
   },
+  getProduct: function(sku, successCallback) {
+    $.ajax({
+      url: '/api/catalog/product/' + sku,
+      method: 'get',
+      success: successCallback
+    });
+  }
 };

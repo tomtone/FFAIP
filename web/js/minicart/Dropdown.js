@@ -10,11 +10,11 @@ module.exports = React.createClass({
       items = <ItemList
                 checkoutUrl={this.props.checkoutUrl}
                 cartUrl={this.props.cartUrl}
-                mediaUrl={this.props.mediaUrl}
                 items={this.props.items}
                 totals={this.props.totals}
                 refresh={this.props.refresh}
                 loading={this.props.loading}
+                mediaUrl={this.props.mediaUrl}
               />;
     }
     return (
