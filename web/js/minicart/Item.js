@@ -28,20 +28,21 @@ module.exports = React.createClass({
   },
   changeQty: function(e) {
     var qty = e.target.value;
+    this.setState({
+      qty: qty
+    })
+    return true;
+  },
+  updateQty: function() {
     var refresh = this.props.refresh;
 
     Client.updateQty(
       this.props.item_id,
-      qty,
+      this.state.qty,
       function(data) {
-        this.setState({
-          qty: qty
-        })
         refresh();
       }.bind(this)
     );
-
-    return true;
   },
   render: function() {
     var style = {
@@ -55,6 +56,7 @@ module.exports = React.createClass({
         <div className="form-group">
           <label>Qty</label>
           <input onChange={this.changeQty.bind(this)} value={this.state.qty} type="text" className="form-control mb-2 mr-sm-2 mb-sm-0"/>
+          <span><button onClick={this.updateQty}>Update</button></span>
           <button type="button" onClick={this.removeItem.bind(this)}>
             <span className="fa fa-trash fa-3" aria-hidden="true"></span>
           </button>

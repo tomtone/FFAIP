@@ -31,6 +31,7 @@ module.exports = React.createClass({
       <ul className="list-group">
         {itemNodes}
       </ul>
+      <hr />
       <span><a href={this.props.cartUrl}>View and edit cart</a></span>
       </div>
       </div>
