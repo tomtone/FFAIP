@@ -130,7 +130,7 @@ class RequestFactory
      */
     public function removeItemFromCartRequest($itemId)
     {
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             // TODO
         } else {
             $addToCartRequest = $this->buildRequest('DELETE', 'V1/carts/mine/items/' . $itemId, $this->token->getAttribute('bearerToken'));
@@ -145,7 +145,7 @@ class RequestFactory
      */
     public function updateItemQtyRequest($quoteId, $itemId, $qty)
     {
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             // TODO
         } else {
             $payload = [
@@ -202,7 +202,7 @@ class RequestFactory
 
     public function getShippingAddressRequest()
     {
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             return false;
         } else {
             $request = $this->buildRequest('GET', 'V1/customers/me/shippingAddress', $this->token->getAttribute('bearerToken'));
@@ -259,7 +259,7 @@ class RequestFactory
             ]
         ];
         /* not really sure why i have to do this... [BEGIN] */
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
         } else {
@@ -275,7 +275,7 @@ class RequestFactory
     {
         $addressPayload = $this->session->get('cart_request');
         dump($addressPayload);
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
         } else {
@@ -286,7 +286,7 @@ class RequestFactory
 
         $addressPayload = \GuzzleHttp\json_encode($addressPayload, JSON_FORCE_OBJECT);
 
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/order', false, $addressPayload);
         } else {
@@ -302,7 +302,7 @@ class RequestFactory
 
     public function getShippingMethodsRequest()
     {
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('GET', 'V1/guest-carts/' . $cartId . '/shipping-methods');
         } else {
@@ -316,7 +316,7 @@ class RequestFactory
         $paymentPayload = [
             'method' => ['method' => $payment['payment']]
         ];
-        if ($scopeContext->isGuest()) {
+        if ($this->scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/selected-payment-method', false, $paymentPayload);
         } else {
