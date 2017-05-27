@@ -9,6 +9,7 @@ $( document ).ready(function() {
     var component = elementConfig["compontent"];
     var props = elementConfig["props"];
 
+    // TODO: create components by config
     ReactDOM.render(
       <Button cartUrl={props.cartUrl} checkoutUrl={props.checkoutUrl} />,
       document.getElementById('minicart')
