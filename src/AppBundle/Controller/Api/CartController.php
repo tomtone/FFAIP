@@ -42,7 +42,7 @@ class CartController extends Controller
 
     /**
      * @Route("/api/cart/items/{itemId}/update_qty",
-     *   name="api_cart_items_delete"
+     *   name="api_cart_items_update"
      * )
      * @Method("PUT")
      */

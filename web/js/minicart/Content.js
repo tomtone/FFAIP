@@ -15,8 +15,8 @@ module.exports = React.createClass({
           name={item.name}
           price={item.price}
           qty={item.qty}
-          item_id={item.item_id}
-          image_url={mediaUrl + "w/b/wb06-red-0_alt1.jpg"}
+          itemId={item.item_id}
+          imageUrl={mediaUrl + "w/b/wb06-red-0_alt1.jpg"}
           refresh={refresh}></Item>
       );
     });
@@ -24,7 +24,7 @@ module.exports = React.createClass({
       <div>
       <ul className="list-group">
         <li className="list-group-item">
-          <span>{this.props.totals.totals.items_qty} Item</span>
+          <span>{this.props.totals.totals.itemsQty} Item</span>
           <span>Cart Subtotal: {this.props.totals.totals.subtotal}</span>
         </li>
       </ul>

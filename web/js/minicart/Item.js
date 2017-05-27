@@ -11,7 +11,7 @@ module.exports = React.createClass({
   },
   removeItem: function() {
     var refresh = this.props.refresh;
-    var itemId = this.props.item_id;
+    var itemId = this.props.itemId;
 
     Client.removeItem(
       itemId,
@@ -37,7 +37,7 @@ module.exports = React.createClass({
     var refresh = this.props.refresh;
 
     Client.updateQty(
-      this.props.item_id,
+      this.props.itemId,
       this.state.qty,
       function(data) {
         refresh();
@@ -52,7 +52,7 @@ module.exports = React.createClass({
       <li className="list-group-item">
         <small>{this.props.name} - {this.props.sku}</small>
         <small>{this.props.price}</small>
-        <p><img style={style} src={this.props.image_url} /></p>
+        <p><img style={style} src={this.props.imageUrl} /></p>
         <div className="form-group">
           <label>Qty</label>
           <input onChange={this.changeQty.bind(this)} value={this.state.qty} type="text" className="form-control mb-2 mr-sm-2 mb-sm-0"/>
