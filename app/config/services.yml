@@ -6,7 +6,7 @@ parameters:
 services:
     app.factory.request:
       class: AppBundle\Http\RequestFactory
-      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@security.token_storage","@session","@cache.app"]
+      arguments: ["%shop_url%", "%shop_admin_user%", "%shop_admin_password%", "@security.token_storage","@session","@cache.app","@app.scope.context"]
 
     api.customer.create:
       class: AppBundle\Service\CustomerCreate
@@ -34,7 +34,9 @@ services:
       class: AppBundle\Service\Address
       arguments: ["@app.factory.request"]
 
-
+    app.scope.context:
+      class: AppBundle\Service\Scope
+      arguments: ["%shop_url%", "@session", "@security.token_storage"]
 
     api.catalog.product.helper:
       class: AppBundle\Service\Catalog\ProductHelper

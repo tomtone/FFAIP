@@ -3,6 +3,15 @@ namespace AppBundle\Http;
 
 
 use AppBundle\Entity\Address;
+use AppBundle\Http\Cart\AddToCartRequest;
+use AppBundle\Http\Cart\CartItemRequest;
+use AppBundle\Http\Cart\CartRequest;
+use AppBundle\Http\Catalog\CategoryRequest;
+use AppBundle\Http\Catalog\ProductRequest;
+use AppBundle\Http\Catalog\AttributeRequest;
+use AppBundle\Http\Catalog\CategoriesRequest;
+use AppBundle\Http\Checkout\PaymentInformationRequest;
+use AppBundle\Service\Scope;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Psr\Cache\CacheItemPoolInterface;
@@ -45,6 +54,10 @@ class RequestFactory
      * @var Session
      */
     private $session;
+    /**
+     * @var Scope
+     */
+    private $scopeContext;
 
     /**
      * RequestFactory constructor.
@@ -55,6 +68,7 @@ class RequestFactory
      * @param TokenStorage $tokenStorage
      * @param Session $session
      * @param CacheItemPoolInterface $cacheAdapter
+     * @param Scope $scopeContext
      */
     public function __construct(
         string $shopUrl,
@@ -62,7 +76,8 @@ class RequestFactory
         string $adminPassword,
         TokenStorage $tokenStorage,
         Session $session,
-        CacheItemPoolInterface $cacheAdapter
+        CacheItemPoolInterface $cacheAdapter,
+        Scope $scopeContext
     )
     {
         $this->shopUrl = $shopUrl;
@@ -76,6 +91,7 @@ class RequestFactory
         if ($this->session->has('cart_id') === false) {
             $this->createGuestCart();
         }
+        $this->scopeContext = $scopeContext;
     }
 
     /**
@@ -83,12 +99,7 @@ class RequestFactory
      */
     public function getCartRequest()
     {
-        if ($this->token instanceof AnonymousToken) {
-            $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id'));
-        } else {
-            $request = $this->buildRequest('GET', 'V1/carts/mine', $this->token->getAttribute('bearerToken'));
-        }
-        return $request;
+        return new CartRequest($this->scopeContext);
     }
 
     /**
@@ -96,13 +107,7 @@ class RequestFactory
      */
     public function getCartItemRequest()
     {
-        if ($this->token instanceof AnonymousToken) {
-            $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id') . '/items');
-        } else {
-            $request = $this->buildRequest('GET', 'V1/carts/mine/items', $this->token->getAttribute('bearerToken'));
-        }
-
-        return $request;
+        return new CartItemRequest($this->scopeContext);
     }
 
     /**
@@ -110,12 +115,7 @@ class RequestFactory
      */
     public function getPaymentInformationRequest()
     {
-        if ($this->token instanceof AnonymousToken) {
-            $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id') . '/payment-information');
-        } else {
-            $request = $this->buildRequest('GET', 'V1/carts/mine/payment-information', $this->token->getAttribute('bearerToken'));
-        }
-        return $request;
+        return new PaymentInformationRequest($this->scopeContext);
     }
 
     /**
@@ -124,17 +124,7 @@ class RequestFactory
      */
     public function getAddToCartRequest($productData)
     {
-        if ($this->token instanceof AnonymousToken) {
-            $cartId = $this->session->get('cart_id');
-            $data = $productData['cart_item'];
-            $data['quote_id'] = $cartId;
-            unset($productData);
-            $productData = ['cartItem' => $data];
-            $addToCartRequest = $this->buildRequest('POST', '/V1/guest-carts/' . $cartId . '/items', false, $productData);
-        } else {
-            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items', $this->token->getAttribute('bearerToken'), $productData);
-        }
-        return $addToCartRequest;
+        return new AddToCartRequest($this->scopeContext, $productData);
     }
 
     /**
@@ -143,9 +133,9 @@ class RequestFactory
      */
     public function removeItemFromCartRequest($itemId)
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             // TODO
-        }else {
+        } else {
             $addToCartRequest = $this->buildRequest('DELETE', 'V1/carts/mine/items/' . $itemId, $this->token->getAttribute('bearerToken'));
         }
         return $addToCartRequest;
@@ -159,9 +149,9 @@ class RequestFactory
     public function updateItemQtyRequest($quoteId, $itemId, $qty)
     {
         /* $quoteId = "mine"; */
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             // TODO
-        }else {
+        } else {
             $payload = [
                 'cartItem' => [
                     'qty' => $qty,
@@ -227,14 +217,7 @@ class RequestFactory
 
     public function getAdminTokenRequest()
     {
-        $userData = \json_encode(
-            [
-                'username' => $this->adminUser,
-                'password' => $this->adminPassword
-            ]
-        );
-        $request = $this->buildRequest('POST', 'V1/integration/admin/token', false, $userData);
-        return $request;
+        return new AdminTokenRequest($this->scopeContext, $this->adminUser, $this->adminPassword);
     }
 
     public function getAddressMetadataRequest($bearerToken)
@@ -245,26 +228,22 @@ class RequestFactory
 
     public function getCategoriesRequest($bearerToken)
     {
-        $request = $this->buildRequest('GET', 'V1/categories', $bearerToken);
-        return $request;
+        return new CategoriesRequest($this->scopeContext, $bearerToken);
     }
 
     public function getCategoryRequest($bearerToken, $categoryId)
     {
-        $request = $this->buildRequest('GET', 'V1/categories/' . $categoryId . '/products', $bearerToken);
-        return $request;
+        return new CategoryRequest($this->scopeContext, $categoryId, $bearerToken);
     }
 
     public function getProductDataRequest($bearerToken, $sku)
     {
-        $request = $this->buildRequest('GET', 'V1/products/' . $sku, $bearerToken);
-        return $request;
+        return new ProductRequest($this->scopeContext, $sku, $bearerToken);
     }
 
     public function getAttributeValueRequest($bearerToken, $attributeId)
     {
-        $request = $this->buildRequest('GET', 'V1/products/attributes/' . $attributeId . '/options', $bearerToken);
-        return $request;
+        return new AttributeRequest($this->scopeContext, $attributeId, $bearerToken);
     }
 
     public function getCache()
@@ -344,9 +323,9 @@ class RequestFactory
         ];
         if ($this->token instanceof AnonymousToken) {
             $cartId = $this->session->get('cart_id');
-            $request = $this->buildRequest('PUT', 'V1/guest-carts/'.$cartId.'/selected-payment-method', false, $paymentPayload);
+            $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/selected-payment-method', false, $paymentPayload);
         } else {
-            $request = $this->buildRequest('PUT', 'V1/carts/mine/selected-payment-method', $this->token->getAttribute('bearerToken'),$paymentPayload);
+            $request = $this->buildRequest('PUT', 'V1/carts/mine/selected-payment-method', $this->token->getAttribute('bearerToken'), $paymentPayload);
         }
         return $request;
     }
