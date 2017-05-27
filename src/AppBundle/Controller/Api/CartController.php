@@ -39,4 +39,20 @@ class CartController extends Controller
         return new JsonResponse([
             'ok' => "hello" ]);
     }
+
+    /**
+     * @Route("/api/cart/items/{itemId}/update_qty",
+     *   name="api_cart_items_delete"
+     * )
+     * @Method("PUT")
+     */
+    public function updateQty(Request $request, $itemId)
+    {
+        $qty = $request->request->get('qty');
+        $items = $this->get('api.checkout.cart')->updateItemQty($itemId, $qty);
+
+        return new JsonResponse([
+            'ok' => $qty
+        ]);
+    }
 }

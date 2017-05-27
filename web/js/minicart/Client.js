@@ -11,5 +11,13 @@ module.exports = {
       method: 'DELETE',
       success: successCallback
     });
+  },
+  updateQty: function(itemId, qty, successCallback) {
+    $.ajax({
+      url: '/api/cart/items/'+ itemId + '/update_qty',
+      data: { qty: qty },
+      method: 'PUT',
+      success: successCallback
+    });
   }
 };

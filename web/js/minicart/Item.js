@@ -4,6 +4,11 @@ var Alert = require('react-bootstrap').Alert;
 var Client = require('./Client');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      qty: this.props.qty,
+    }
+  },
   removeItem: function() {
     var refresh = this.props.refresh;
     var itemId = this.props.item_id;
@@ -21,9 +26,26 @@ module.exports = React.createClass({
       }.bind(this)
     );
   },
+  changeQty: function(e) {
+    var qty = e.target.value;
+    var refresh = this.props.refresh;
+
+    Client.updateQty(
+      this.props.item_id,
+      qty,
+      function(data) {
+        this.setState({
+          qty: qty
+        })
+        refresh();
+      }.bind(this)
+    );
+
+    return true;
+  },
   render: function() {
     var style = {
-      'max-width': '100px'
+      width: '100px'
     };
     return (
       <li className="list-group-item">
@@ -32,7 +54,7 @@ module.exports = React.createClass({
         <p><img style={style} src="http://magento2.local/pub/media/catalog/product//w/b/wb06-red-0_alt1.jpg" /></p>
         <div className="form-group">
           <label>Qty</label>
-          <input value={this.props.qty} type="text" className="form-control mb-2 mr-sm-2 mb-sm-0"/>
+          <input onChange={this.changeQty.bind(this)} value={this.state.qty} type="text" className="form-control mb-2 mr-sm-2 mb-sm-0"/>
           <button type="button" onClick={this.removeItem.bind(this)}>
             <span className="fa fa-trash fa-3" aria-hidden="true"></span>
           </button>

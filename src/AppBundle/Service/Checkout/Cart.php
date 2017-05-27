@@ -104,6 +104,32 @@ class Cart
         }
     }
 
+    public function updateItemQty($itemId, $qty)
+    {
+        $request = $this->requestFactory->getCartRequest();
+        $client = new Client();
+        try {
+            $response = $client->send($request);
+        } catch (RequestException $e) {
+            echo '<pre>';
+            print_r($e->getResponse()->getBody()->getContents());
+            die();
+        }
+
+        $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $quoteId = $responseData['id'];
+
+        $request = $this->requestFactory->updateItemQtyRequest($quoteId, $itemId, $qty);
+        $client = new Client();
+        try {
+            $response = $client->send($request);
+        } catch (RequestException $e) {
+            echo '<pre>';
+            print_r($e->getResponse()->getBody()->getContents());
+            die();
+        }
+    }
+
     public function __call($name, $arguments)
     {
         $method = 'get'. ucfirst($name);

@@ -144,6 +144,30 @@ class RequestFactory
     }
 
     /**
+     * @param $itemId
+     * @param $qty
+     * @return Request
+     */
+    public function updateItemQtyRequest($quoteId, $itemId, $qty)
+    {
+        /* $quoteId = "mine"; */
+        if($this->token instanceof AnonymousToken){
+            // TODO
+        }else {
+            $payload = [
+                'cartItem' => [
+                    'qty' => $qty,
+                    'quoteId' => $quoteId,
+                    'itemId' => $itemId
+                ]
+            ];
+            /* $addToCartRequest = $this->buildRequest('PUT', 'V1/carts/' . $quoteId . '/items/' . $itemId, $this->token->getAttribute('bearerToken'), $payload); */
+            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items/', $this->token->getAttribute('bearerToken'), $payload);
+        }
+        return $addToCartRequest;
+    }
+
+    /**
      * @param $action
      * @param $uri
      * @param array $payload
