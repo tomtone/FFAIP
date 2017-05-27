@@ -174,7 +174,7 @@ class RequestFactory
         if($this->token instanceof AnonymousToken){
             return false;
         }else {
-            $request = $this->buildRequest('POST', 'V1/customers/me/shippingAddress',$this->token->getAttribute('bearerToken'));
+            $request = $this->buildRequest('GET', 'V1/customers/me/shippingAddress',$this->token->getAttribute('bearerToken'));
         }
         return $request;
     }

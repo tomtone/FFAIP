@@ -57,6 +57,7 @@ class Shipping extends AbstractAdminRequest
                 $response = new Response(200,[],'{}');
             }
         } catch (RequestException $e) {
+            var_dump($e->getRequest());
             echo '<pre>';
             print_r($e->getResponse()->getBody()->getContents());
             die();
