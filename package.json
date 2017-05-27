@@ -16,6 +16,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "watchify": "^3.9.0"
   }

@@ -14,6 +14,9 @@ module.exports = React.createClass({
   componentDidMount: function() {
     this.loadFromServer();
   },
+  refresh: function() {
+    this.loadFromServer();
+  },
   loadFromServer: function() {
     $.ajax({
       url: '/api/checkout/cart',
@@ -34,6 +37,7 @@ module.exports = React.createClass({
                             cartUrl={this.props.cartUrl}
                             items={this.state.items}
                             totals={this.state.totals}
+                            refresh={this.refresh}
                           />;
     }
 

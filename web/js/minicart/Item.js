@@ -1,8 +1,24 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
+var Alert = require('react-bootstrap').Alert;
 
 module.exports = React.createClass({
   removeItem: function() {
-    alert("delete me");
+    var refresh = this.props.refresh;
+    $.ajax({
+      url: '/api/cart/items/' + this.props.item_id,
+      method: 'DELETE',
+      success: function (data) {
+        refresh();
+        const alertInstance = (
+          <Alert bsStyle="warning">
+            <strong>Holy guacamole!</strong> You did something awesome.
+          </Alert>
+        );
+        ReactDOM.render(alertInstance, document.getElementById('alert-container'));
+      }.bind(this)
+    });
+
   },
   render: function() {
     var style = {

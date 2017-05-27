@@ -130,6 +130,20 @@ class RequestFactory
     }
 
     /**
+     * @param $itemId
+     * @return Request
+     */
+    public function removeItemFromCartRequest($itemId)
+    {
+        if($this->token instanceof AnonymousToken){
+            // TODO
+        }else {
+            $addToCartRequest = $this->buildRequest('DELETE', 'V1/carts/mine/items/' . $itemId, $this->token->getAttribute('bearerToken'));
+        }
+        return $addToCartRequest;
+    }
+
+    /**
      * @param $action
      * @param $uri
      * @param array $payload

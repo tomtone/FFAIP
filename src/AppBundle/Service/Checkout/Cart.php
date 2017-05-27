@@ -91,6 +91,19 @@ class Cart
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
     }
 
+    public function removeItemFromCart($itemId)
+    {
+        $request = $this->requestFactory->removeItemFromCartRequest($itemId);
+        $client = new Client();
+        try {
+            $response = $client->send($request);
+        } catch (RequestException $e) {
+            echo '<pre>';
+            print_r($e->getResponse()->getBody()->getContents());
+            die();
+        }
+    }
+
     public function __call($name, $arguments)
     {
         $method = 'get'. ucfirst($name);

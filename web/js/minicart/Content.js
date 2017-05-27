@@ -6,9 +6,16 @@ module.exports = React.createClass({
     window.location.href=this.props.checkoutUrl;
   },
   render: function() {
+    var refresh = this.props.refresh;
     var itemNodes = this.props.items.map(function(item) {
       return (
-        <Item sku={item.sku} name={item.name} price={item.price} qty={item.qty}></Item>
+        <Item
+          sku={item.sku}
+          name={item.name}
+          price={item.price}
+          qty={item.qty}
+          item_id={item.item_id}
+          refresh={refresh}></Item>
       );
     });
     return (
