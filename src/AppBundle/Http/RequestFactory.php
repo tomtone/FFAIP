@@ -124,7 +124,7 @@ class RequestFactory
             $productData = ['cartItem' => $data];
             $addToCartRequest = $this->buildRequest('POST', '/V1/guest-carts/' . $cartId . '/items', false, $productData);
         }else {
-            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/item',$this->token->getAttribute('bearerToken'), $productData);
+            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items',$this->token->getAttribute('bearerToken'), $productData);
         }
         return $addToCartRequest;
     }

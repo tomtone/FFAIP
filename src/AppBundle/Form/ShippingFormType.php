@@ -11,10 +11,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Http\RequestFactory;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -41,7 +39,7 @@ class ShippingFormType extends AbstractType
         $requestFactory = $options['requestFactory'];
         $builder = $this->getMetaData($requestFactory, $builder);
         $builder
-            ->add('submit', SubmitType::class, ['label' => 'text_register']);
+            ->add('submit', SubmitType::class, ['label' => 'text_submit_shipping_form']);
     }
 
     /**
