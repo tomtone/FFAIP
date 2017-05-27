@@ -47,14 +47,14 @@ class Shipping extends AbstractAdminRequest
     public function getShipping()
     {
         $request = $this->requestFactory->getShippingAddressRequest();
-        
+
         $client = new Client();
 
         try {
-            if($request !== false) {
+            if ($request !== false) {
                 $response = $client->send($request);
-            }else{
-                $response = new Response(200,[],'{}');
+            } else {
+                $response = new Response(200, [], '{}');
             }
         } catch (RequestException $e) {
             var_dump($e->getRequest());
@@ -63,13 +63,20 @@ class Shipping extends AbstractAdminRequest
             die();
         }
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        #if(empty($responseData)) {
-        #    $request = $this->requestFactory->getAddressMetadataRequest($this->getBearerToken());
-#
- #           $responseData = $this->request($request);
-  #      }
-   #     var_dump($responseData);
-    #    die();
         return $responseData;
+    }
+
+    public function getShippingMethods()
+    {
+        $request = $this->requestFactory->getShippingMethodsRequest();
+        try {
+            $response = $this->request($request);
+        } catch (RequestException $e) {
+            var_dump($e->getRequest());
+            echo '<pre>';
+            print_r($e->getResponse()->getBody()->getContents());
+            die();
+        }
+        return $response;
     }
 }

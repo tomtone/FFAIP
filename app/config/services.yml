@@ -30,6 +30,10 @@ services:
     api.checkout.shipping:
       class: AppBundle\Service\Checkout\Shipping
       arguments: ["@app.factory.request"]
+    api.checkout.address:
+      class: AppBundle\Service\Address
+      arguments: ["@app.factory.request"]
+
 
 
     api.catalog.product.helper:

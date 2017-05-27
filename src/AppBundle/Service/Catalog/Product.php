@@ -18,18 +18,4 @@ class Product extends \AppBundle\Service\AbstractAdminRequest
 
         return $response;
     }
-
-    private function prepareRequest($bearerToken, $sku)
-    {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/products/'. $sku,
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $bearerToken
-            ]
-        );
-
-        return $request;
-    }
 }
