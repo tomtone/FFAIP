@@ -64,6 +64,20 @@ class Scope
     }
 
     /**
+     * prepareCart
+     */
+    public function prepareCart()
+    {
+        if ($this->session->has('cart_id')) {
+            if ($this->isGuest()) {
+                $this->createGuestCart();
+            } else {
+                $this->fetchQuoteId();
+            }
+        }
+    }
+
+    /**
      * Helper MEthod to create GuestCart if not exist.
      */
     private function createGuestCart()
@@ -76,6 +90,14 @@ class Scope
         $response = (new Client())->send($request);
         $cartId = \GuzzleHttp\json_decode($response->getBody()->getContents());
         $this->session->set('cart_id', $cartId);
+    }
+
+    private function fetchQuoteId()
+    {
+        $request = $this->getCartRequest();
+        $response = (new Client())->send($request);
+        $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $this->session->set('cart_id', $response['id']);
     }
 
     /**
@@ -102,7 +124,7 @@ class Scope
      */
     public function extendHeaders($headers, $adminToken = false)
     {
-        if (!$this->isGuest() && !$adminToken) {
+        if (!$this->isGuest() && !$adminToken && $this->token) {
             $headers['Authorization'] = 'Bearer ' . $this->token->getAttribute('bearerToken');
         } elseif ($adminToken) {
             $headers['Authorization'] = 'Bearer ' . $adminToken;
@@ -121,7 +143,7 @@ class Scope
     /**
      * @return mixed
      */
-    private function getCartId()
+    public function getCartId()
     {
         return $this->session->get('cart_id');
     }
