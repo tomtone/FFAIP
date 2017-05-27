@@ -1,14 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Alert = require('react-bootstrap').Alert;
+var Client = require('./Client');
 
 module.exports = React.createClass({
   removeItem: function() {
     var refresh = this.props.refresh;
-    $.ajax({
-      url: '/api/cart/items/' + this.props.item_id,
-      method: 'DELETE',
-      success: function (data) {
+    var itemId = this.props.item_id;
+
+    Client.removeItem(
+      itemId,
+      function (data) {
         refresh();
         const alertInstance = (
           <Alert bsStyle="warning">
@@ -17,8 +19,7 @@ module.exports = React.createClass({
         );
         ReactDOM.render(alertInstance, document.getElementById('alert-container'));
       }.bind(this)
-    });
-
+    );
   },
   render: function() {
     var style = {

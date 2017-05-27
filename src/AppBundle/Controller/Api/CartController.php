@@ -11,18 +11,32 @@ use Symfony\Component\HttpFoundation\Request;
 class CartController extends Controller
 {
     /**
+     * @Route("/api/cart",
+     *   name="api_checkout_cart"
+     * )
+     */
+    public function indexAction(Request $request)
+    {
+        $items = $this->get('api.checkout.cart')->getCartItems();
+        $totals = $this->get('api.checkout.cart')->getTotals();
+
+        return new JsonResponse([
+            'items' => $items,
+            'totals' => $totals
+        ]);
+    }
+
+    /**
      * @Route("/api/cart/items/{itemId}",
      *   name="api_cart_items_delete"
      * )
      * @Method("DELETE")
      */
-    public function cartAction(Request $request, $itemId)
+    public function removeItemAction(Request $request, $itemId)
     {
-        /* $itemId = 222; */
         $items = $this->get('api.checkout.cart')->removeItemFromCart($itemId);
 
         return new JsonResponse([
-            'ok' => "hello"
-        ]);
+            'ok' => "hello" ]);
     }
 }

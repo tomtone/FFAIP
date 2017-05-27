@@ -1,6 +1,7 @@
 var React = require('react');
 var NoItems = require('./NoItems');
 var Content = require('./Content');
+var Client = require('./Client');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -18,12 +19,11 @@ module.exports = React.createClass({
     this.loadFromServer();
   },
   loadFromServer: function() {
-    $.ajax({
-      url: '/api/checkout/cart',
-      success: function (data) {
+    Client.getItems(
+      function (data) {
         this.setState({items: data.items, totals: data.totals});
       }.bind(this)
-    });
+    );
   },
   toggleMiniCart: function(e) {
     $("#dropdown-menu").toggle();
