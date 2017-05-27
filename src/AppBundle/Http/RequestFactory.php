@@ -231,7 +231,7 @@ class RequestFactory
         return new ProductRequest($this->scopeContext, $sku, $bearerToken);
     }
 
-    public function getAttributeValueRequest($bearerToken, $attributeId)
+    public function getAttributeRequest($bearerToken, $attributeId)
     {
         return new AttributeRequest($this->scopeContext, $attributeId, $bearerToken);
     }

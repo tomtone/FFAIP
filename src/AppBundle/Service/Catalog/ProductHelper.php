@@ -12,7 +12,7 @@ class ProductHelper extends AbstractAdminRequest
         $response = $cachedItem->get();
         if($response == null) {
             $bearerToken = $this->getBearerToken();
-            $request = $this->requestFactory->getAttributeValueRequest($bearerToken, $attribute['attribute_id']);
+            $request = $this->requestFactory->getAttributeRequest($bearerToken, $attribute['attribute_id']);
             $response = $this->request($request);
             $cachedItem->set($response);
             $cachedItem->expiresAfter(300);
