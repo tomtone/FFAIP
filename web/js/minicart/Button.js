@@ -25,7 +25,7 @@ module.exports = React.createClass({
       }.bind(this)
     );
   },
-  toggleMiniCart: function(e) {
+  toggleMiniCart: function() {
     $("#dropdown-menu").toggle();
   },
   render: function() {

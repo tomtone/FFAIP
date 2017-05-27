@@ -19,5 +19,16 @@ module.exports = {
       method: 'PUT',
       success: successCallback
     });
-  }
+  },
+  addItem: function(sku, qty, successCallback) {
+    $.ajax({
+      url: '/api/cart/items',
+      data: {
+        _qty: qty,
+        _sku: sku
+      },
+      method: 'POST',
+      success: successCallback
+    });
+  },
 };

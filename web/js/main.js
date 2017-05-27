@@ -1,22 +1,39 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
-var Button = require('./minicart/Button');
+var Registry = require('./component/Registry');
+var MiniCartButton = require('./minicart/Button');
+var AddToCartButton = require('./cart/AddButton');
+
+Registry.addClass("MiniCartButton", MiniCartButton);
+Registry.addClass("AddToCartButton", AddToCartButton);
 
 $( document ).ready(function() {
   $.each($("script[type='text/x-init']"), function(index, value) {
     var elementConfig = JSON.parse($(value).html());
     var element = elementConfig["element"];
-    var component = elementConfig["compontent"];
+    var componentName = elementConfig["component"];
     var props = elementConfig["props"];
 
-    // TODO: create components by config
-    ReactDOM.render(
-      <Button
-        cartUrl={props.cartUrl}
-        checkoutUrl={props.checkoutUrl}
-        mediaUrl={props.mediaUrl}
-      />,
-      document.getElementById('minicart')
-    );
+    // try {
+      // if (componentName == "MiniCartButton") {
+        // Registry.value = 10;
+        // var str = "./minicart/"+"Button";
+        // var component = require(componentName);
+        var componentClass = Registry.getClass(componentName);
+        if (componentClass) {
+          // console.log(component);
+          var component = React.createElement(componentClass, props);
+          var componentInstance = ReactDOM.render(
+            component,
+            document.getElementById(element)
+          );
+          Registry.addInstance(componentName, componentInstance);
+
+          // button2.toggleMiniCart();
+        // }
+      }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   });
 });

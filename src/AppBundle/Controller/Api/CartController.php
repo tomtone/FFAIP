@@ -55,4 +55,24 @@ class CartController extends Controller
             'ok' => $qty
         ]);
     }
+
+    /**
+     * @Route("/api/cart/items",
+     *   name="api_cart_items_add"
+     * )
+     * @Method("POST")
+     */
+    public function addItem(Request $request)
+    {
+        $qty = $request->request->get('_qty');
+        $sku = $request->request->get('_sku');
+
+        $attributes = $request->request->get('_attributes');
+
+        $this->get('api.checkout.cart')->addToCart($sku, $qty, $attributes);
+
+        return new JsonResponse([
+            'ok' => $qty
+        ]);
+    }
 }

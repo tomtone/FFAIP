@@ -27,6 +27,24 @@
                 <input type="hidden" name="_sku" value="{{ product.sku }}">
                 <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
             </form>
+
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Ajax Add to cart</div>
+              <div class="panel-body">
+                <div id="addToCartButton"></div>
+                <script type="text/x-init">
+                    {
+                        "element": "addToCartButton",
+                        "component": "AddToCartButton",
+                        "props": {
+                          "sku": "{{ product.sku }}"
+                        }
+                    }
+                </script>
+              </div>
+            </div>
         </div>
     </div>
 {{ dump(product) }}

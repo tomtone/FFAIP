@@ -77,7 +77,7 @@
 <script src="{{ asset('build/app.js') }}"></script>
 <script type="text/x-init">
     {
-        "element": "#minicart",
+        "element": "minicart",
         "component": "MiniCartButton",
         "props": {
             "cartUrl": "{{ path('checkout_cart')}}",
@@ -86,6 +86,7 @@
         }
     }
 </script>
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>
