@@ -1,5 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{ dump(customer) }}
+    <div class="row">
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills nav-stacked col-md-2" role="tablist">
+            <li role="presentation" class="active"><a href="#orders" aria-controls="orders" role="tab" data-toggle="tab">Orders</a></li>
+            <li role="presentation"><a href="#addresses" aria-controls="addresses" role="tab" data-toggle="tab">Addresses</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content col-md-10">
+            <div role="tabpanel" class="tab-pane active" id="orders">{% include 'customer/_partials/orders.html.twig' %}</div>
+            <div role="tabpanel" class="tab-pane" id="addresses">{% include 'customer/_partials/addresses.html.twig' %}</div>
+            <div role="tabpanel" class="tab-pane" id="messages">messages</div>
+            <div role="tabpanel" class="tab-pane" id="settings">settings</div>
+        </div>
+    </div>
+    {{ dump(customer) }}
 {% endblock %}
