@@ -7,6 +7,7 @@ module.exports = React.createClass({
   },
   render: function() {
     var refresh = this.props.refresh;
+    var mediaUrl = this.props.mediaUrl;
     var itemNodes = this.props.items.map(function(item) {
       return (
         <Item
@@ -15,6 +16,7 @@ module.exports = React.createClass({
           price={item.price}
           qty={item.qty}
           item_id={item.item_id}
+          image_url={mediaUrl + "w/b/wb06-red-0_alt1.jpg"}
           refresh={refresh}></Item>
       );
     });

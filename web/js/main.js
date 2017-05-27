@@ -11,7 +11,11 @@ $( document ).ready(function() {
 
     // TODO: create components by config
     ReactDOM.render(
-      <Button cartUrl={props.cartUrl} checkoutUrl={props.checkoutUrl} />,
+      <Button
+        cartUrl={props.cartUrl}
+        checkoutUrl={props.checkoutUrl}
+        mediaUrl={props.mediaUrl}
+      />,
       document.getElementById('minicart')
     );
   });

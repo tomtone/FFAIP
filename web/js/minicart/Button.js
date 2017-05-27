@@ -35,6 +35,7 @@ module.exports = React.createClass({
       minicartContent = <Content
                             checkoutUrl={this.props.checkoutUrl}
                             cartUrl={this.props.cartUrl}
+                            mediaUrl={this.props.mediaUrl}
                             items={this.state.items}
                             totals={this.state.totals}
                             refresh={this.refresh}
