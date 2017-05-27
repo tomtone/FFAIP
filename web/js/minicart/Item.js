@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Alert = require('react-bootstrap').Alert;
-var Client = require('./Client');
+var Client = require('../remote/Client');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -26,11 +26,19 @@ module.exports = React.createClass({
       }.bind(this)
     );
   },
+  componentDidUpdate: function(prevProps, prevState){
+    // dirty workaround to make qty chances from add to cart button possible
+    if (this.props.qty != prevProps.qty && this.props.qty != this.state.qty) {
+      this.setState({
+        qty: this.props.qty
+      });
+    }
+  },
   changeQty: function(e) {
     var qty = e.target.value;
     this.setState({
       qty: qty
-    })
+    });
     return true;
   },
   updateQty: function() {
