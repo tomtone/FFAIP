@@ -145,19 +145,14 @@ class RequestFactory
      */
     public function updateItemQtyRequest($quoteId, $itemId, $qty)
     {
-        if ($this->scopeContext->isGuest()) {
-            // TODO
-        } else {
-            $payload = [
-                'cartItem' => [
-                    'qty' => $qty,
-                    'quoteId' => $quoteId,
-                    'itemId' => $itemId
-                ]
-            ];
-            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items/', $this->token->getAttribute('bearerToken'), $payload);
-        }
-        return $addToCartRequest;
+        $productData = [
+            'cart_item' => [
+                'qty' => $qty,
+                'quoteId' => $quoteId,
+                'itemId' => $itemId
+            ]
+        ];
+        return new AddToCartRequest($this->scopeContext, $productData);
     }
 
     /**

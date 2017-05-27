@@ -58,9 +58,6 @@ class Scope
         $this->token = $tokenStorage->getToken();
         $this->shopUrl = $shopUrl;
         $this->session = $session;
-        if ($this->session->has('cart_id') === false && $this->isGuest()) {
-            $this->createGuestCart();
-        }
     }
 
     /**
@@ -68,7 +65,7 @@ class Scope
      */
     public function prepareCart()
     {
-        if ($this->session->has('cart_id')) {
+        if (!$this->session->has('cart_id')) {
             if ($this->isGuest()) {
                 $this->createGuestCart();
             } else {
