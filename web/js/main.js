@@ -1,6 +1,6 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
-var Button = require('./Button');
+var Button = require('./minicart/Button');
 
 $( document ).ready(function() {
   $.each($("script[type='text/x-init']"), function(index, value) {

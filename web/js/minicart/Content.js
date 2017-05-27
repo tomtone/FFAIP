@@ -1,4 +1,4 @@
-var ItemBlock = require('./ItemBlock');
+var Item = require('./Item');
 
 module.exports = React.createClass({
   gotoCheckout: function() {
@@ -7,7 +7,7 @@ module.exports = React.createClass({
   render: function() {
     var itemNodes = this.props.items.map(function(item) {
       return (
-        <ItemBlock sku={item.sku} name={item.name} price={item.price} qty={item.qty}></ItemBlock>
+        <Item sku={item.sku} name={item.name} price={item.price} qty={item.qty}></Item>
       );
     });
     return (

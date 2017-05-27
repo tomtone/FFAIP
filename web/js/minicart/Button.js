@@ -1,5 +1,5 @@
-var MiniCartEmpty = require('./MiniCartEmpty');
-var MiniCartContent = require('./MiniCartContent');
+var NoItems = require('./NoItems');
+var Content = require('./Content');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -26,16 +26,15 @@ module.exports = React.createClass({
   },
   render: function() {
     var minicartContent = null;
-    minicartContent = <MiniCartEmpty/>;
+    minicartContent = <NoItems/>;
     if (this.state.totals.totals.items_qty > 0) {
-      minicartContent = <MiniCartContent
+      minicartContent = <Content
                             checkoutUrl={this.props.checkoutUrl}
                             cartUrl={this.props.cartUrl}
                             items={this.state.items}
                             totals={this.state.totals}
                           />;
     }
-
 
     return (
       <li className="nav navbar-nav navbar-right">
