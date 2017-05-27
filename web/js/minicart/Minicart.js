@@ -9,7 +9,8 @@ module.exports = React.createClass({
       items: [],
       totals: {
         totals: {}
-      }
+      },
+      loading: true
     }
   },
   componentDidMount: function() {
@@ -19,9 +20,10 @@ module.exports = React.createClass({
     this.loadFromServer();
   },
   loadFromServer: function() {
+    this.setState({loading: true});
     Client.getItems(
       function (data) {
-        this.setState({items: data.items, totals: data.totals});
+        this.setState({items: data.items, totals: data.totals, loading: false});
       }.bind(this)
     );
   },
@@ -34,7 +36,11 @@ module.exports = React.createClass({
   render: function() {
     return (
       <li className="nav navbar-nav navbar-right">
-      <NavIcon toggle={this.toggle.bind(this)} itemsQty={this.state.totals.totals.items_qty} />
+      <NavIcon
+        toggle={this.toggle.bind(this)}
+        itemsQty={this.state.totals.totals.items_qty}
+        loading={this.state.loading}
+      />
       <Dropdown
         toggle={this.toggle.bind(this)}
         checkoutUrl={this.props.checkoutUrl}
@@ -44,6 +50,7 @@ module.exports = React.createClass({
         totals={this.state.totals}
         refresh={this.refresh}
         gotoCheckout={this.gotoCheckout.bind(this)}
+        loading={this.state.loading}
       />
       </li>
     );

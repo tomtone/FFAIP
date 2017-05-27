@@ -8,13 +8,14 @@ module.exports = React.createClass({
     items = <NoItems/>;
     if (this.props.totals.totals.items_qty > 0) {
       items = <ItemList
-                            checkoutUrl={this.props.checkoutUrl}
-                            cartUrl={this.props.cartUrl}
-                            mediaUrl={this.props.mediaUrl}
-                            items={this.props.items}
-                            totals={this.props.totals}
-                            refresh={this.props.refresh}
-                          />;
+                checkoutUrl={this.props.checkoutUrl}
+                cartUrl={this.props.cartUrl}
+                mediaUrl={this.props.mediaUrl}
+                items={this.props.items}
+                totals={this.props.totals}
+                refresh={this.props.refresh}
+                loading={this.props.loading}
+              />;
     }
     return (
       <div className="dropdown">

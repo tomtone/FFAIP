@@ -63,9 +63,26 @@ module.exports = React.createClass({
         <p><img style={style} src={this.props.imageUrl} /></p>
         <div className="form-group">
           <label>Qty</label>
-          <input onChange={this.changeQty.bind(this)} value={this.state.qty} type="text" className="form-control mb-2 mr-sm-2 mb-sm-0"/>
-          <span><button onClick={this.updateQty}>Update</button></span>
-          <button type="button" onClick={this.removeItem.bind(this)}>
+          <input
+            onChange={this.changeQty.bind(this)}
+            value={this.state.qty}
+            type="text"
+            className="form-control mb-2 mr-sm-2 mb-sm-0"
+            disabled={this.props.loading}
+          />
+          <span>
+            <button
+              disabled={this.props.loading}
+              onClick={this.updateQty}
+            >
+              Update
+            </button>
+          </span>
+          <button
+            type="button"
+            onClick={this.removeItem.bind(this)}
+            disabled={this.props.loading}
+          >
             <span className="fa fa-trash fa-3" aria-hidden="true"></span>
           </button>
         </div>
