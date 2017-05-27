@@ -88,10 +88,15 @@ class RequestFactory
         $this->cacheAdapter = $cacheAdapter;
         $this->session = $session;
 
-        if ($this->session->has('cart_id') === false) {
-            $this->createGuestCart();
-        }
         $this->scopeContext = $scopeContext;
+
+        if ($this->session->has('cart_id')) {
+            if ($scopeContext->isGuest()) {
+                $this->createGuestCart();
+            } else {
+                $this->fetchQuoteId();
+            }
+        }
     }
 
     /**
@@ -133,7 +138,7 @@ class RequestFactory
      */
     public function removeItemFromCartRequest($itemId)
     {
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             // TODO
         } else {
             $addToCartRequest = $this->buildRequest('DELETE', 'V1/carts/mine/items/' . $itemId, $this->token->getAttribute('bearerToken'));
@@ -148,8 +153,7 @@ class RequestFactory
      */
     public function updateItemQtyRequest($quoteId, $itemId, $qty)
     {
-        /* $quoteId = "mine"; */
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             // TODO
         } else {
             $payload = [
@@ -159,7 +163,6 @@ class RequestFactory
                     'itemId' => $itemId
                 ]
             ];
-            /* $addToCartRequest = $this->buildRequest('PUT', 'V1/carts/' . $quoteId . '/items/' . $itemId, $this->token->getAttribute('bearerToken'), $payload); */
             $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items/', $this->token->getAttribute('bearerToken'), $payload);
         }
         return $addToCartRequest;
@@ -205,9 +208,17 @@ class RequestFactory
         $this->session->set('cart_id', $cartId);
     }
 
+    private function fetchQuoteId()
+    {
+        $request = $this->getCartRequest();
+        $response = (new Client())->send($request);
+        $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $this->session->set('cart_id', $response['id']);
+    }
+
     public function getShippingAddressRequest()
     {
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             return false;
         } else {
             $request = $this->buildRequest('GET', 'V1/customers/me/shippingAddress', $this->token->getAttribute('bearerToken'));
@@ -264,7 +275,7 @@ class RequestFactory
             ]
         ];
         /* not really sure why i have to do this... [BEGIN] */
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
         } else {
@@ -280,7 +291,7 @@ class RequestFactory
     {
         $addressPayload = $this->session->get('cart_request');
         dump($addressPayload);
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
         } else {
@@ -291,7 +302,7 @@ class RequestFactory
 
         $addressPayload = \GuzzleHttp\json_encode($addressPayload, JSON_FORCE_OBJECT);
 
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/order', false, $addressPayload);
         } else {
@@ -307,7 +318,7 @@ class RequestFactory
 
     public function getShippingMethodsRequest()
     {
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('GET', 'V1/guest-carts/' . $cartId . '/shipping-methods');
         } else {
@@ -321,7 +332,7 @@ class RequestFactory
         $paymentPayload = [
             'method' => ['method' => $payment['payment']]
         ];
-        if ($this->token instanceof AnonymousToken) {
+        if ($scopeContext->isGuest()) {
             $cartId = $this->session->get('cart_id');
             $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/selected-payment-method', false, $paymentPayload);
         } else {

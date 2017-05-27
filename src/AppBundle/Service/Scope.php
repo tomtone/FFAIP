@@ -113,7 +113,7 @@ class Scope
     /**
      * @return bool
      */
-    protected function isGuest()
+    public function isGuest()
     {
         return $this->token instanceof AnonymousToken;
     }

@@ -20,7 +20,7 @@ class AddToCartRequest extends Request
 
     /**
      * AddToCartRequest constructor.
-     * 
+     *
      * @param Scope $scopeContext
      * @param \Psr\Http\Message\UriInterface|string $payload
      */
