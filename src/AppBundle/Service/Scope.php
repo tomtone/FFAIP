@@ -83,11 +83,11 @@ class Scope
      */
     public function prepareUri($uris)
     {
-        if ($this->isGuest()) {
+        if (array_key_exists(self::URI_TYPE_GLOBAL, $uris)) {
+            $uri = $uris[self::URI_TYPE_GLOBAL];
+        }  elseif ($this->isGuest()) {
             $uri = $uris[self::URI_TYPE_GUEST];
             $uri = str_replace(':cartId', $this->getCartId(), $uri);
-        } elseif (array_key_exists(self::URI_TYPE_GLOBAL, $uris)) {
-            $uri = $uris[self::URI_TYPE_GLOBAL];
         } else {
             $uri = $uris[self::URI_TYPE_CUSTOMER];
         }
