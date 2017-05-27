@@ -1,0 +1,51 @@
+<div class=" col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ address_type }}</div>
+        <div class="panel-body">
+            {% if address.prefix is not empty %}
+                <p>{{ address.prefix }}</p>
+            {% endif %}
+            <p>
+                {% if address.firstname is not empty %}
+                    {{ address.firstname }}
+                {% endif %}
+                {% if address.middlename is not empty %}
+                    {{ address.middlename }}
+                {% endif %}
+                {% if address.lastname is not empty %}
+                    {{ address.lastname }}
+                {% endif %}
+            </p>
+            {% if address.company is not empty %}
+                <p>{{ address.company }}</p>
+            {% endif %}
+            <span>
+    {% for line in address.street %}
+        <p>{{ line }}</p>
+    {% endfor %}
+    </span>
+            <p>
+                {% if address.postcode is not empty %}
+                    {{ address.postcode }}
+                {% endif %}
+                {% if address.city is not empty %}
+                    {{ address.city }}
+                {% endif %}
+            </p>
+            <p>
+                {% if address.country_id is not empty %}
+                    {{ address.country_id }}
+                {% endif %}
+            </p>
+            {% if address.telephone is not empty %}
+                <p>Tel.: {{ address.telephone }}</p>
+            {% endif %}
+            {% if address.fax is not empty %}
+                <p>Fax: {{ address.fax }}</p>
+            {% endif %}
+            {% if address.vat_id is not empty %}
+                <p>VAT Id: {{ address.vat_id }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

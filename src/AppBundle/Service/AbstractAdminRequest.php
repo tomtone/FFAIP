@@ -5,6 +5,7 @@ namespace AppBundle\Service;
 use AppBundle\Http\RequestFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Request;
 use Psr\Cache\CacheItemPoolInterface;
 
 abstract class AbstractAdminRequest
@@ -13,6 +14,7 @@ abstract class AbstractAdminRequest
      * @var string
      */
     protected $shopUrl;
+    protected $session;
 
     /**
      * @var string
@@ -41,6 +43,7 @@ abstract class AbstractAdminRequest
     {
         $this->requestFactory = $requestFactory;
         $this->cacheAdapter = $requestFactory->getCache();
+        $this->session = $requestFactory->getSession();
     }
 
     public function getBearerToken()
@@ -51,14 +54,18 @@ abstract class AbstractAdminRequest
         return $response;
     }
 
+    /**
+     * @param Request $request
+     * @return mixed|string
+     */
     protected function request($request)
     {
         $client = new Client();
         try {
             $response = $client->send($request);
         }catch (RequestException $e){
-            dump($e);
             $responseData = \GuzzleHttp\json_decode($e->getResponse()->getBody()->getContents());
+            dump($responseData);
             if(property_exists($responseData, 'message')) {
                 return $responseData->message;
             }else{

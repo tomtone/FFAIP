@@ -1,0 +1,72 @@
+{
+  "addressInformation": {
+    "shipping_address": {
+      "countryId": "NG",
+      "regionId": "508",
+      "regionCode": "Kebbi",
+      "region": "Kebbi",
+      "street": [
+        "",
+        ""
+      ],
+      "postcode": "234",
+      "city": "Lagos"
+    },
+    "billing_address": {
+      "countryId": "NG",
+      "regionId": "508",
+      "regionCode": "Kebbi",
+      "region": "Kebbi",
+      "street": [
+        "Lagos"
+      ],
+      "company": "Yudala",
+      "telephone": "",
+      "postcode": "234",
+      "city": "Uyo",
+      "firstname": "Kpono",
+      "lastname": "Akpabio",
+      "saveInAddressBook": false
+    },
+    "shipping_method_code": "yucarrier",
+    "shipping_carrier_code": "yucarrier"
+  },
+  "addressInformation": {
+    "shipping_address": {
+      "customer_id": null,
+      "prefix": null,
+      "firstname": "Thomas",
+      "middlename": null,
+      "lastname": "von Gostomski",
+      "company": null,
+      "street": {
+        "0": "Kulmer Stra\u00dfe"
+      },
+      "city": "Bremen",
+      "country_id": "DE",
+      "region": null,
+      "postcode": "28237",
+      "telephone": "1728725537",
+      "fax": null,
+      "vat_id": null
+    },
+    "billing_address": {
+      "customer_id": null,
+      "prefix": null,
+      "firstname": "Thomas",
+      "middlename": null,
+      "lastname": "von Gostomski",
+      "company": null,
+      "street": {
+        "0": "Kulmer Stra\u00dfe"
+      },
+      "city": "Bremen",
+      "country_id": "DE",
+      "region": null,
+      "postcode": "28237",
+      "telephone": "1728725537",
+      "fax": null,
+      "vat_id": null
+    }
+  }
+}

@@ -33,9 +33,8 @@ class Cart
         try {
             $response = $client->send($request);
         } catch (RequestException $e) {
-            echo '<pre>';
-            print_r($e->getResponse()->getBody()->getContents());
-            die();
+            dump($e->getResponse()->getBody()->getContents());
+            return 0;
         }
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
         $qty = 0;

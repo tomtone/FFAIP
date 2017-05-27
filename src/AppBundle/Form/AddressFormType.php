@@ -13,6 +13,7 @@ use AppBundle\Http\RequestFactory;
 use GuzzleHttp\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,11 +24,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class ShippingFormType
  * @package AppBundle\Form
  */
-class ShippingFormType extends AbstractType
+class AddressFormType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('requestFactory');
+        $resolver->setRequired('type');
     }
     /**
      * @param FormBuilderInterface $builder
@@ -37,8 +39,12 @@ class ShippingFormType extends AbstractType
     {
         /** @var RequestFactory $requestFactory */
         $requestFactory = $options['requestFactory'];
+        $type = $options['type'];
+        $builder
+            ->add('email', EmailType::class, ['label' => 'E-Mail']);
         $builder = $this->getMetaData($requestFactory, $builder);
         $builder
+            ->add('type', HiddenType::class, ['data' => $type])
             ->add('submit', SubmitType::class, ['label' => 'text_submit_shipping_form']);
     }
 
@@ -64,14 +70,28 @@ class ShippingFormType extends AbstractType
         foreach ($data as $field){
             dump($field);
             if($field['frontend_input'] == 'text' && $field['visible']) {
-                $builder->add($field['attribute_code'], TextType::class, ['label' => $field['store_label']]);
+                $builder->add($field['attribute_code'], TextType::class, [
+                    'label' => $field['store_label'],
+                    'required' => $field['required']
+                ]);
             }elseif($field['frontend_input'] == 'text' && !$field['visible']){
-                $builder->add($field['attribute_code'], HiddenType::class, ['label' => $field['store_label']]);
+                $builder->add($field['attribute_code'], HiddenType::class, [
+                    'label' => $field['store_label'],
+                    'required' => $field['required']
+                ]);
             }elseif($field['frontend_input'] == 'select'){
                 $builder->add($field['attribute_code'], ChoiceType::class, [
                     'label' => $field['store_label'],
+                    'required' => $field['required'],
                     'choices' => $this->prepareChoices($field['options'])
                 ]);
+            }elseif ($field['frontend_input'] == 'multiline' && $field['visible']){
+                for($i = 0; $i < $field['multiline_count']; $i++){
+                    $builder->add($field['attribute_code']. '_'.$i, TextType::class, [
+                        'label' => $field['store_label'],
+                        'required' => ($field['required'] && $i == 0)? $field['required']: false
+                    ]);
+                }
             }
         }
         

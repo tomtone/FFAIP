@@ -2,6 +2,7 @@
 namespace AppBundle\Http;
 
 
+use AppBundle\Entity\Address;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Psr\Cache\CacheItemPoolInterface;
@@ -53,9 +54,16 @@ class RequestFactory
      * @param string $adminPassword
      * @param TokenStorage $tokenStorage
      * @param Session $session
-     * @internal param CacheItemPoolInterface $cacheAdapter
+     * @param CacheItemPoolInterface $cacheAdapter
      */
-    public function __construct(string $shopUrl, string $adminUser, string $adminPassword, TokenStorage $tokenStorage, Session $session, CacheItemPoolInterface $cacheAdapter)
+    public function __construct(
+        string $shopUrl,
+        string $adminUser,
+        string $adminPassword,
+        TokenStorage $tokenStorage,
+        Session $session,
+        CacheItemPoolInterface $cacheAdapter
+    )
     {
         $this->shopUrl = $shopUrl;
         $this->adminUser = $adminUser;
@@ -65,7 +73,7 @@ class RequestFactory
         $this->cacheAdapter = $cacheAdapter;
         $this->session = $session;
 
-        if($this->session->has('cart_id') === false){
+        if ($this->session->has('cart_id') === false) {
             $this->createGuestCart();
         }
     }
@@ -75,9 +83,9 @@ class RequestFactory
      */
     public function getCartRequest()
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id'));
-        }else {
+        } else {
             $request = $this->buildRequest('GET', 'V1/carts/mine', $this->token->getAttribute('bearerToken'));
         }
         return $request;
@@ -88,9 +96,9 @@ class RequestFactory
      */
     public function getCartItemRequest()
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id') . '/items');
-        }else {
+        } else {
             $request = $this->buildRequest('GET', 'V1/carts/mine/items', $this->token->getAttribute('bearerToken'));
         }
 
@@ -102,9 +110,9 @@ class RequestFactory
      */
     public function getPaymentInformationRequest()
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             $request = $this->buildRequest('GET', 'V1/guest-carts/' . $this->session->get('cart_id') . '/payment-information');
-        }else {
+        } else {
             $request = $this->buildRequest('GET', 'V1/carts/mine/payment-information', $this->token->getAttribute('bearerToken'));
         }
         return $request;
@@ -116,15 +124,15 @@ class RequestFactory
      */
     public function getAddToCartRequest($productData)
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             $cartId = $this->session->get('cart_id');
             $data = $productData['cart_item'];
             $data['quote_id'] = $cartId;
             unset($productData);
             $productData = ['cartItem' => $data];
             $addToCartRequest = $this->buildRequest('POST', '/V1/guest-carts/' . $cartId . '/items', false, $productData);
-        }else {
-            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items',$this->token->getAttribute('bearerToken'), $productData);
+        } else {
+            $addToCartRequest = $this->buildRequest('POST', 'V1/carts/mine/items', $this->token->getAttribute('bearerToken'), $productData);
         }
         return $addToCartRequest;
     }
@@ -179,11 +187,11 @@ class RequestFactory
         $headers = [
             "Content-Type" => "application/json",
         ];
-        if($token !== false){
+        if ($token !== false) {
             $headers["Authorization"] = "Bearer " . $token;
         }
 
-        if(is_array($payload)){
+        if (is_array($payload)) {
             $payload = \GuzzleHttp\json_encode($payload);
         }
 
@@ -209,10 +217,10 @@ class RequestFactory
 
     public function getShippingAddressRequest()
     {
-        if($this->token instanceof AnonymousToken){
+        if ($this->token instanceof AnonymousToken) {
             return false;
-        }else {
-            $request = $this->buildRequest('GET', 'V1/customers/me/shippingAddress',$this->token->getAttribute('bearerToken'));
+        } else {
+            $request = $this->buildRequest('GET', 'V1/customers/me/shippingAddress', $this->token->getAttribute('bearerToken'));
         }
         return $request;
     }
@@ -225,13 +233,13 @@ class RequestFactory
                 'password' => $this->adminPassword
             ]
         );
-        $request = $this->buildRequest('POST', 'V1/integration/admin/token',false, $userData);
+        $request = $this->buildRequest('POST', 'V1/integration/admin/token', false, $userData);
         return $request;
     }
 
     public function getAddressMetadataRequest($bearerToken)
     {
-        $request = $this->buildRequest('GET', 'V1/attributeMetadata/customerAddress',$bearerToken);
+        $request = $this->buildRequest('GET', 'V1/attributeMetadata/customerAddress', $bearerToken);
         return $request;
     }
 
@@ -243,24 +251,103 @@ class RequestFactory
 
     public function getCategoryRequest($bearerToken, $categoryId)
     {
-        $request = $this->buildRequest('GET', 'V1/categories/'.$categoryId . '/products', $bearerToken);
+        $request = $this->buildRequest('GET', 'V1/categories/' . $categoryId . '/products', $bearerToken);
         return $request;
     }
 
     public function getProductDataRequest($bearerToken, $sku)
     {
-        $request = $this->buildRequest('GET', 'V1/products/'. $sku, $bearerToken);
+        $request = $this->buildRequest('GET', 'V1/products/' . $sku, $bearerToken);
         return $request;
     }
 
     public function getAttributeValueRequest($bearerToken, $attributeId)
     {
-        $request = $this->buildRequest('GET', 'V1/products/attributes/'. $attributeId .'/options', $bearerToken);
+        $request = $this->buildRequest('GET', 'V1/products/attributes/' . $attributeId . '/options', $bearerToken);
         return $request;
     }
 
     public function getCache()
     {
         return $this->cacheAdapter;
+    }
+
+    public function prepareSaveAddressRequest($address)
+    {
+        $shippingAddress = (new Address($address))->toArray();
+        $billingAddress = (new Address($address, Address::ADDRESS_TYPE_BILLING))->toArray();
+        $addressPayload = [
+            'addressInformation' => [
+                'shipping_address' => $shippingAddress,
+                'billing_address' => $billingAddress,
+                'shipping_method_code' => 'flatrate',   # need to be setted to default
+                'shipping_carrier_code' => 'flatrate'   # need to be setted to default
+            ]
+        ];
+        /* not really sure why i have to do this... [BEGIN] */
+        if ($this->token instanceof AnonymousToken) {
+            $cartId = $this->session->get('cart_id');
+            $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
+        } else {
+            $request = $this->buildRequest('POST', 'V1/carts/mine/shipping-information', $this->token->getAttribute('bearerToken'), $addressPayload);
+        }
+        $client = new Client();
+        $client->send($request);
+        /* [END] */
+        return $addressPayload;
+    }
+
+    public function placeOrderRequest()
+    {
+        $addressPayload = $this->session->get('cart_request');
+        dump($addressPayload);
+        if ($this->token instanceof AnonymousToken) {
+            $cartId = $this->session->get('cart_id');
+            $request = $this->buildRequest('POST', 'V1/guest-carts/' . $cartId . '/shipping-information', false, $addressPayload);
+        } else {
+            $request = $this->buildRequest('POST', 'V1/carts/mine/shipping-information', $this->token->getAttribute('bearerToken'), $addressPayload);
+        }
+        $client = new Client();
+        $response = $client->send($request);
+
+        $addressPayload = \GuzzleHttp\json_encode($addressPayload, JSON_FORCE_OBJECT);
+
+        if ($this->token instanceof AnonymousToken) {
+            $cartId = $this->session->get('cart_id');
+            $request = $this->buildRequest('PUT', 'V1/guest-carts/' . $cartId . '/order', false, $addressPayload);
+        } else {
+            $request = $this->buildRequest('PUT', 'V1/carts/mine/order', $this->token->getAttribute('bearerToken'), $addressPayload);
+        }
+        return $request;
+    }
+
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    public function getShippingMethodsRequest()
+    {
+        if ($this->token instanceof AnonymousToken) {
+            $cartId = $this->session->get('cart_id');
+            $request = $this->buildRequest('GET', 'V1/guest-carts/' . $cartId . '/shipping-methods');
+        } else {
+            $request = $this->buildRequest('GET', 'V1/carts/mine/shipping-methods', $this->token->getAttribute('bearerToken'));
+        }
+        return $request;
+    }
+
+    public function addPaymentMethodRequest($payment)
+    {
+        $paymentPayload = [
+            'method' => ['method' => $payment['payment']]
+        ];
+        if ($this->token instanceof AnonymousToken) {
+            $cartId = $this->session->get('cart_id');
+            $request = $this->buildRequest('PUT', 'V1/guest-carts/'.$cartId.'/selected-payment-method', false, $paymentPayload);
+        } else {
+            $request = $this->buildRequest('PUT', 'V1/carts/mine/selected-payment-method', $this->token->getAttribute('bearerToken'),$paymentPayload);
+        }
+        return $request;
     }
 }

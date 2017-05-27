@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Review</h1>
+    <div class="row">
+        {% include 'checkout/_partial/address.html.twig' with {'address': order.addressInformation.shipping_address, 'address_type': 'Shipping Address'} %}
+        {% include 'checkout/_partial/address.html.twig' with {'address': order.addressInformation.billing_address, 'address_type': 'Billing Address'} %}
+        <div class=" col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Shipping Carrier/Method</div>
+                <div class="panel-body">
+                    <p>Carrier: {{ order.addressInformation.shipping_carrier_code }}</p>
+                    <p>Method: {{ order.addressInformation.shipping_method_code }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% include ':checkout/_partial:items.html.twig' %}
+    </div>
+    <div class="row">
+        <form method="post">
+            <button type="submit" class="btn btn-success">Place Order</button>
+        </form>
+    </div>
+{% endblock %}
