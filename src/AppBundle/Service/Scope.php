@@ -83,12 +83,12 @@ class Scope
      */
     public function prepareUri($uris)
     {
-        if($this->isGuest()){
+        if ($this->isGuest()) {
             $uri = $uris[self::URI_TYPE_GUEST];
             $uri = str_replace(':cartId', $this->getCartId(), $uri);
-        }elseif(array_key_exists(self::URI_TYPE_GLOBAL, $uris)){
+        } elseif (array_key_exists(self::URI_TYPE_GLOBAL, $uris)) {
             $uri = $uris[self::URI_TYPE_GLOBAL];
-        }else{
+        } else {
             $uri = $uris[self::URI_TYPE_CUSTOMER];
         }
 
@@ -102,10 +102,9 @@ class Scope
      */
     public function extendHeaders($headers, $adminToken = false)
     {
-        if(!$this->isGuest() && !$adminToken){
+        if (!$this->isGuest() && !$adminToken) {
             $headers['Authorization'] = 'Bearer ' . $this->token->getAttribute('bearerToken');
-        }elseif($adminToken)
-        {
+        } elseif ($adminToken) {
             $headers['Authorization'] = 'Bearer ' . $adminToken;
         }
         return $headers;
