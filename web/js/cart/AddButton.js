@@ -1,6 +1,6 @@
 var React = require('react');
 var Registry = require('../component/Registry');
-var Client = require('../minicart/Client');
+var Client = require('../remote/Client');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -10,7 +10,7 @@ module.exports = React.createClass({
   },
   addToCart: function() {
     Client.addItem(this.props.sku, this.state.qty, function() {
-      var miniCartButton = Registry.getInstance("MiniCartButton");
+      var miniCartButton = Registry.getInstance("Minicart");
       miniCartButton.refresh();
     });
   },
