@@ -1,3 +1,4 @@
+var React = require('react');
 var Item = require('./Item');
 
 module.exports = React.createClass({

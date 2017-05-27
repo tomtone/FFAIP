@@ -1,3 +1,4 @@
+var React = require('react');
 var NoItems = require('./NoItems');
 var Content = require('./Content');
 
