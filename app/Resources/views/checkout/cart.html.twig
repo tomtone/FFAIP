@@ -34,11 +34,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Totals</div>
                 <div class="panel-body">
-                    <p>Subtotal: {{ totals.totals.base_subtotal }}</p>
-                    <p>Discount: {{ totals.totals.base_discount_amount }}</p>
-                    <p>Tac: {{ totals.totals.base_tax_amount }}</p>
-                    <hr/>
-                    <p>Grand Total: {{ totals.totals.base_grand_total }}</p>
+                    {% for segment in totals.totals.total_segments %}
+                        {% if segment.area is defined and segment.area == 'footer' %}
+                            <hr/>
+                        {% endif %}
+                        <p>{{ segment.title }}: {{ segment.value }}</p>
+                    {% endfor %}
                     {{ dump(totals) }}
                 </div>
                 <div class="panel-body text-center">
