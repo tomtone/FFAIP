@@ -1,4 +1,5 @@
 var MiniCartEmpty = require('./MiniCartEmpty');
+var MiniCartContent = require('./MiniCartContent');
 
 module.exports = React.createClass({
   getInitialState: function() {
