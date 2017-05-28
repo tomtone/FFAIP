@@ -1,0 +1,19 @@
+parameters:
+    git_dir: "."
+    bin_dir: "./vendor/bin"
+    stop_on_failure: false
+    tasks:
+#      phpstan:
+#        autoload_file: "./app/autoload.php"
+      phpmd:
+        exclude: ['web','var','src\AppBundle']
+        ruleset: ['codesize', 'naming']
+        triggered_by: ['php']
+# Covers nothing, cuz foldes code is completly excluded.
+      phpcpd:
+        directory: './src/AppBundle'
+        exclude: ['web','var']
+#      phpcs:
+#        whitelist_patterns:
+#          - /^src\/App\/(.*)/
+#          - /^src\/AppBundle\/(.*)/
