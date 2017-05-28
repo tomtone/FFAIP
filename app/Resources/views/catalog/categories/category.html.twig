@@ -13,6 +13,15 @@
                 <p>{{ product.product.name|raw }}</p>
                 <p>{{ product.product.sku }}</p>
                 <a href="{{ path('catalog_product', {sku: product.product.sku}) }}" class="btn btn-default">Details</a>
+                <script type="text/x-init">
+                    {
+                        "component": "AddToCartButton",
+                        "props": {
+                          "sku": "{{ product.sku }}",
+                          "mediaUrl": "{{ base_url }}pub/media/catalog/product/"
+                        }
+                    }
+                </script>
             </div>
         </div>
     {% endfor %}

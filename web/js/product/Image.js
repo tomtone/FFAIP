@@ -11,7 +11,6 @@ module.exports = React.createClass({
     this.loadFromServer();
   },
   loadFromServer: function() {
-    // var mediaUrl = "http://magento2.local/pub/media/catalog/product/";
     var mediaUrl = this.props.mediaUrl;
     Client.getProduct(
       this.props.sku,

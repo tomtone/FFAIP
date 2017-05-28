@@ -15,12 +15,27 @@ $( document ).ready(function() {
     var props = elementConfig["props"];
 
     var componentClass = Registry.getClass(componentName);
-    if (componentClass) {
-      var component = React.createElement(componentClass, props);
+    var component = React.createElement(componentClass, props);
+
+    // either render the element into the given element
+    if (element) {
       var componentInstance = ReactDOM.render(
         component,
         document.getElementById(element)
       );
+    } else {
+      // or replace script tag with component anonumously
+      var tmpContainer = document.createElement("div");
+      var componentInstance = ReactDOM.render(
+        component,
+        tmpContainer
+      );
+      $(this).replaceWith(tmpContainer);
+    }
+
+    // only add it to registry, if element is given, these ones
+    // will be shared for access by other components
+    if (element) {
       Registry.addInstance(componentName, componentInstance);
     }
   });
