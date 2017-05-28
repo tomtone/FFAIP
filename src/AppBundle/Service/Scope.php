@@ -89,6 +89,9 @@ class Scope
         $this->session->set('cart_id', $cartId);
     }
 
+    /**
+     *
+     */
     private function fetchQuoteId()
     {
         $request = $this->getCartRequest();
@@ -159,5 +162,17 @@ class Scope
         $payload = ['cartItem' => $data];
 
         return \GuzzleHttp\json_encode($payload);
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerId()
+    {
+        $customerId = 0;
+        if(!$this->isGuest()){
+            $customerId = $this->token->getUser()->getId();
+        }
+        return $customerId;
     }
 }

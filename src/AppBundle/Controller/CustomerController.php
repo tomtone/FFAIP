@@ -14,8 +14,10 @@ class CustomerController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $orders = $this->get('api.sales.order')->getOrders();
         return $this->render('customer/index.html.twig', [
             'customer' => $this->get('security.token_storage')->getToken()->getUser(),
+            'orders' => $orders
         ]);
     }
 }

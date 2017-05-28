@@ -33,6 +33,9 @@ services:
     api.checkout.address:
       class: AppBundle\Service\Address
       arguments: ["@app.factory.request"]
+    api.sales.order:
+      class: AppBundle\Service\Sales\Order
+      arguments: ["@app.factory.request"]
 
     app.scope.context:
       class: AppBundle\Service\Scope

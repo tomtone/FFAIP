@@ -11,11 +11,10 @@
         </ul>
         <!-- Tab panes -->
         <div class="tab-content col-md-10">
-            <div role="tabpanel" class="tab-pane active" id="orders">{% include 'customer/_partials/orders.html.twig' %}</div>
+            <div role="tabpanel" class="tab-pane active" id="orders">{% include 'customer/_partials/orders.html.twig' with {'orders': orders.items} %}</div>
             <div role="tabpanel" class="tab-pane" id="addresses">{% include 'customer/_partials/addresses.html.twig' %}</div>
             <div role="tabpanel" class="tab-pane" id="messages">messages</div>
             <div role="tabpanel" class="tab-pane" id="settings">settings</div>
         </div>
     </div>
-    {{ dump(customer) }}
 {% endblock %}

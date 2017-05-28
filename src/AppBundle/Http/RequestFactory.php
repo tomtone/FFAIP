@@ -11,6 +11,7 @@ use AppBundle\Http\Catalog\ProductRequest;
 use AppBundle\Http\Catalog\AttributeRequest;
 use AppBundle\Http\Catalog\CategoriesRequest;
 use AppBundle\Http\Checkout\PaymentInformationRequest;
+use AppBundle\Http\Sales\OrderRequest;
 use AppBundle\Service\Scope;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -182,6 +183,11 @@ class RequestFactory
             $payload
         );
         return $request;
+    }
+
+    public function getSalesOrderRequest($bearerToken)
+    {
+        return new OrderRequest($this->scopeContext, $bearerToken);
     }
 
     /**
