@@ -25,7 +25,6 @@ class CartRequest extends Request
      */
     public function __construct(Scope $scopeContext)
     {
-        $scopeContext->prepareCart();
         $headers = [
             "Content-Type" => "application/json",
         ];

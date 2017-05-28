@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use AppBundle\Http\Cart\CartRequest;
 
 /**
  * Class Scope
@@ -58,6 +59,7 @@ class Scope
         $this->token = $tokenStorage->getToken();
         $this->shopUrl = $shopUrl;
         $this->session = $session;
+        $this->prepareCart();
     }
 
     /**
@@ -65,6 +67,7 @@ class Scope
      */
     public function prepareCart()
     {
+
         if (!$this->session->has('cart_id')) {
             if ($this->isGuest()) {
                 $this->createGuestCart();
@@ -94,7 +97,7 @@ class Scope
      */
     private function fetchQuoteId()
     {
-        $request = $this->getCartRequest();
+        $request = new CartRequest($this);
         $response = (new Client())->send($request);
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
         $this->session->set('cart_id', $response['id']);
