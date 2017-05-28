@@ -22,10 +22,13 @@ module.exports = React.createClass({
     return true;
   },
   render: function() {
+    var qtyInput = (
+      <input className="form-control" type="text" value={this.state.qty} onChange={this.changeQty.bind(this)}/>
+    );
     return (
       <div>
-      <input className="form-control" type="text" value={this.state.qty} onChange={this.changeQty.bind(this)}/>
-      <button className="btn btn-primary" onClick={this.addToCart.bind(this)}>Add to Cart</button>
+        { this.props.qtyInputEnabled ? qtyInput : '' }
+        <button className="btn btn-primary" onClick={this.addToCart.bind(this)}>Add to Cart</button>
       </div>
     );
   }

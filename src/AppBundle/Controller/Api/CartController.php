@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use GuzzleHttp\Exception\RequestException;
 
 class CartController extends Controller
 {
@@ -69,10 +70,13 @@ class CartController extends Controller
 
         $attributes = $request->request->get('_attributes');
 
-        $this->get('api.checkout.cart')->addToCart($sku, $qty, $attributes);
+        try {
+            $response = $this->get('api.checkout.cart')->addToCart($sku, $qty, $attributes);
+            return new JsonResponse($response);
 
-        return new JsonResponse([
-            'ok' => $qty
-        ]);
+        } catch (RequestException $e) {
+            $response = $e->getResponse()->getBody()->getContents();
+            return new JsonResponse(json_decode($response), 500);
+        }
     }
 }

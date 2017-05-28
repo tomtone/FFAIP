@@ -61,17 +61,20 @@ class Cart
         return $responseData;
     }
 
+    /**
+     * addToCart
+     *
+     * @param mixed $sku
+     * @param mixed $qty
+     * @param mixed $attributes
+     *
+     * @throws RequestException
+     */
     public function addToCart($sku, $qty, $attributes = [])
     {
         $request = $this->requestFactory->getCartRequest();
         $client = new Client();
-        try {
-            $response = $client->send($request);
-        } catch (RequestException $e) {
-            echo '<pre>';
-            print_r($e->getResponse()->getBody()->getContents());
-            die();
-        }
+        $response = $client->send($request);
 
         $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
         $quoteId = $responseData['id'];
@@ -79,15 +82,8 @@ class Cart
 
         $addToCartRequest = $this->requestFactory->getAddToCartRequest($productData);
 
-        try {
-            $response = $client->send($addToCartRequest);
-        } catch (RequestException $e) {
-            echo '<pre>';
-            print_r($e->getResponse()->getBody()->getContents());
-            die();
-        }
-
-        $responseData = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $response = $client->send($addToCartRequest);
+        return $response->getBody()->getContents();
     }
 
     public function removeItemFromCart($itemId)
