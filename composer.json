@@ -37,6 +37,7 @@
     },
     "require-dev": {
         "phpmd/phpmd": "^2.6",
+        "phpro/grumphp": "^0.11.5",
         "phpstan/phpstan": "^0.7.0",
         "sebastian/phpcpd": "^3.0",
         "sensio/generator-bundle": "^3.0",
