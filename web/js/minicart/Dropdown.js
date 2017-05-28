@@ -4,9 +4,10 @@ var NoItems = require('./NoItems');
 
 module.exports = React.createClass({
   render: function() {
+    var hasItemsOnCart = (this.props.totals.totals.items_qty > 0);
     var items = null;
     items = <NoItems/>;
-    if (this.props.totals.totals.items_qty > 0) {
+    if (hasItemsOnCart) {
       items = <ItemList
                 checkoutUrl={this.props.checkoutUrl}
                 cartUrl={this.props.cartUrl}
@@ -17,6 +18,24 @@ module.exports = React.createClass({
                 mediaUrl={this.props.mediaUrl}
               />;
     }
+
+    var gotoCheckoutButton = (
+      <button onClick={this.props.gotoCheckout}>Go to Checkout</button>
+    );
+
+    var cartLink = (
+      <span><a href={this.props.cartUrl}>View and edit cart</a></span>
+    );
+
+    var subTotal = (
+      <ul className="list-group">
+        <li className="list-group-item">
+          <span>{this.props.totals.totals.itemsQty} Item</span>
+          <span>Cart Subtotal: {this.props.totals.totals.subtotal}</span>
+        </li>
+      </ul>
+    );
+
     return (
       <div className="dropdown">
         <div id="dropdown-menu" className="dropdown-menu">
@@ -25,17 +44,12 @@ module.exports = React.createClass({
           </button>
           <hr/>
           <div>
-            <ul className="list-group">
-              <li className="list-group-item">
-                <span>{this.props.totals.totals.itemsQty} Item</span>
-                <span>Cart Subtotal: {this.props.totals.totals.subtotal}</span>
-              </li>
-            </ul>
-            <button onClick={this.props.gotoCheckout}>Go to Checkout</button>
+            { hasItemsOnCart ? subTotal : '' }
+            { hasItemsOnCart ? gotoCheckoutButton : '' }
             <div className="form-inline">
               {items}
               <hr />
-              <span><a href={this.props.cartUrl}>View and edit cart</a></span>
+              { hasItemsOnCart ? cartLink : '' }
             </div>
           </div>
         </div>
