@@ -17,6 +17,7 @@ module.exports = React.createClass({
           refresh={refresh}
           loading={loading}
           mediaUrl={mediaUrl}
+          editable={true}
         />
       );
     });
