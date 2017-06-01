@@ -1,0 +1,213 @@
+{
+  "id": 1529,
+  "sku": "WS10",
+  "name": "Karissa V-Neck Tee",
+  "attribute_set_id": 9,
+  "price": 0,
+  "status": 1,
+  "visibility": 4,
+  "type_id": "configurable",
+  "created_at": "2017-05-24 14:52:28",
+  "updated_at": "2017-05-24 14:52:28",
+  "extension_attributes": {
+    "stock_item": {
+      "item_id": 1529,
+      "product_id": 1529,
+      "stock_id": 1,
+      "qty": 0,
+      "is_in_stock": true,
+      "is_qty_decimal": false,
+      "show_default_notification_message": false,
+      "use_config_min_qty": true,
+      "min_qty": 0,
+      "use_config_min_sale_qty": 1,
+      "min_sale_qty": 1,
+      "use_config_max_sale_qty": true,
+      "max_sale_qty": 10000,
+      "use_config_backorders": true,
+      "backorders": 0,
+      "use_config_notify_stock_qty": true,
+      "notify_stock_qty": 1,
+      "use_config_qty_increments": true,
+      "qty_increments": 0,
+      "use_config_enable_qty_inc": true,
+      "enable_qty_increments": false,
+      "use_config_manage_stock": true,
+      "manage_stock": true,
+      "low_stock_date": null,
+      "is_decimal_divided": false,
+      "stock_status_changed_auto": 0
+    },
+    "configurable_product_options": [
+      {
+        "id": 209,
+        "attribute_id": "93",
+        "label": "Color",
+        "position": 0,
+        "values": [
+          {
+            "value_index": 53
+          },
+          {
+            "value_index": 58
+          },
+          {
+            "value_index": 60
+          }
+        ],
+        "product_id": 1529
+      },
+      {
+        "id": 208,
+        "attribute_id": "142",
+        "label": "Size",
+        "position": 0,
+        "values": [
+          {
+            "value_index": 167
+          },
+          {
+            "value_index": 168
+          },
+          {
+            "value_index": 169
+          },
+          {
+            "value_index": 170
+          },
+          {
+            "value_index": 171
+          }
+        ],
+        "product_id": 1529
+      }
+    ],
+    "configurable_product_links": [
+      1514,
+      1515,
+      1516,
+      1517,
+      1518,
+      1519,
+      1520,
+      1521,
+      1522,
+      1523,
+      1524,
+      1525,
+      1526,
+      1527,
+      1528
+    ]
+  },
+  "product_links": [],
+  "options": [],
+  "media_gallery_entries": [
+    {
+      "id": 2578,
+      "media_type": "image",
+      "label": "",
+      "position": 1,
+      "disabled": false,
+      "types": [
+        "image",
+        "small_image",
+        "thumbnail"
+      ],
+      "file": "\/w\/s\/ws10-red_main.jpg"
+    },
+    {
+      "id": 2579,
+      "media_type": "image",
+      "label": "",
+      "position": 2,
+      "disabled": false,
+      "types": [],
+      "file": "\/w\/s\/ws10-red_back.jpg"
+    }
+  ],
+  "tier_prices": [],
+  "custom_attributes": [
+    {
+      "attribute_code": "description",
+      "value": "<p>The Karissa V-Neck Tee features a semi-fitted shape that's flattering for every figure. You can hit the gym with confidence while it hugs curves and hides common \"problem\" areas.<\/p>\n<p>&bull; Pink heather soft v-neck tee. <br \/>&bull; Luma signature micro sleeves.<br \/>&bull; Semi-fitted. <br \/>&bull; Machine wash\/dry.<\/p>"
+    },
+    {
+      "attribute_code": "image",
+      "value": "\/w\/s\/ws10-red_main.jpg"
+    },
+    {
+      "attribute_code": "small_image",
+      "value": "\/w\/s\/ws10-red_main.jpg"
+    },
+    {
+      "attribute_code": "thumbnail",
+      "value": "\/w\/s\/ws10-red_main.jpg"
+    },
+    {
+      "attribute_code": "category_ids",
+      "value": [
+        "25",
+        "33",
+        "35",
+        "2"
+      ]
+    },
+    {
+      "attribute_code": "options_container",
+      "value": "container2"
+    },
+    {
+      "attribute_code": "required_options",
+      "value": "0"
+    },
+    {
+      "attribute_code": "has_options",
+      "value": "1"
+    },
+    {
+      "attribute_code": "msrp_display_actual_price_type",
+      "value": "0"
+    },
+    {
+      "attribute_code": "tax_class_id",
+      "value": "2"
+    },
+    {
+      "attribute_code": "material",
+      "value": "33,153"
+    },
+    {
+      "attribute_code": "eco_collection",
+      "value": "0"
+    },
+    {
+      "attribute_code": "performance_fabric",
+      "value": "1"
+    },
+    {
+      "attribute_code": "erin_recommends",
+      "value": "0"
+    },
+    {
+      "attribute_code": "new",
+      "value": "0"
+    },
+    {
+      "attribute_code": "sale",
+      "value": "0"
+    },
+    {
+      "attribute_code": "style_general",
+      "value": "136"
+    },
+    {
+      "attribute_code": "pattern",
+      "value": "197"
+    },
+    {
+      "attribute_code": "climate",
+      "value": "205,209"
+    }
+  ]
+}

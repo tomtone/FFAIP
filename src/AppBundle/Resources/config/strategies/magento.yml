@@ -1,0 +1,7 @@
+services:
+  app.strategies.magento.get.guest-cart.items:
+    class: AppBundle\Http\ResourceResources\Magento\Cart\GetCartsGuestCartsItemsResourceStrategy
+    arguments:
+      - "@app.scope.context"
+    tags:
+      - { name: 'strategies', type: 'magento' }

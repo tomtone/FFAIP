@@ -1,0 +1,62 @@
+[
+  {
+    "sku": "WS02",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS03",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS04",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS06",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS07",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS08",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS09",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS10",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS11",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS12",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS01",
+    "position": 1,
+    "category_id": "25"
+  },
+  {
+    "sku": "WS05",
+    "position": 1,
+    "category_id": "25"
+  }
+]

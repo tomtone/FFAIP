@@ -1,0 +1,7 @@
+services:
+  app.strategies.fixtures.get.guest-cart.items:
+    class: AppBundle\Http\RequestResources\Fixture\Catalog\GetCategoriesResourceStrategy
+    arguments:
+      - "@app.scope.context"
+    tags:
+      - { name: 'strategies', type: 'fixture' }

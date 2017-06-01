@@ -1,0 +1,119 @@
+{
+  "items": [
+    {
+      "item_id": 59,
+      "sku": "WS03-XS-Blue",
+      "qty": 1,
+      "name": "Iris Workout Top",
+      "price": 29,
+      "product_type": "configurable",
+      "quote_id": "599beb24adc75b65c940f9f129709bc2",
+      "product_option": {
+        "extension_attributes": {
+          "configurable_item_options": [
+            {
+              "option_id": "93",
+              "option_value": 50
+            },
+            {
+              "option_id": "142",
+              "option_value": 167
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "totals": {
+    "payment_methods": [
+      {
+        "code": "cashondelivery",
+        "title": "Cash On Delivery"
+      },
+      {
+        "code": "banktransfer",
+        "title": "Bank Transfer Payment"
+      },
+      {
+        "code": "checkmo",
+        "title": "Check \/ Money order"
+      }
+    ],
+    "totals": {
+      "grand_total": 29,
+      "base_grand_total": 29,
+      "subtotal": 29,
+      "base_subtotal": 29,
+      "discount_amount": 0,
+      "base_discount_amount": 0,
+      "subtotal_with_discount": 29,
+      "base_subtotal_with_discount": 29,
+      "shipping_amount": 0,
+      "base_shipping_amount": 0,
+      "shipping_discount_amount": 0,
+      "base_shipping_discount_amount": 0,
+      "tax_amount": 0,
+      "base_tax_amount": 0,
+      "weee_tax_applied_amount": null,
+      "shipping_tax_amount": 0,
+      "base_shipping_tax_amount": 0,
+      "subtotal_incl_tax": 29,
+      "shipping_incl_tax": 0,
+      "base_shipping_incl_tax": 0,
+      "base_currency_code": "USD",
+      "quote_currency_code": "USD",
+      "items_qty": 1,
+      "items": [
+        {
+          "item_id": 59,
+          "price": 29,
+          "base_price": 29,
+          "qty": 1,
+          "row_total": 29,
+          "base_row_total": 29,
+          "row_total_with_discount": 0,
+          "tax_amount": 0,
+          "base_tax_amount": 0,
+          "tax_percent": 0,
+          "discount_amount": 0,
+          "base_discount_amount": 0,
+          "discount_percent": 0,
+          "price_incl_tax": 29,
+          "base_price_incl_tax": 29,
+          "row_total_incl_tax": 29,
+          "base_row_total_incl_tax": 29,
+          "options": "[{\u0022value\u0022:\u0022Blue\u0022,\u0022label\u0022:\u0022Color\u0022},{\u0022value\u0022:\u0022XS\u0022,\u0022label\u0022:\u0022Size\u0022}]",
+          "weee_tax_applied_amount": null,
+          "weee_tax_applied": null,
+          "name": "Iris Workout Top"
+        }
+      ],
+      "total_segments": [
+        {
+          "code": "subtotal",
+          "title": "Subtotal",
+          "value": 29
+        },
+        {
+          "code": "shipping",
+          "title": "Shipping \u0026 Handling",
+          "value": 0
+        },
+        {
+          "code": "tax",
+          "title": "Tax",
+          "value": 0,
+          "extension_attributes": {
+            "tax_grandtotal_details": []
+          }
+        },
+        {
+          "code": "grand_total",
+          "title": "Grand Total",
+          "value": 29,
+          "area": "footer"
+        }
+      ]
+    }
+  }
+}

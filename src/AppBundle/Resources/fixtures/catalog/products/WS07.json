@@ -1,0 +1,223 @@
+{
+  "id": 1481,
+  "sku": "WS07",
+  "name": "Juliana Short-Sleeve Tee",
+  "attribute_set_id": 9,
+  "price": 0,
+  "status": 1,
+  "visibility": 4,
+  "type_id": "configurable",
+  "created_at": "2017-05-24 14:52:27",
+  "updated_at": "2017-05-24 14:52:27",
+  "extension_attributes": {
+    "stock_item": {
+      "item_id": 1481,
+      "product_id": 1481,
+      "stock_id": 1,
+      "qty": 0,
+      "is_in_stock": true,
+      "is_qty_decimal": false,
+      "show_default_notification_message": false,
+      "use_config_min_qty": true,
+      "min_qty": 0,
+      "use_config_min_sale_qty": 1,
+      "min_sale_qty": 1,
+      "use_config_max_sale_qty": true,
+      "max_sale_qty": 10000,
+      "use_config_backorders": true,
+      "backorders": 0,
+      "use_config_notify_stock_qty": true,
+      "notify_stock_qty": 1,
+      "use_config_qty_increments": true,
+      "qty_increments": 0,
+      "use_config_enable_qty_inc": true,
+      "enable_qty_increments": false,
+      "use_config_manage_stock": true,
+      "manage_stock": true,
+      "low_stock_date": null,
+      "is_decimal_divided": false,
+      "stock_status_changed_auto": 0
+    },
+    "configurable_product_options": [
+      {
+        "id": 203,
+        "attribute_id": "93",
+        "label": "Color",
+        "position": 0,
+        "values": [
+          {
+            "value_index": 49
+          },
+          {
+            "value_index": 59
+          },
+          {
+            "value_index": 60
+          }
+        ],
+        "product_id": 1481
+      },
+      {
+        "id": 202,
+        "attribute_id": "142",
+        "label": "Size",
+        "position": 0,
+        "values": [
+          {
+            "value_index": 167
+          },
+          {
+            "value_index": 168
+          },
+          {
+            "value_index": 169
+          },
+          {
+            "value_index": 170
+          },
+          {
+            "value_index": 171
+          }
+        ],
+        "product_id": 1481
+      }
+    ],
+    "configurable_product_links": [
+      1466,
+      1467,
+      1468,
+      1469,
+      1470,
+      1471,
+      1472,
+      1473,
+      1474,
+      1475,
+      1476,
+      1477,
+      1478,
+      1479,
+      1480
+    ]
+  },
+  "product_links": [],
+  "options": [],
+  "media_gallery_entries": [
+    {
+      "id": 2511,
+      "media_type": "image",
+      "label": "",
+      "position": 1,
+      "disabled": false,
+      "types": [
+        "image",
+        "small_image",
+        "thumbnail"
+      ],
+      "file": "\/w\/s\/ws07-black_main.jpg"
+    },
+    {
+      "id": 2512,
+      "media_type": "image",
+      "label": "",
+      "position": 2,
+      "disabled": false,
+      "types": [],
+      "file": "\/w\/s\/ws07-black_alt1.jpg"
+    },
+    {
+      "id": 2513,
+      "media_type": "image",
+      "label": "",
+      "position": 3,
+      "disabled": false,
+      "types": [],
+      "file": "\/w\/s\/ws07-black_back.jpg"
+    }
+  ],
+  "tier_prices": [],
+  "custom_attributes": [
+    {
+      "attribute_code": "description",
+      "value": "<p>The Juliana Short-Sleeve Tee gives you more than sporty style. Consider that its soft Cocona&reg; polyester fabric accelerates evaporation to help keep you dry and comfortable, too. And a selection of colors lets you get more than one.<\/p>\n<p>&bull; Black scoop neck tee.<br \/>&bull; Side rouching.<br \/>&bull; Relaxed fit.<\/p>"
+    },
+    {
+      "attribute_code": "image",
+      "value": "\/w\/s\/ws07-black_main.jpg"
+    },
+    {
+      "attribute_code": "small_image",
+      "value": "\/w\/s\/ws07-black_main.jpg"
+    },
+    {
+      "attribute_code": "thumbnail",
+      "value": "\/w\/s\/ws07-black_main.jpg"
+    },
+    {
+      "attribute_code": "category_ids",
+      "value": [
+        "25",
+        "33",
+        "8",
+        "34",
+        "2"
+      ]
+    },
+    {
+      "attribute_code": "options_container",
+      "value": "container2"
+    },
+    {
+      "attribute_code": "required_options",
+      "value": "0"
+    },
+    {
+      "attribute_code": "has_options",
+      "value": "1"
+    },
+    {
+      "attribute_code": "msrp_display_actual_price_type",
+      "value": "0"
+    },
+    {
+      "attribute_code": "tax_class_id",
+      "value": "2"
+    },
+    {
+      "attribute_code": "material",
+      "value": "143,38"
+    },
+    {
+      "attribute_code": "eco_collection",
+      "value": "0"
+    },
+    {
+      "attribute_code": "performance_fabric",
+      "value": "1"
+    },
+    {
+      "attribute_code": "erin_recommends",
+      "value": "1"
+    },
+    {
+      "attribute_code": "new",
+      "value": "1"
+    },
+    {
+      "attribute_code": "sale",
+      "value": "0"
+    },
+    {
+      "attribute_code": "style_general",
+      "value": "136"
+    },
+    {
+      "attribute_code": "pattern",
+      "value": "197"
+    },
+    {
+      "attribute_code": "climate",
+      "value": "205,209"
+    }
+  ]
+}

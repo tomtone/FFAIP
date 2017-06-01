@@ -72,6 +72,8 @@ abstract class AbstractAdminRequest
                 return 'An Error occured';
             }
         }
-        return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $contents = $response->getBody()->getContents();
+        dump($contents);
+        return \GuzzleHttp\json_decode($contents, true);
     }
 }

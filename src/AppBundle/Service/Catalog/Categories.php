@@ -7,7 +7,7 @@ class Categories extends \AppBundle\Service\AbstractAdminRequest
     {
         $cachedItem = $this->cacheAdapter->getItem('categories');
         $response = $cachedItem->get();
-        if($response == null) {
+        #if($response == null) {
             $bearerToken = $this->getBearerToken();
             $request = $this->requestFactory->getCategoriesRequest($bearerToken);
             $response = $this->request($request);
@@ -15,7 +15,7 @@ class Categories extends \AppBundle\Service\AbstractAdminRequest
             $cachedItem->set($response);
             $cachedItem->expiresAfter(300);
             $this->cacheAdapter->save($cachedItem);
-        }
+        #}
         return $response;
     }
 
