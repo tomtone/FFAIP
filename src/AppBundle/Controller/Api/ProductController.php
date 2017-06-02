@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function productAction(Request $request, $sku)
     {
-        $product = $this->get('api.catalog.product')->getProduct($sku);
+        $product = $this->get('app.strategy.generator')->generate('catalog_product_view', $sku);
         return new JsonResponse([
             'product' => $product
         ]);
