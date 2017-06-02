@@ -43,7 +43,7 @@ services:
 
     api.catalog.product.helper:
       class: AppBundle\Service\Catalog\ProductHelper
-      arguments: ["@app.factory.request"]
+      arguments: ["@app.strategy.generator"]
 
     security.token.factory:
       class: AppBundle\Security\Token\MagentoTokenFactory

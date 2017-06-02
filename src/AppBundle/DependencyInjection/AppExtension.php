@@ -20,5 +20,10 @@ class AppExtension extends Extension
         $loader->load('strategies/magento.yml');
         $loader->load('strategies/fixtures.yml');
         $loader->load('services.yml');
+        $loader->load('controller.yml');
+
+        if (isset($configs[0]) && $configs[0]['strategy']) {
+            $container->setParameter('app.strategy', $configs[0]['strategy']);
+        }
     }
 }

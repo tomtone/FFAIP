@@ -1,7 +1,93 @@
 services:
-  app.strategies.fixtures.get.guest-cart.items:
-    class: AppBundle\Http\RequestResources\Fixture\Catalog\GetCategoriesResourceStrategy
+  # Checkout Services
+  app.strategies.fixture.get.guest.items:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Cart\Items\Guest\GetResource
     arguments:
       - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.post.guest.items:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Cart\Items\Guest\PostResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.customer.items:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Cart\Items\Customer\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.post.customer.items:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Cart\Items\Customer\PostRequest
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  # Checkout Services
+  app.strategies.fixture.get.checkout.guest.payment:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Checkout\Guest\GetPaymentResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.checkout.customer.payment:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Checkout\Customer\GetPaymentResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  # Catalog services
+  app.strategies.fixture.get.categories:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Catalog\Categories\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.categories.list:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Catalog\Categories\GetListResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.product:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Catalog\Product\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.product.attribute.options:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Catalog\Product\Attribute\Options\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
     tags:
       - { name: 'strategies', type: 'fixture' }

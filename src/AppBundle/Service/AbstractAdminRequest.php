@@ -73,7 +73,6 @@ abstract class AbstractAdminRequest
             }
         }
         $contents = $response->getBody()->getContents();
-        dump($contents);
         return \GuzzleHttp\json_decode($contents, true);
     }
 }

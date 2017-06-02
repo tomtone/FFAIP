@@ -2,38 +2,30 @@
 namespace AppBundle\Service\Catalog;
 
 
+use AppBundle\Http\MagentoResourceGenerator;
 use AppBundle\Service\AbstractAdminRequest;
 
-class ProductHelper extends AbstractAdminRequest
+class ProductHelper
 {
+    /**
+     * @var MagentoResourceGenerator
+     */
+    private $resourceGenerator;
+
+    /**
+     * ProductHelper constructor.
+     * @param MagentoResourceGenerator $resourceGenerator
+     */
+    public function __construct(MagentoResourceGenerator $resourceGenerator)
+    {
+        $this->resourceGenerator = $resourceGenerator;
+    }
+    
     public function getAttributeValue($index, $attribute)
     {
-        $cachedItem = $this->cacheAdapter->getItem('attribute_'. $attribute['attribute_id']);
-        $response = $cachedItem->get();
-        if($response == null) {
-            $bearerToken = $this->getBearerToken();
-            $request = $this->requestFactory->getAttributeRequest($bearerToken, $attribute['attribute_id']);
-            $response = $this->request($request);
-            $cachedItem->set($response);
-            $cachedItem->expiresAfter(300);
-            $this->cacheAdapter->save($cachedItem);
-        }
-        $value = $this->searchForId($index, $response);
+        $data = $this->resourceGenerator->generate('catalog_product_attribute', $attribute['attribute_id']);
+        $value = $this->searchForId($index, $data);
         return $value;
-    }
-
-    private function prepareRequest($bearerToken, $optionId)
-    {
-        $request = new \GuzzleHttp\Psr7\Request(
-            'GET',
-            $this->shopUrl . 'rest/V1/products/attributes/'. $optionId .'/options',
-            [
-                "Content-Type" => "application/json",
-                "Authorization" => "Bearer " . $bearerToken
-            ]
-        );
-
-        return $request;
     }
 
     private function searchForId($id, $array) {

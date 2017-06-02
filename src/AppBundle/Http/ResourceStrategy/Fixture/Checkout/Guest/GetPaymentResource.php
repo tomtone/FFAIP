@@ -1,10 +1,10 @@
 <?php
-namespace AppBundle\Http\RequestResources\Magento\Catalog;
+namespace AppBundle\Http\ResourceStrategy\Fixture\Checkout\Guest;
 
-use AppBundle\Http\RequestResources\AbstractResourceStrategy;
-use AppBundle\Http\RequestResources\ResourceStrategyInterface;
+use AppBundle\Http\ResourceStrategy\AbstractResourceStrategy;
+use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 
-class GetGuestCartsPaymentInformationResourceStrategy
+class GetPaymentResource
     extends AbstractResourceStrategy
     implements
     ResourceStrategyInterface
@@ -20,19 +20,21 @@ class GetGuestCartsPaymentInformationResourceStrategy
     protected $method = "GET";
 
     /**
-     * @return string
+     * @param null $args
+     * @return array|string
      */
-    public function request() : string
+    public function request($args = null) : array
     {
         // TODO: Implement request() method.
     }
 
     /**
+     * @param $resource
      * @return bool checks for resource support for given request
      */
-    public function supports() : bool
+    public function supports($resource) : bool
     {
-        // TODO: Implement supports() method.
+        return false;
     }
 
 }

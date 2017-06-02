@@ -1,0 +1,4 @@
+services:
+  app.controller.catalog:
+    class: AppBundle\Controller\CatalogController
+    arguments: ["@app.strategy.generator"]

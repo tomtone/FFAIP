@@ -34,4 +34,4 @@ monolog:
 #    delivery_addresses: ['me@example.com']
 
 app:
-  strategy: "magento"
+  strategy: "fixture"

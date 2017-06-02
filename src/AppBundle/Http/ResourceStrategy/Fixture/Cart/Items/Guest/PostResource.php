@@ -1,12 +1,12 @@
 <?php
-namespace AppBundle\Http\ResourceResources\Magento\Cart;
+namespace AppBundle\Http\ResourceStrategy\Fixture\Cart\Items\Guest;
 
-use AppBundle\Http\RequestResources\AbstractResourceStrategy;
-use AppBundle\Http\RequestResources\PostRequestInterface;
-use AppBundle\Http\RequestResources\ResourceStrategyInterface;
+use AppBundle\Http\ResourceStrategy\Fixture\AbstractFixtureResourceStrategy;
+use AppBundle\Http\ResourceStrategy\PostRequestInterface;
+use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 
-class PostCartsGuestCartsItemsResourceStrategy
-    extends AbstractResourceStrategy
+class PostResource
+    extends AbstractFixtureResourceStrategy
     implements
         ResourceStrategyInterface,
         PostRequestInterface
@@ -27,9 +27,10 @@ class PostCartsGuestCartsItemsResourceStrategy
     private $body;
 
     /**
-     * @return string
+     * @param null $args
+     * @return array|string
      */
-    public function request() : string
+    public function request($args = null) : array
     {
         // TODO: Implement request() method.
     }
@@ -48,10 +49,11 @@ class PostCartsGuestCartsItemsResourceStrategy
     }
 
     /**
+     * @param $resource
      * @return bool checks for resource support for given request
      */
-    public function supports() : bool
+    public function supports($resource) : bool
     {
-        // TODO: Implement supports() method.
+        return false;
     }
 }

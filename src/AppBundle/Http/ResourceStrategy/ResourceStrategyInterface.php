@@ -1,16 +1,20 @@
 <?php
-namespace AppBundle\Http\RequestResources;
+namespace AppBundle\Http\ResourceStrategy;
 
 
 interface ResourceStrategyInterface
 {
     /**
-     * @return string
+     * @param null $args
+     * 
+     * @return array|string
      */
-    public function request() : string;
-    
+    public function request($args = null) : array;
+
     /**
+     * @param $resource
+     * 
      * @return bool checks for resource support for given request
      */
-    public function supports() : bool;
+    public function supports($resource) : bool;
 }

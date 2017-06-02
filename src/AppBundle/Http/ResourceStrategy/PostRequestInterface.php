@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Http\RequestResources;
+namespace AppBundle\Http\ResourceStrategy;
 
 
 interface PostRequestInterface

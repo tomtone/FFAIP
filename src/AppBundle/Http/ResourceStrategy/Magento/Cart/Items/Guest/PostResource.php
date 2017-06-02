@@ -1,11 +1,11 @@
 <?php
-namespace AppBundle\Http\RequestResources\Magento\Cart;
+namespace AppBundle\Http\ResourceStrategy\Magento\Cart\Items\Guest;
 
-use AppBundle\Http\RequestResources\AbstractResourceStrategy;
-use AppBundle\Http\RequestResources\PostRequestInterface;
-use AppBundle\Http\RequestResources\ResourceStrategyInterface;
+use AppBundle\Http\ResourceStrategy\AbstractResourceStrategy;
+use AppBundle\Http\ResourceStrategy\PostRequestInterface;
+use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 
-class PostCartsMineItemsRequestStrategy
+class PostResource
     extends AbstractResourceStrategy
     implements
         ResourceStrategyInterface,
@@ -14,7 +14,7 @@ class PostCartsMineItemsRequestStrategy
     /**
      * @var string resource target uri
      */
-    protected $uri = "V1/carts/mine/items";
+    protected $uri = "V1/guest-carts/:cartId/items";
 
     /**
      * @var string Request Method
@@ -27,13 +27,14 @@ class PostCartsMineItemsRequestStrategy
     private $body;
 
     /**
-     * @return string
+     * @param null $args
+     * @return array|string
      */
-    public function request() : string
+    public function request($args = null) : array
     {
         // TODO: Implement request() method.
     }
-    
+
     /**
      * Add body for post request.
      *
@@ -48,10 +49,11 @@ class PostCartsMineItemsRequestStrategy
     }
 
     /**
+     * @param $resource
      * @return bool checks for resource support for given request
      */
-    public function supports() : bool 
+    public function supports($resource) : bool
     {
-        // TODO: Implement supports() method.
+        return false;
     }
 }

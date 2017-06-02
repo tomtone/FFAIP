@@ -2,38 +2,62 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Http\RequestGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class CatalogController extends Controller
+/**
+ * Class CatalogController
+ * @package AppBundle\Controller
+ * @Route(service="app.controller.catalog")
+ */
+class CatalogController
 {
+    private $generatorInterface;
+
+    /**
+     * CatalogController constructor.
+     * @param RequestGeneratorInterface $generatorInterface
+     */
+    public function __construct(RequestGeneratorInterface $generatorInterface)
+    {
+        $this->generatorInterface = $generatorInterface;
+    }
     /**
      * @Route("/catalog/categories", name="catalog_categories")
+     * @Template("catalog/categories/index.html.twig")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        return $this->render('catalog/categories/index.html.twig', [
-            'categories' => $this->get('api.catalog.categories')->getCategories(),
-        ]);
+        $data = $this->generatorInterface->generate("catalog_category_list");
+
+        return [
+            'categories' => $data,
+        ];
     }
 
     /**
      * @Route("/catalog/category/{id}", name="catalog_category")
+     * @Template(":catalog/categories:category.html.twig")
      */
-    public function categoryAction(Request $request, $id)
+    public function categoryAction($id)
     {
-        return $this->render('catalog/categories/category.html.twig', [
-            'category' => $this->get('api.catalog.categories')->getCategory($id),
-        ]);
+        $data = $this->generatorInterface->generate("catalog_category_view", $id);
+
+        return [
+            'category' => $data,
+        ];
     }
     /**
      * @Route("/catalog/product/{sku}", name="catalog_product")
+     * @Template(":catalog/product:view.html.twig")
      */
-    public function productAction(Request $request, $sku)
+    public function productAction($sku)
     {
-        return $this->render('catalog/product/view.html.twig', [
-            'product' => $this->get('api.catalog.product')->getProduct($sku),
-        ]);
+        $data = $this->generatorInterface->generate('catalog_product_view', $sku);
+        
+        return [
+            'product' => $data,
+        ];
     }
 }
