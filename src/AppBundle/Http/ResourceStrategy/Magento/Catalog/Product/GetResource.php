@@ -44,18 +44,7 @@ class GetResource
         if($response['type_id'] == "configurable"){
             $response["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
         }
-        dump($response);
 
         return $response;
     }
-
-    /**
-     * @param $resource
-     * @return bool checks for resource support for given request
-     */
-    public function supports($resource) : bool
-    {
-        return $this->resourceName == $resource;
-    }
-
 }
