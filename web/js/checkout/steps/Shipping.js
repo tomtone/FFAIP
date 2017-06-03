@@ -4,84 +4,16 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ShoppingCart = require('../../cart/ShoppingCart');
-var Address = require('../../customer/Address');
+var AddressSelect = require('../components/AddressSelect');
+var ShippingMethodSelect = require('../components/ShippingMethodSelect');
 var Client = require('../../remote/Client');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      addresses: [],
-      addressId: null
-    }
-  },
-  componentDidMount: function() {
-    this.loadFromServer();
-  },
-  loadFromServer: function() {
-    Client.getCustomer(
-      function (data) {
-        var newState = {addresses: data.customer.addresses};
-        if (data.customer.addresses.length > 0 && this.state.addressId == null) {
-          // init selected address
-          newState['addressId'] = data.customer.addresses[0].id;
-        }
-        this.setState(newState);
-      }.bind(this)
-    );
-  },
-  changeAddress: function(event) {
-    var selectedAddressId = parseInt($(event.target).attr('data-address-id'));
-    if (selectedAddressId) {
-      this.setState({ addressId: selectedAddressId  });
-    }
-  },
   render: function() {
-    var self = this;
-    var remoteAddresses = this.state.addresses;
-    var selectedAddressId = this.state.addressId;
-
-    var addresses = remoteAddresses.map(function(address) {
-      var style = {};
-      var isSelected = address.id == selectedAddressId;
-      if (isSelected) {
-        style['background-color'] = '#5cb85c';
-      }
-      var selectButton = (
-        <button onClick={self.changeAddress.bind(self)} data-address-id={ address.id } >
-          Select
-        </button>
-      );
-      return (
-        <Panel style={style}>
-          <Address
-            addressId={ address.id }
-            firstname={ address.firstname }
-            lastname={ address.lastname }
-            street={ address.street }
-            city={ address.city }
-            region={ address.region }
-            postcode={ address.postcode }
-            country_id={ address.country_id }
-            telephone={ address.telephone }
-          />
-        { isSelected ? '' : selectButton }
-        </Panel>
-      );
-    });
     var addressPanel = (
       <div>
         <Panel header="Shipping Address">
-          { addresses }
-        </Panel>
-      </div>
-    );
-    var methodPanel = (
-      <div>
-        <Panel header="Shipping Method">
-          <div>
-            <p><input type="radio" value="Method1" ref="shippingMethod"/> Method1</p>
-            <p><input type="radio" value="Method2" ref="shippingMethod"/> Method2</p>
-          </div>
+          <AddressSelect />
         </Panel>
       </div>
     );
@@ -91,7 +23,7 @@ module.exports = React.createClass({
         <Row className="show-grid">
           <Col xs={12} md={8}>
             { addressPanel }
-            { methodPanel }
+            <ShippingMethodSelect/>
             <button onClick={ this.saveAndContinue }>Next</button>
           </Col>
           <Col xs={6} md={4}>
