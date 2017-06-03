@@ -36,4 +36,24 @@ class ProductHelper
         }
         return null;
     }
+
+    public function getPrice($product)
+    {
+        $minPrice = $product['price'];
+        $maxPrice = $product['price'];
+        if($product['type_id'] == "configurable"){
+            $minPrice = $product['price'];
+            $maxPrice = $product['price'];
+            foreach ($product['child_products'] as $product){
+                if($product['price'] > $maxPrice){
+                    $maxPrice = $product['price'];
+                }
+                if($product['price'] < $minPrice){
+                    $minPrice = $product['price'];
+                }
+            }
+        }
+
+        return $maxPrice;
+    }
 }

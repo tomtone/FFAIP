@@ -14,27 +14,32 @@
                     {{ attribute.value|raw }}
                 {% endif %}
             {% endfor %}
-        </div>
-        <div class="col-md-12">
-            <form method="post" action="{{ path('checkout_add') }}">
-                {% if product.type_id == 'configurable'  %}
-                    {% include 'catalog/product/options/configurable.html.twig' with {'options': product.extension_attributes.configurable_product_options} %}
-                {% endif %}
-                <div class="form-group">
-                    <label for="qty">Qty</label>
-                    <input type="text" class="form-control" id="qty" name="_qty" value="1">
-                </div>
-                <input type="hidden" name="_sku" value="{{ product.sku }}">
-                <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
-            </form>
-
+            <p>Price: {{ product_helper.getPrice(product) }}</p>
         </div>
         <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-heading">Ajax Add to cart</div>
-              <div class="panel-body">
-                <div id="addToCartButton"></div>
-                <script type="text/x-init">
+                <div class="panel-heading">Post Add to cart</div>
+                <div class="panel-body">
+                    <form method="post" action="{{ path('checkout_add') }}">
+                        {% if product.type_id == 'configurable' %}
+                            {% include 'catalog/product/options/configurable.html.twig' with {'options': product.extension_attributes.configurable_product_options} %}
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="qty">Qty</label>
+                            <input type="text" class="form-control" id="qty" name="_qty" value="1">
+                        </div>
+                        <input type="hidden" name="_sku" value="{{ product.sku }}">
+                        <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ajax Add to cart</div>
+                <div class="panel-body">
+                    <div id="addToCartButton"></div>
+                    <script type="text/x-init">
                     {
                         "element": "addToCartButton",
                         "component": "AddToCartButton",
@@ -43,10 +48,10 @@
                           "qtyInputEnabled": true
                         }
                     }
-                </script>
-              </div>
+                    </script>
+                </div>
             </div>
         </div>
     </div>
-{{ dump(product) }}
+    {{ dump(product) }}
 {% endblock %}

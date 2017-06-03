@@ -34,22 +34,27 @@
             </ul>
             {% if not is_granted('ROLE_CUSTOMER') %}
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <form class="navbar-form navbar-right" action="{{ path('security_login_check') }}" method="post"
-                          autocomplete="off">
-                        <div class="form-group">
-                            <input type="text" placeholder="Email" class="form-control" name="_username" readonly
-                                   onfocus="this.removeAttribute('readonly');">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" name="_password" class="form-control" readonly
-                                   onfocus="this.removeAttribute('readonly');">
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        <input type="submit" value="submit" class="btn btn-success"/>
-                    </form>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-3"></i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form class="navbar-form navbar-right" action="{{ path('security_login_check') }}" method="post"
+                                  autocomplete="off">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Email" class="form-control" name="_username" readonly
+                                           onfocus="this.removeAttribute('readonly');">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" placeholder="Password" name="_password" class="form-control" readonly
+                                           onfocus="this.removeAttribute('readonly');">
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <input type="submit" value="submit" class="btn btn-success"/>
+                            </form>
+                        </li>
+                        <li><a href="{{ path('registration_form') }}">Register</a></li>
+                    </ul>
                 </li>
-                <li><a href="{{ path('registration_form') }}">Register</a></li>
             </ul>
             {% else %}
                 <ul class="nav navbar-nav navbar-right">

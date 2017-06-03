@@ -91,3 +91,12 @@ services:
       - "@kernel"
     tags:
       - { name: 'strategies', type: 'fixture' }
+
+  app.strategies.fixture.get.configurable.product.children:
+    class: AppBundle\Http\ResourceStrategy\Fixture\Catalog\Product\Type\Configurable\GetChildrenResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "@kernel"
+    tags:
+      - { name: 'strategies', type: 'fixture' }

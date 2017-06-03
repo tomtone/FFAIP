@@ -43,7 +43,7 @@ class CatalogController
     public function categoryAction($id)
     {
         $data = $this->generatorInterface->generate("catalog_category_view", $id);
-
+        dump($data);
         return [
             'category' => $data,
         ];

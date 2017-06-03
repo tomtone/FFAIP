@@ -12,6 +12,7 @@
                 </div>
                 <p>{{ product.product.name|raw }}</p>
                 <p>{{ product.product.sku }}</p>
+                <p>Price: {{ product_helper.getPrice(product.product) }}</p>
                 <a href="{{ path('catalog_product', {sku: product.product.sku}) }}" class="btn btn-default">Details</a>
                 <script type="text/x-init">
                     {

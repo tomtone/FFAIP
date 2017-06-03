@@ -1,0 +1,977 @@
+[
+  {
+    "sku": "WH01-XS-Green",
+    "name": "Mona Pullover Hoodlie-XS-Green",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "167"
+      },
+      {
+        "attribute_code": "color",
+        "value": "53"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xs-green"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-XS-Orange",
+    "name": "Mona Pullover Hoodlie-XS-Orange",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "167"
+      },
+      {
+        "attribute_code": "color",
+        "value": "56"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xs-orange"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-XS-Purple",
+    "name": "Mona Pullover Hoodlie-XS-Purple",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "167"
+      },
+      {
+        "attribute_code": "color",
+        "value": "57"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xs-purple"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-S-Green",
+    "name": "Mona Pullover Hoodlie-S-Green",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "168"
+      },
+      {
+        "attribute_code": "color",
+        "value": "53"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-s-green"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-S-Orange",
+    "name": "Mona Pullover Hoodlie-S-Orange",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "168"
+      },
+      {
+        "attribute_code": "color",
+        "value": "56"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-s-orange"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-S-Purple",
+    "name": "Mona Pullover Hoodlie-S-Purple",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "168"
+      },
+      {
+        "attribute_code": "color",
+        "value": "57"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-s-purple"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-M-Green",
+    "name": "Mona Pullover Hoodlie-M-Green",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "169"
+      },
+      {
+        "attribute_code": "color",
+        "value": "53"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-m-green"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-M-Orange",
+    "name": "Mona Pullover Hoodlie-M-Orange",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "169"
+      },
+      {
+        "attribute_code": "color",
+        "value": "56"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-m-orange"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-M-Purple",
+    "name": "Mona Pullover Hoodlie-M-Purple",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "169"
+      },
+      {
+        "attribute_code": "color",
+        "value": "57"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-m-purple"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-L-Green",
+    "name": "Mona Pullover Hoodlie-L-Green",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "170"
+      },
+      {
+        "attribute_code": "color",
+        "value": "53"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-l-green"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-L-Orange",
+    "name": "Mona Pullover Hoodlie-L-Orange",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "170"
+      },
+      {
+        "attribute_code": "color",
+        "value": "56"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-l-orange"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-L-Purple",
+    "name": "Mona Pullover Hoodlie-L-Purple",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "170"
+      },
+      {
+        "attribute_code": "color",
+        "value": "57"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-l-purple"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-XL-Green",
+    "name": "Mona Pullover Hoodlie-XL-Green",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "171"
+      },
+      {
+        "attribute_code": "color",
+        "value": "53"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-green_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xl-green"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-XL-Orange",
+    "name": "Mona Pullover Hoodlie-XL-Orange",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "171"
+      },
+      {
+        "attribute_code": "color",
+        "value": "56"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-orange_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xl-orange"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  },
+  {
+    "sku": "WH01-XL-Purple",
+    "name": "Mona Pullover Hoodlie-XL-Purple",
+    "attribute_set_id": 9,
+    "price": 57,
+    "status": 1,
+    "type_id": "simple",
+    "created_at": "2017-06-03 01:02:22",
+    "updated_at": "2017-06-03 01:02:22",
+    "weight": 1,
+    "extension_attributes": [],
+    "product_links": [],
+    "tier_prices": [],
+    "custom_attributes": [
+      {
+        "attribute_code": "required_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "has_options",
+        "value": "0"
+      },
+      {
+        "attribute_code": "tax_class_id",
+        "value": "2"
+      },
+      {
+        "attribute_code": "category_ids",
+        "value": [
+          "24",
+          "8",
+          "34",
+          "2"
+        ]
+      },
+      {
+        "attribute_code": "size",
+        "value": "171"
+      },
+      {
+        "attribute_code": "color",
+        "value": "57"
+      },
+      {
+        "attribute_code": "image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "small_image",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "thumbnail",
+        "value": "\/w\/h\/wh01-purple_main.jpg"
+      },
+      {
+        "attribute_code": "url_key",
+        "value": "mona-pullover-hoodlie-xl-purple"
+      },
+      {
+        "attribute_code": "msrp_display_actual_price_type",
+        "value": "0"
+      }
+    ]
+  }
+]

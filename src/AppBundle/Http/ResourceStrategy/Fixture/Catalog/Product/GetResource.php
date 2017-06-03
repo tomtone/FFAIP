@@ -7,9 +7,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 
 class GetResource
-    extends AbstractFixtureResourceStrategy
+    extends
+        AbstractFixtureResourceStrategy
     implements
-    ResourceStrategyInterface
+        ResourceStrategyInterface
 {
     /**
      * @var string resource target uri
@@ -34,16 +35,11 @@ class GetResource
     {
         $productSku = reset($args);
         $data = $this->getFileContent('catalog/product/' . $productSku . '.json');
+
+        if($data['type_id'] == "configurable"){
+            $data["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $data['sku']);
+        }
+
         return $data;
     }
-
-    /**
-     * @param $resource
-     * @return bool checks for resource support for given request
-     */
-    public function supports($resource) : bool
-    {
-        return $this->resourceName == $resource;
-    }
-
 }

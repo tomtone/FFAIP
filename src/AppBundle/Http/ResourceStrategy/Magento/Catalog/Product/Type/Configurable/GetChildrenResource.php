@@ -1,12 +1,12 @@
 <?php
-namespace AppBundle\Http\ResourceStrategy\Magento\Catalog\Product;
+namespace AppBundle\Http\ResourceStrategy\Magento\Catalog\Product\Type\Configurable;
 
 use AppBundle\Http\ResourceStrategy\AbstractAdminResourceStrategy;
 use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 
-class GetResource
+class GetChildrenResource
     extends AbstractAdminResourceStrategy
     implements
     ResourceStrategyInterface
@@ -14,7 +14,7 @@ class GetResource
     /**
      * @var string resource target uri
      */
-    protected $uri = "V1/products/:sku";
+    protected $uri = "/V1/configurable-products/:sku/children";
 
     /**
      * @var string Request Method
@@ -24,7 +24,7 @@ class GetResource
     /**
      * @var string
      */
-    protected $resourceName = "catalog_product_view";
+    protected $resourceName = "catalog_product_type_configurable_children";
 
     /**
      * @param null $args
@@ -32,19 +32,15 @@ class GetResource
      */
     public function request($args = null) : array
     {
-        $productSku = reset($args);
-        $uri = str_replace(':sku', $productSku, $this->uri);
+        $parentSku = reset($args);
+        $uri = str_replace(':sku', $parentSku, $this->uri);
         $uri = $this->scopeContext->prepareUri(['global' => $uri]);
 
-        $request = new Request('GET', $uri, $this->header);
+        $request = new Request($this->method, $uri, $this->header);
         $client = new Client();
         $response = $client->send($request);
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 
-        if($response['type_id'] == "configurable"){
-            $response["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
-        }
-        dump($response);
 
         return $response;
     }
