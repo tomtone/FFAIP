@@ -38,7 +38,7 @@ class CategoryMenuBuilder
         $categories = $this->resourceGenerator->generate('catalog_category_list');
 
         foreach ($categories as $category ) {
-            $parent = $menu->addChild($category['name'], array('route' => 'catalog_category', 'routeParameters' => ['id' => $category['id']]));
+            $parent = $menu->addChild($category['name'], array('route' => 'catalog_category', 'routeParameters' => ['categoryId' => $category['id']]));
             if(count($category['children_data']) > 0) {
                 $parent->setAttribute('dropdown', true);
             }
@@ -56,7 +56,7 @@ class CategoryMenuBuilder
     {
         if(count($childCategories) > 0){
             foreach ($childCategories as $category){
-                $childNode = $parentNode->addChild($category['name'], array('route' => 'catalog_category', 'routeParameters' => ['id' => $category['id']]));
+                $childNode = $parentNode->addChild($category['name'], array('route' => 'catalog_category', 'routeParameters' => ['categoryId' => $category['id']]));
                 if(isset($category['children_data'])){
                     #$childNode->setAttribute('dropdown', true);
                     $this->appendChildren($category['children_data'], $childNode);

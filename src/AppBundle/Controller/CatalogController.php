@@ -37,13 +37,13 @@ class CatalogController
     }
 
     /**
-     * @Route("/catalog/category/{id}", name="catalog_category")
+     * @Route("/catalog/category/{categoryId}", name="catalog_category")
      * @Template(":catalog/categories:category.html.twig")
      */
-    public function categoryAction($id)
+    public function categoryAction($categoryId)
     {
-        $data = $this->generatorInterface->generate("catalog_category_view", $id);
-        dump($data);
+        $data = $this->generatorInterface->generate("catalog_category_view", $categoryId);
+
         return [
             'category' => $data,
         ];

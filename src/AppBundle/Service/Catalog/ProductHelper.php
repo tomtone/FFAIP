@@ -28,9 +28,9 @@ class ProductHelper
         return $value;
     }
 
-    private function searchForId($id, $array) {
+    private function searchForId($optionId, $array) {
         foreach ($array as $key => $val) {
-            if ($val['value'] == $id) {
+            if ($val['value'] == $optionId) {
                 return $val['label'];
             }
         }
