@@ -2,12 +2,14 @@ var React = require('react')
 var Panel = require('react-bootstrap').Panel;
 var Address = require('../../customer/Address');
 var Client = require('../../remote/Client');
+var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
       addressId: null,
       addresses: [],
+      isLoading: false
     }
   },
   componentDidMount: function() {
@@ -75,9 +77,12 @@ module.exports = React.createClass({
         </Panel>
       );
     });
+
+    var spinner = (<Spinner />);
+
     return (
       <div>
-        { addresses }
+        { this.props.loading ? spinner : addresses  }
       </div>
     );
   },

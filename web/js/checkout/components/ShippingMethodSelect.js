@@ -1,6 +1,7 @@
 var React = require('react')
 var Panel = require('react-bootstrap').Panel;
 var Client = require('../../remote/Client');
+var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
   render: function() {
@@ -16,11 +17,13 @@ module.exports = React.createClass({
       );
     });
 
+    var spinner = (<Spinner />);
+
     return (
       <div>
         <Panel header="Shipping Method">
           <div>
-            { methods }
+            { this.props.loading ? spinner : methods  }
           </div>
         </Panel>
       </div>
