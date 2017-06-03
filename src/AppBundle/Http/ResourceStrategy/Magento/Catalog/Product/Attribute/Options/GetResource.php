@@ -7,9 +7,10 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 
 class GetResource
-    extends AbstractAdminResourceStrategy
+    extends
+        AbstractAdminResourceStrategy
     implements
-    ResourceStrategyInterface
+        ResourceStrategyInterface
 {
     /**
      * @var string resource target uri

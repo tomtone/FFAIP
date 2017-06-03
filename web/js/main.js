@@ -7,11 +7,13 @@ var Minicart = require('./minicart/Minicart');
 var AddToCartButton = require('./cart/AddButton');
 var ShoppingCart = require('./cart/ShoppingCart');
 var Checkout = require('./checkout/Checkout');
+var ConfigurableAttributes = require('./product/ConfigurableAttributes');
 
 Registry.addClass("Minicart", Minicart);
 Registry.addClass("ShoppingCart", ShoppingCart);
 Registry.addClass("AddToCartButton", AddToCartButton);
 Registry.addClass("Checkout", Checkout);
+Registry.addClass("ConfigurableAttributes", ConfigurableAttributes);
 
 $( document ).ready(function() {
   $.each($("script[type='text/x-init']"), function(index, value) {

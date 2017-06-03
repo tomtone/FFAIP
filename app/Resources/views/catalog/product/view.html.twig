@@ -4,9 +4,9 @@
     <div class="col-md-12">
         <div class="col-md-4">
             <img src="{{ base_url }}pub/media/catalog/product/{{ product.image }}" style="max-width: 250px"/>
-            <div class="media-gallery">
+            <div class="media-gallery row" style="padding: 5px;">
                 {% for image in product.media_gallery_entries %}
-                    <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" style="max-width: 250px"/>
+                    <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" class="img-thumbnail" style="max-width: 80px"/>
                 {% endfor %}
             </div>
         </div>
@@ -24,9 +24,21 @@
                 <div class="panel-heading">Post Add to cart</div>
                 <div class="panel-body">
                     <form method="post" action="{{ path('checkout_add') }}">
-                        {% if product.type_id == 'configurable' %}
+                        {#{% if product.type_id == 'configurable' %}
                             {% include 'catalog/product/options/configurable.html.twig' with {'options': product.extension_attributes.configurable_product_options} %}
-                        {% endif %}
+                        {% endif %}#}
+                        {{ dump(product.extension_attributes.configurable_product_options) }}
+                        <div id="configurableOptions"></div>
+                        <script type="text/x-init">
+                            {
+                                "element": "configurableOptions",
+                                "component": "ConfigurableAttributes",
+                                "props": {
+                                    "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options)|raw }},
+                                    "anyUrl": "{{ base_url }}pub/media/catalog/product/"
+                                }
+                            }
+                        </script>
                         <div class="form-group">
                             <label for="qty">Qty</label>
                             <input type="text" class="form-control" id="qty" name="_qty" value="1">

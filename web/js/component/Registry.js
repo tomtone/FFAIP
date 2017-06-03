@@ -9,7 +9,7 @@ module.exports = {
     if (result) {
       return result;
     }
-    throw new "Class with registred name of " + name + " was not found.";
+    throw "Class with registred name of " + name + " was not found.";
   },
   addInstance: function(name, instance) {
     this.instances[name] = instance;
@@ -19,7 +19,7 @@ module.exports = {
     if (result) {
       return result;
     }
-    throw new "Instance with registred name of " + name + " was not found.";
+    throw "Instance with registred name of " + name + " was not found.";
   }
 };
 

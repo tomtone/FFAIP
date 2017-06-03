@@ -8,10 +8,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Address;
-use AppBundle\Form\AddressFormType;
-use AppBundle\Form\PaymentFormType;
-use AppBundle\Form\ShippingMethodFormType;
 use AppBundle\Http\RequestGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -22,20 +18,19 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class: CheckoutController
  *
- * @Route(service="app.controller.checkout")
  */
 class CheckoutController extends Controller
 {
-    private $generatorInterface;
+    #private $generatorInterface;
 
     /**
      * CatalogController constructor.
      * @param RequestGeneratorInterface $generatorInterface
      */
-    public function __construct(RequestGeneratorInterface $generatorInterface)
+    /*public function __construct(RequestGeneratorInterface $generatorInterface)
     {
         $this->generatorInterface = $generatorInterface;
-    }
+    }*/
 
     /**
      * @Route("/checkout/add", name="checkout_add")
@@ -75,7 +70,7 @@ class CheckoutController extends Controller
      */
     public function checkoutShippingAction()
     {
-        $data = $this->generatorInterface->generate("customer_customer");
+        $data = $this->get('app.strategy.generator')->generate("customer_customer");
         return [
             'customer' => $data,
         ];
