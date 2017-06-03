@@ -21,19 +21,30 @@ module.exports = {
   updateQty: function(itemId, qty, successCallback) {
     $.ajax({
       url: '/api/cart/items/'+ itemId + '/update_qty',
-      data: { qty: qty },
+      data: data,
       method: 'PUT',
       success: successCallback,
       error: this.handleError
     });
   },
-  addItem: function(sku, qty, successCallback) {
+  addItem: function(sku, qty, configuredOptions, successCallback) {
+
+    var data = {};
+    if(configuredOptions){
+        data = {
+            _qty: qty,
+            _sku: sku,
+            _attributes: configuredOptions
+        };
+    }else{
+        data = {
+            _qty: qty,
+            _sku: sku
+        };
+    }
     $.ajax({
       url: '/api/cart/items',
-      data: {
-        _qty: qty,
-        _sku: sku
-      },
+      data: data,
       method: 'POST',
       success: successCallback,
       error: this.handleError

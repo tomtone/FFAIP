@@ -3,9 +3,21 @@ var Registry = require('../component/Registry');
 var Select = require('../component/Select');
 
 module.exports = React.createClass({
+    getData:function () {
+
+        var options = {}
+        this.props.configurableAttributes.map(function (value) {
+            selectValue = $('select[name="_attributes['+ value.attribute_id +']"]').val();
+            options[value.attribute_id] = selectValue;
+        });
+
+        return options;
+    },
     updateImages: function (event) {
         var imagePath = event.target[event.target.selectedIndex].getAttribute('data-image');
-        document.getElementById('product-base-image').src=this.props.product_base_url + imagePath;
+        if(imagePath) {
+            document.getElementById('product-base-image').src = this.props.product_base_url + imagePath;
+        }
     },
     render: function() {
         var self = this;
@@ -14,7 +26,6 @@ module.exports = React.createClass({
             name = "_attributes[" + value.attribute_id +"]";
             id = "attribute-" + value.id;
             return <Select
-                id={id}
                 name={name}
                 attribute_id={value.attribute_id}
                 label={value.label}

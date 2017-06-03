@@ -5,20 +5,33 @@ var Client = require('../remote/Client');
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      qty: 1
+      qty: 1,
+      disabled: false
     }
   },
   addToCart: function() {
-    Client.addItem(this.props.sku, this.state.qty, function() {
+    this.setState({
+        disabled: true
+    });
+
+    var configurableAttributes = Registry.getInstance("ConfigurableAttributes");
+    var configuredOptions = configurableAttributes.getData();
+    var self = this;
+
+    Client.addItem(this.props.sku, this.state.qty, configuredOptions,  function() {
       var miniCartButton = Registry.getInstance("Minicart");
       miniCartButton.refresh();
+
+        self.setState({
+          disabled: false
+      });
     });
   },
   changeQty: function(e) {
     var qty = e.target.value;
     this.setState({
       qty: qty
-    })
+    });
     return true;
   },
   render: function() {
@@ -28,7 +41,7 @@ module.exports = React.createClass({
     return (
       <div>
         { this.props.qtyInputEnabled ? qtyInput : '' }
-        <button className="btn btn-primary" onClick={this.addToCart.bind(this)}>Add to Cart</button>
+        <button className="btn btn-primary" onClick={this.addToCart.bind(this)} disabled={this.state.disabled}>Add to Cart</button>
       </div>
     );
   }
