@@ -42,13 +42,18 @@ module.exports = React.createClass({
 
     var addresses = remoteAddresses.map(function(address) {
       var style = {};
-      if (address.id == selectedAddressId) {
+      var isSelected = address.id == selectedAddressId;
+      if (isSelected) {
         style['background-color'] = '#5cb85c';
       }
+      var selectButton = (
+        <button onClick={self.changeAddress.bind(self)} data-address-id={ address.id } >
+          Select
+        </button>
+      );
       return (
         <Panel style={style}>
           <Address
-            onClick={self.changeAddress.bind(self)}
             addressId={ address.id }
             firstname={ address.firstname }
             lastname={ address.lastname }
@@ -59,6 +64,7 @@ module.exports = React.createClass({
             country_id={ address.country_id }
             telephone={ address.telephone }
           />
+        { isSelected ? '' : selectButton }
         </Panel>
       );
     });
