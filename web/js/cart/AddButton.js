@@ -17,11 +17,10 @@ module.exports = React.createClass({
       try {
           var configurableAttributes = Registry.getInstance("ConfigurableAttributes");
           configuredOptions = configurableAttributes.getData();
-          var self = this;
       }catch (err){
 
       }
-
+    var self = this;
     Client.addItem(this.props.sku, this.state.qty, configuredOptions,  function() {
       var miniCartButton = Registry.getInstance("Minicart");
       miniCartButton.refresh();
