@@ -7,13 +7,19 @@ module.exports = React.createClass({
     },
     render: function() {
         var options = this.props.options.map(function (option) {
-            return <option value={option.value}>{option.label}</option>
+            var optionElement = '';
+            if(option.image){
+                optionElement = <option value={option.value} data-image={option.image}>{option.label}</option>;
+            }else{
+                optionElement = <option value={option.value} >{option.label}</option>;
+            }
+            return optionElement;
         });
         var name="_attributes[" + this.props.attribute_id + "]";
         return (
             <div className="form-group">
                 <label htmlFor={this.props.id}>{this.props.label}</label>
-                <select id={this.props.id} name={name} class="form-control" className="form-control">
+                <select id={this.props.id} name={name} class="form-control" className="form-control" onChange={this.props.onChange}>
                     <option>Please select...</option>
                     {options}
                 </select>

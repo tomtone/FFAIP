@@ -25,7 +25,7 @@ class GetResource
     /**
      * @var string
      */
-    protected $resourceName = "catalog_product_attribute";
+    protected $resourceName = "catalog_product_attribute_options";
 
     /**
      * @var string

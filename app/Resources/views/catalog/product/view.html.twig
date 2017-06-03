@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3">
-            <img src="{{ base_url }}pub/media/catalog/product/{{ product.image }}" style="max-width: 250px"/>
+            <img src="{{ base_url }}pub/media/catalog/product/{{ product.image }}" id="product-base-image" style="max-width: 250px"/>
             <div class="media-gallery row" style="padding: 5px;">
                 {% for image in product.media_gallery_entries %}
                     <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" class="img-thumbnail" style="max-width: 80px"/>
@@ -32,8 +32,8 @@
                                     "element": "configurableOptions",
                                     "component": "ConfigurableAttributes",
                                     "props": {
-                                        "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options)|raw }},
-                                        "anyUrl": "{{ base_url }}pub/media/catalog/product/"
+                                        "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options, product.child_products)|raw }},
+                                        "product_base_url": "{{ base_url }}pub/media/catalog/product/"
                                     }
                                 }
                             </script>

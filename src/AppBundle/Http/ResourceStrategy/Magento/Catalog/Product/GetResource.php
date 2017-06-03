@@ -50,7 +50,8 @@ class GetResource
         $response = $this->prepareImages($response);
 
         if($response['type_id'] == "configurable"){
-            $response["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
+            $childProducts = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
+            $response["child_products"] = $childProducts;
         }
 
         return $response;

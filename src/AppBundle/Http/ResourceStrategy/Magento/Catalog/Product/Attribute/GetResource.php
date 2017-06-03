@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Http\ResourceStrategy\Magento\Catalog\Product\Attribute\Options;
+namespace AppBundle\Http\ResourceStrategy\Magento\Catalog\Product\Attribute;
 
 use AppBundle\Http\ResourceStrategy\AbstractAdminResourceStrategy;
 use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
@@ -15,7 +15,7 @@ class GetResource
     /**
      * @var string resource target uri
      */
-    protected $uri = "V1/products/attributes/:attributeId/options";
+    protected $uri = "V1/products/attributes/:attributeId";
 
     /**
      * @var string Request Method

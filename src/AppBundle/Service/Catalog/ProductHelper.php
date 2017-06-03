@@ -25,9 +25,33 @@ class ProductHelper
 
     public function getAttributeValue($optionId, $attribute)
     {
-        $data = $this->resourceGenerator->generate('catalog_product_attribute', $attribute['attribute_id']);
+        $data = $this->resourceGenerator->generate('catalog_product_attribute_options', $attribute['attribute_id']);
         $value = $this->searchForId($optionId, $data);
         return $value;
+    }
+
+    /**
+     * @param $optionId
+     * @param $attribute
+     * @param $childProducts
+     * @return bool|string
+     */
+    private function getOptionImage($optionId, $attribute, $childProducts)
+    {
+        $data = $this->resourceGenerator->generate('catalog_product_attribute', $attribute['attribute_id']);
+        if($data['attribute_code'] != 'color') return false;
+        foreach ($childProducts as $product){
+            foreach ($product['custom_attributes'] as $attribute){
+                if($attribute['attribute_code'] == $data['attribute_code'] && $optionId == $attribute['value']){
+                    foreach ($product['custom_attributes'] as $attributeData){
+                        if($attributeData['attribute_code'] == 'image'){
+                            return $attributeData['value'];
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private function searchForId($optionId, $array)
@@ -40,9 +64,8 @@ class ProductHelper
         return null;
     }
 
-    public function getConfigurableAttributesJson(array $attributes)
+    public function getConfigurableAttributesJson(array $attributes, array $childProducts)
     {
-        dump($attributes);
         $options = [];
         foreach ($attributes as $attribute){
             $option = [
@@ -54,9 +77,11 @@ class ProductHelper
             $values = [];
             foreach ($attribute['values'] as $value){
                 $label = $this->getAttributeValue($value['value_index'], $attribute);
+                $image = $this->getOptionImage($value['value_index'], $attribute, $childProducts);
                 $values[] = [
                     'value' => $value['value_index'],
-                    'label' => $label
+                    'label' => $label,
+                    'image' => $image
                 ];
             }
             $option['options'] = $values;

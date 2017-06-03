@@ -122,6 +122,16 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
+  app.strategies.magento.get.product.attribute:
+    class: AppBundle\Http\ResourceStrategy\Magento\Catalog\Product\Attribute\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "%shop_admin_user%"
+      - "%shop_admin_password%"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
   app.strategies.magento.get.configurable.product.children:
     class: AppBundle\Http\ResourceStrategy\Magento\Catalog\Product\Type\Configurable\GetChildrenResource
     arguments:
