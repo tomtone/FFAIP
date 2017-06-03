@@ -3,24 +3,8 @@ var Panel = require('react-bootstrap').Panel;
 var Client = require('../../remote/Client');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      methods: [],
-    }
-  },
-  componentDidMount: function() {
-    this.loadFromServer();
-  },
-  loadFromServer: function() {
-    Client.getShippingMethods(
-      function (data) {
-        var newState = {methods: data.customer};
-        this.setState(newState);
-      }.bind(this)
-    );
-  },
   render: function() {
-    var methods = this.state.methods.map(function(method) {
+    var methods = this.props.methods.map(function(method) {
       return (
         <p>
           <input

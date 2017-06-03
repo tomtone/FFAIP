@@ -9,11 +9,17 @@ var ShippingMethodSelect = require('../components/ShippingMethodSelect');
 var Client = require('../../remote/Client');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      shippingMethods: [],
+      shippingAddress: null,
+    }
+  },
   render: function() {
     var addressPanel = (
       <div>
         <Panel header="Shipping Address">
-          <AddressSelect />
+          <AddressSelect changedAddress={ this.changedAddress } />
         </Panel>
       </div>
     );
@@ -23,7 +29,7 @@ module.exports = React.createClass({
         <Row className="show-grid">
           <Col xs={12} md={8}>
             { addressPanel }
-            <ShippingMethodSelect/>
+            <ShippingMethodSelect methods={ this.state.shippingMethods } />
             <button onClick={ this.saveAndContinue }>Next</button>
           </Col>
           <Col xs={6} md={4}>
@@ -52,6 +58,19 @@ module.exports = React.createClass({
     )
   },
 
+  changedAddress: function(address) {
+    this.setState({shippingAddress: address});
+    this.loadShippingMethods(address);
+  },
+  loadShippingMethods: function(address) {
+    Client.getShippingMethods(
+      address,
+      function (data) {
+        var newState = {shippingMethods: data.methods};
+        this.setState(newState);
+      }.bind(this)
+    );
+  },
   saveAndContinue: function(e) {
     e.preventDefault()
 

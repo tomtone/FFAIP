@@ -64,13 +64,13 @@ module.exports = {
       error: this.handleError
     });
   },
-  getShippingMethods: function(successCallback) {
+  getShippingMethods: function(address, successCallback) {
     $.ajax({
       url: '/api/checkout/shipping_methods',
-      method: 'get',
+      method: 'post',
+      data: { address: address},
       success: successCallback,
       error: this.handleError
     });
   }
-
 };

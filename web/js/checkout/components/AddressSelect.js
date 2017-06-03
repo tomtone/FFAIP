@@ -22,12 +22,23 @@ module.exports = React.createClass({
           newState['addressId'] = data.customer.addresses[0].id;
         }
         this.setState(newState);
+        this.props.changedAddress(data.customer.addresses[0]);
       }.bind(this)
     );
+  },
+  getAddressById: function(addressId) {
+    for (var i=0;i<this.state.addresses.length;i++) {
+      if (this.state.addresses[i].id == addressId) {
+        return this.state.addresses[i];
+      }
+    }
+    return null;
+
   },
   changeAddress: function(event) {
     var selectedAddressId = parseInt($(event.target).attr('data-address-id'));
     if (selectedAddressId) {
+      this.props.changedAddress(this.getAddressById(selectedAddressId));
       this.setState({ addressId: selectedAddressId  });
     }
   },
