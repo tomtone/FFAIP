@@ -41,6 +41,14 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
+  app.strategies.magento.get.customer.customer:
+    class: AppBundle\Http\ResourceStrategy\Magento\Customer\GetCustomerResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
   app.strategies.magento.get.checkout.customer.payment:
     class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer\GetPaymentResource
     arguments:

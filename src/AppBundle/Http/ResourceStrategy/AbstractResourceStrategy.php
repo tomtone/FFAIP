@@ -65,4 +65,9 @@ class AbstractResourceStrategy
     {
         return $resource == $this->resourceName;
     }
+
+    public function getScope()
+    {
+        return $this->scopeContext;
+    }
 }

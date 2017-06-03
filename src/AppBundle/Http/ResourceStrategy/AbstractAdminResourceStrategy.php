@@ -65,6 +65,4 @@ abstract class AbstractAdminResourceStrategy extends AbstractResourceStrategy
 
         $this->header["Authorization"] = "Bearer " . $this->bearerToken;
     }
-
-
 }

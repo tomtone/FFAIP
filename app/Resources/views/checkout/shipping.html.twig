@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Shipping Address</h1>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<script type="text/x-init">
+    {
+        "component": "Checkout",
+        "props": {
+          "mediaUrl": "{{ base_url }}pub/media/catalog/product/"
+        }
+    }
+</script>
 {% endblock %}

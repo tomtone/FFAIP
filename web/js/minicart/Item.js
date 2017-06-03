@@ -8,6 +8,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       qty: this.props.qty,
+      editable: this.props.editable
     }
   },
   removeItem: function() {
@@ -54,11 +55,7 @@ module.exports = React.createClass({
     );
   },
   render: function() {
-    return (
-      <li className="list-group-item">
-        <small>{this.props.name} - {this.props.sku}</small>
-        <small>{this.props.price}</small>
-        <ProductImage sku={this.props.sku} mediaUrl={this.props.mediaUrl}/>
+    var editForm = (
         <div className="form-group">
           <label>Qty</label>
           <input
@@ -84,6 +81,17 @@ module.exports = React.createClass({
             <span className="fa fa-trash fa-3" aria-hidden="true"></span>
           </button>
         </div>
+    );
+    var qtyPanel = (
+      <span>Qty: {this.state.qty}</span>
+    );
+    return (
+      <li className="list-group-item">
+        <p>{this.props.name} - {this.props.sku}</p>
+        <p><strong>Price: {this.props.price}</strong></p>
+        { this.state.editable ? '' : qtyPanel }
+        <ProductImage sku={this.props.sku} mediaUrl={this.props.mediaUrl}/>
+        { this.state.editable ? editForm : '' }
       </li>
     );
   }

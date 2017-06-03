@@ -23,6 +23,7 @@ class MagentoResourceGenerator implements RequestGeneratorInterface
                 return $strategy->request($args);
             }
         }
+        throw new \Exception("Requested resource " . $resource . " does not exist");
     }
 
     public function addStrategy(ResourceStrategyInterface $strategy)
