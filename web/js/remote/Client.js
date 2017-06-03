@@ -63,5 +63,14 @@ module.exports = {
       success: successCallback,
       error: this.handleError
     });
+  },
+  getShippingMethods: function(successCallback) {
+    $.ajax({
+      url: '/api/checkout/shipping_methods',
+      method: 'get',
+      success: successCallback,
+      error: this.handleError
+    });
   }
+
 };

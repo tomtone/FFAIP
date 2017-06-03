@@ -2,29 +2,32 @@
 namespace AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer;
 
 use AppBundle\Http\ResourceStrategy\AbstractCustomerResourceStrategy;
+use AppBundle\Http\ResourceStrategy\PostRequestInterface;
 use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 
-class GetPaymentResource
+class PostTotalsInformation
     extends AbstractCustomerResourceStrategy
     implements
+    PostRequestInterface,
     ResourceStrategyInterface
 {
     /**
      * @var string resource target uri
      */
-    protected $uri = "V1/carts/mine/payment-information";
+    /* protected $uri = "V1/carts/mine/totals-information"; */
+    protected $uri = "V1/carts/mine/shipping-information";
 
     /**
      * @var string Request Method
      */
-    protected $method = "GET";
+    protected $method = "POST";
 
     /**
-     * @param null $args
-     * @return array|string
+     * @var string
      */
-    public function request($args = null) : array
-    {
-        // TODO: Implement request() method.
+    protected $resourceName = "checkout_totals_information";
+
+    public function getBody(array $args) {
+        return $args;
     }
 }

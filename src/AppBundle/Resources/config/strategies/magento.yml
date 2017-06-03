@@ -32,6 +32,14 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
+  app.strategies.magento.get.customer.customer:
+    class: AppBundle\Http\ResourceStrategy\Magento\Customer\GetCustomerResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
   # Checkout Services
   app.strategies.magento.get.checkout.guest.payment:
     class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Guest\GetPaymentResource
@@ -41,8 +49,8 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
-  app.strategies.magento.get.customer.customer:
-    class: AppBundle\Http\ResourceStrategy\Magento\Customer\GetCustomerResource
+  app.strategies.magento.get.checkout.guest.shipping:
+    class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Guest\GetShippingMethodsResource
     arguments:
       - "@app.scope.context"
       - "@app.strategy.generator"
@@ -51,6 +59,22 @@ services:
 
   app.strategies.magento.get.checkout.customer.payment:
     class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer\GetPaymentResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
+  app.strategies.magento.get.checkout.customer.shipping:
+    class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer\GetShippingMethodsResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
+  app.strategies.magento.get.checkout.customer.totals_information:
+    class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer\PostTotalsInformation
     arguments:
       - "@app.scope.context"
       - "@app.strategy.generator"

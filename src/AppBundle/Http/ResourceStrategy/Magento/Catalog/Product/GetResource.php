@@ -27,6 +27,12 @@ class GetResource
     protected $resourceName = "catalog_product_view";
 
     /**
+     * @var string
+     */
+    protected $adminRequest = true;
+
+
+    /**
      * @param null $args
      * @return array|string
      */

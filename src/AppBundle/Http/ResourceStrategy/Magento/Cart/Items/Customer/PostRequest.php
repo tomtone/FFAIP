@@ -34,25 +34,24 @@ class PostRequest
     {
         // TODO: Implement request() method.
     }
-    
+
     /**
      * Add body for post request.
      *
-     * @param string $payload
+     * @param array $args
      *
      * @return mixed
      */
-    public function setBody(string $payload)
+    public function getBody(array $args)
     {
-        $this->body = $payload;
-        return $this;
+        return $args;
     }
 
     /**
      * @param $resource
      * @return bool checks for resource support for given request
      */
-    public function supports($resource) : bool 
+    public function supports($resource) : bool
     {
         return false;
     }

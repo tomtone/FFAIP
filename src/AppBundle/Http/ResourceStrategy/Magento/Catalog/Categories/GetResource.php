@@ -27,6 +27,12 @@ class GetResource
     protected $resourceName = "catalog_category_list";
 
     /**
+     * @var string
+     */
+    protected $adminRequest = true;
+
+
+    /**
      * @param null $args
      * @return array|string
      */

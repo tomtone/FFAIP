@@ -27,6 +27,11 @@ class GetListResource
     protected $resourceName = "catalog_category_view";
 
     /**
+     * @var string
+     */
+    protected $adminRequest = true;
+
+    /**
      * @param array|null $args
      *
      * @return array
