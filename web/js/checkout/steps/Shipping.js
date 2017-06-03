@@ -4,19 +4,68 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ShoppingCart = require('../../cart/ShoppingCart');
+var Address = require('../../customer/Address');
+var Client = require('../../remote/Client');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      addresses: [],
+      addressId: null
+    }
+  },
+  componentDidMount: function() {
+    this.loadFromServer();
+  },
+  loadFromServer: function() {
+    Client.getCustomer(
+      function (data) {
+        var newState = {addresses: data.customer.addresses};
+        if (data.customer.addresses.length > 0 && this.state.addressId == null) {
+          // init selected address
+          newState['addressId'] = data.customer.addresses[0].id;
+        }
+        this.setState(newState);
+      }.bind(this)
+    );
+  },
+  changeAddress: function(event) {
+    var selectedAddressId = parseInt($(event.target).attr('data-address-id'));
+    if (selectedAddressId) {
+      this.setState({ addressId: selectedAddressId  });
+    }
+  },
   render: function() {
+    var self = this;
+    var remoteAddresses = this.state.addresses;
+    var selectedAddressId = this.state.addressId;
+
+    var addresses = remoteAddresses.map(function(address) {
+      var style = {};
+      if (address.id == selectedAddressId) {
+        style['background-color'] = '#5cb85c';
+      }
+      return (
+        <Panel style={style}>
+          <Address
+            onClick={self.changeAddress.bind(self)}
+            addressId={ address.id }
+            firstname={ address.firstname }
+            lastname={ address.lastname }
+            street={ address.street }
+            city={ address.city }
+            region={ address.region }
+            postcode={ address.postcode }
+            country_id={ address.country_id }
+            telephone={ address.telephone }
+          />
+        </Panel>
+      );
+    });
     var addressPanel = (
       <div>
         <Panel header="Shipping Address">
-          <address>
-          Veronica Costello
-          6146 Honey Bluff Parkway
-          Calder, Michigan 49628-7978
-          United States
-          (555) 229-3326
-          </address>
+          { addresses }
         </Panel>
       </div>
     );

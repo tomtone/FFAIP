@@ -143,6 +143,11 @@ class Scope
         return $this->token instanceof AnonymousToken;
     }
 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
     /**
      * @return mixed
      */

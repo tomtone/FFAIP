@@ -55,5 +55,13 @@ module.exports = {
       </Alert>
     );
     ReactDOM.render(alertInstance, document.getElementById('alert-container'));
+  },
+  getCustomer: function(successCallback) {
+    $.ajax({
+      url: '/api/customer',
+      method: 'get',
+      success: successCallback,
+      error: this.handleError
+    });
   }
 };

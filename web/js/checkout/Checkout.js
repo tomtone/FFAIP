@@ -4,6 +4,7 @@ var Payment  = require('./steps/Payment');
 var assign        = require('object-assign');
 
 var fieldValues = {
+  addressId: null,
   name     : null,
   email    : null,
   password : null,

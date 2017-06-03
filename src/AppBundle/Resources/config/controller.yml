@@ -2,3 +2,10 @@ services:
   app.controller.catalog:
     class: AppBundle\Controller\CatalogController
     arguments: ["@app.strategy.generator"]
+  app.controller.checkout:
+    class: AppBundle\Controller\CheckoutController
+    arguments: ["@app.strategy.generator"]
+  app.controller.api.customer:
+    class: AppBundle\Controller\Api\CustomerController
+    arguments: ["@app.strategy.generator"]
+
