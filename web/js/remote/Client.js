@@ -83,5 +83,22 @@ module.exports = {
       success: successCallback,
       error: this.handleError
     });
-  }
+  },
+  getPaymentMethods: function(successCallback) {
+    $.ajax({
+      url: '/api/checkout/payment_methods',
+      method: 'get',
+      success: successCallback,
+      error: this.handleError
+    });
+  },
+  placeOrder: function(order, successCallback) {
+    $.ajax({
+      url: '/api/checkout/place_order',
+      method: 'post',
+      data: { order: order},
+      success: successCallback,
+      error: this.handleError
+    });
+  },
 };
