@@ -7,13 +7,21 @@ var ShoppingCart = require('../../cart/ShoppingCart');
 var AddressSelect = require('../components/AddressSelect');
 var ShippingMethodSelect = require('../components/ShippingMethodSelect');
 var Client = require('../../remote/Client');
+var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      shippingMethods: [],
+      shippingAddress: null,
+      loading: false
+    }
+  },
   render: function() {
     var addressPanel = (
       <div>
         <Panel header="Shipping Address">
-          <AddressSelect />
+          <AddressSelect changedAddress={ this.changedAddress } loading={this.state.loading}/>
         </Panel>
       </div>
     );
@@ -23,7 +31,7 @@ module.exports = React.createClass({
         <Row className="show-grid">
           <Col xs={12} md={8}>
             { addressPanel }
-            <ShippingMethodSelect/>
+            <ShippingMethodSelect methods={ this.state.shippingMethods } loading={this.state.loading} />
             <button onClick={ this.saveAndContinue }>Next</button>
           </Col>
           <Col xs={6} md={4}>
@@ -52,6 +60,20 @@ module.exports = React.createClass({
     )
   },
 
+  changedAddress: function(address) {
+    this.setState({shippingAddress: address});
+    this.loadShippingMethods(address);
+  },
+  loadShippingMethods: function(address) {
+    this.setState({loading: true});
+    Client.getShippingMethods(
+      address,
+      function (data) {
+        var newState = {shippingMethods: data.methods, loading: false};
+        this.setState(newState);
+      }.bind(this)
+    );
+  },
   saveAndContinue: function(e) {
     e.preventDefault()
 

@@ -2,12 +2,14 @@ var React = require('react')
 var Panel = require('react-bootstrap').Panel;
 var Address = require('../../customer/Address');
 var Client = require('../../remote/Client');
+var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
       addressId: null,
       addresses: [],
+      isLoading: false
     }
   },
   componentDidMount: function() {
@@ -22,12 +24,23 @@ module.exports = React.createClass({
           newState['addressId'] = data.customer.addresses[0].id;
         }
         this.setState(newState);
+        this.props.changedAddress(data.customer.addresses[0]);
       }.bind(this)
     );
+  },
+  getAddressById: function(addressId) {
+    for (var i=0;i<this.state.addresses.length;i++) {
+      if (this.state.addresses[i].id == addressId) {
+        return this.state.addresses[i];
+      }
+    }
+    return null;
+
   },
   changeAddress: function(event) {
     var selectedAddressId = parseInt($(event.target).attr('data-address-id'));
     if (selectedAddressId) {
+      this.props.changedAddress(this.getAddressById(selectedAddressId));
       this.setState({ addressId: selectedAddressId  });
     }
   },
@@ -64,9 +77,12 @@ module.exports = React.createClass({
         </Panel>
       );
     });
+
+    var spinner = (<Spinner />);
+
     return (
       <div>
-        { addresses }
+        { this.props.loading ? spinner : addresses  }
       </div>
     );
   },

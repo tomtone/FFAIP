@@ -1,26 +1,11 @@
 var React = require('react')
 var Panel = require('react-bootstrap').Panel;
 var Client = require('../../remote/Client');
+var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return {
-      methods: [],
-    }
-  },
-  componentDidMount: function() {
-    this.loadFromServer();
-  },
-  loadFromServer: function() {
-    Client.getShippingMethods(
-      function (data) {
-        var newState = {methods: data.customer};
-        this.setState(newState);
-      }.bind(this)
-    );
-  },
   render: function() {
-    var methods = this.state.methods.map(function(method) {
+    var methods = this.props.methods.map(function(method) {
       return (
         <p>
           <input
@@ -32,11 +17,13 @@ module.exports = React.createClass({
       );
     });
 
+    var spinner = (<Spinner />);
+
     return (
       <div>
         <Panel header="Shipping Method">
           <div>
-            { methods }
+            { this.props.loading ? spinner : methods  }
           </div>
         </Panel>
       </div>
