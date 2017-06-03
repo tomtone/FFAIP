@@ -99,3 +99,14 @@ services:
       - "%shop_admin_password%"
     tags:
       - { name: 'strategies', type: 'magento' }
+
+  # Sales Order Services
+  app.strategies.magento.get.orders:
+    class: AppBundle\Http\ResourceStrategy\Magento\Orders\GetResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+      - "%shop_admin_user%"
+      - "%shop_admin_password%"
+    tags:
+      - { name: 'strategies', type: 'magento' }

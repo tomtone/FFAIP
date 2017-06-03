@@ -14,10 +14,23 @@ class CustomerController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $orders = $this->get('api.sales.order')->getOrders();
+        $data = $this->get('app.strategy.generator')->generate("sales_order");
+
         return $this->render('customer/index.html.twig', [
             'customer' => $this->get('security.token_storage')->getToken()->getUser(),
-            'orders' => $orders
+            'orders' => $data
+        ]);
+    }
+
+    /**
+     * @Route("/customer/order/{orderId}",name="customer_order")
+     */
+    public function orderViewAction($orderId)
+    {
+        $data = $this->get('app.strategy.generator')->generate("sales_order", $orderId);
+
+        return $this->render('customer/orders.html.twig', [
+            'order' => $data
         ]);
     }
 }

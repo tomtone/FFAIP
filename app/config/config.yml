@@ -75,4 +75,4 @@ swiftmailer:
     spool: { type: memory }
 
 app:
-  strategy: "fixture"
+  strategy: "magento"

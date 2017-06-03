@@ -58,7 +58,7 @@
             </ul>
             {% else %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ path('customer') }}">Welcome, {{ app.user }}</a></li>
+                    <li><a href="{{ path('customer') }}">{{ app.user }}</a></li>
                     <li><a href="{{ path('security_logout') }}">Logout</a></li>
                 </ul>
             {% endif %}

@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">BillingAddress</div>
+                <div class="panel-body">
+                    {% include ':customer/orders:address.html.twig' with {'address' : order.billing_address} %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">ShippingAddress</div>
+                <div class="panel-body">
+                    {% include ':customer/orders:address.html.twig' with {'address' : order.extension_attributes.shipping_assignments.0.shipping.address} %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Payment Information</div>
+                <div class="panel-body">
+                    {{ order.payment.additional_information.0 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Shipping Information</div>
+                <div class="panel-body">
+                    {{ order.shipping_description }}: {{ order.shipping_amount }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Sku</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.sku }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Totals</div>
+                <div class="panel-body">
+                    <p>Subtotal: {{ order.base_subtotal }}</p>
+                    <p>Shipping: {{ order.shipping_amount }}</p>
+                    <hr/>
+                    <p>Grand Total: {{ order.base_grand_total }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ dump(order) }}
+{% endblock %}

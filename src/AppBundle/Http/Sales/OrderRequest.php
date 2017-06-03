@@ -51,7 +51,7 @@ class OrderRequest extends Request
         ];
 
         $query = http_build_query($searchCriteria);
-        dump($uri . '?' . $query);
+
         return $uri . '?' . $query;
     }
 }
