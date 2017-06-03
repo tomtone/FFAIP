@@ -1,23 +1,30 @@
 var React = require('react')
+var Panel = require('react-bootstrap').Panel;
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+var ShoppingCart = require('../../cart/ShoppingCart');
 
 module.exports = React.createClass({
   render: function() {
     return (
-      <div>
-        <h2>Confirm Registration</h2>
-        <ul>
-          <li><b>Name:</b> {this.props.fieldValues.name}</li>
-          <li><b>Email:</b> {this.props.fieldValues.email}</li>
-          <li><b>Age:</b> {this.props.fieldValues.age}</li>
-          <li><b>Colors:</b> {this.props.fieldValues.colors.join(', ')}</li>
-        </ul>
-        <ul className="form-fields">
-          <li className="form-footer">
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={12} md={8}>
+            <Panel header="Payment Method">
+              <ul>
+                <li>Paypal</li>
+              </ul>
+            </Panel>
             <button className="btn -default pull-left" onClick={this.props.previousStep}>Back</button>
-            <button className="btn -primary pull-right" onClick={this.props.submitRegistration}>Submit Registration</button>
-          </li>
-        </ul>
-      </div>
+            <button className="btn btn-primary pull-right" onClick={ this.saveAndContinue }>Place Order</button>
+          </Col>
+          <Col xs={6} md={4}>
+            <h2>Order Summary</h2>
+            <ShoppingCart mediaUrl={this.props.mediaUrl} editable={false} />
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 })

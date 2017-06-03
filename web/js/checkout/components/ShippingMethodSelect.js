@@ -5,6 +5,7 @@ var Spinner = require('../../component/Spinner');
 
 module.exports = React.createClass({
   render: function() {
+    var self = this;
     var methods = this.props.methods.map(function(method) {
       return (
         <p>
@@ -13,6 +14,7 @@ module.exports = React.createClass({
             value={ method.method_code }
             ref="ShippingMethod"
             name="ShippingMethod"
+            onChange={ self.props.changedMethod }
           /> { method.method_title } { method.carrier_title } - { method.price_incl_tax }</p>
       );
     });
