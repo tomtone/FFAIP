@@ -1,9 +1,0 @@
-{% for option in options %}
-    <label for="attribute-{{ option.id }}">{{ option.label }}</label>
-    <select id="attribute-{{ option.id }}" name="_attributes[{{ option.attribute_id }}]">
-        <option value="">Please select...</option>
-        {% for value in option.values %}
-            <option value="{{ value.value_index }}">{{ product_helper.getAttributeValue(value.value_index, option) }}</option>
-        {% endfor %}
-    </select>
-{% endfor %}

@@ -9,10 +9,11 @@ module.exports = React.createClass({
         var options = this.props.options.map(function (option) {
             return <option value={option.value}>{option.label}</option>
         });
+        var name="_attributes[" + this.props.attribute_id + "]";
         return (
-            <div class="form-group">
-                <label for={this.props.id}>{this.props.label}</label>
-                <select id={this.props.id} name={this.props.name} class="form-control">
+            <div className="form-group">
+                <label htmlFor={this.props.id}>{this.props.label}</label>
+                <select id={this.props.id} name={name} class="form-control" className="form-control">
                     <option>Please select...</option>
                     {options}
                 </select>

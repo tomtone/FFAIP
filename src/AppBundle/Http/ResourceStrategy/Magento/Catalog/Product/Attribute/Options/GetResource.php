@@ -28,6 +28,11 @@ class GetResource
     protected $resourceName = "catalog_product_attribute";
 
     /**
+     * @var string
+     */
+    protected $adminRequest = true;
+
+    /**
      * @param null $args
      * @return array|string
      */

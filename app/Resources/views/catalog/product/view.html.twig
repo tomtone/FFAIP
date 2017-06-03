@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="col-md-12">
-        <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-3">
             <img src="{{ base_url }}pub/media/catalog/product/{{ product.image }}" style="max-width: 250px"/>
             <div class="media-gallery row" style="padding: 5px;">
                 {% for image in product.media_gallery_entries %}
@@ -10,60 +10,59 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-md-8">
-            <h2>{{ product.name }}</h2>
-            {% for attribute in product.custom_attributes %}
-                {% if attribute.attribute_code == 'description' %}
-                    {{ attribute.value|raw }}
-                {% endif %}
-            {% endfor %}
-            <p>Price: {{ product_helper.getPrice(product) }}</p>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Post Add to cart</div>
-                <div class="panel-body">
-                    <form method="post" action="{{ path('checkout_add') }}">
-                        {#{% if product.type_id == 'configurable' %}
-                            {% include 'catalog/product/options/configurable.html.twig' with {'options': product.extension_attributes.configurable_product_options} %}
-                        {% endif %}#}
-                        {{ dump(product.extension_attributes.configurable_product_options) }}
-                        <div id="configurableOptions"></div>
-                        <script type="text/x-init">
-                            {
-                                "element": "configurableOptions",
-                                "component": "ConfigurableAttributes",
-                                "props": {
-                                    "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options)|raw }},
-                                    "anyUrl": "{{ base_url }}pub/media/catalog/product/"
+
+        <div class="col-md-9">
+            <div class="col-md-12">
+                <h2>{{ product.name }}</h2>
+                {% for attribute in product.custom_attributes %}
+                    {% if attribute.attribute_code == 'description' %}
+                        {{ attribute.value|raw }}
+                    {% endif %}
+                {% endfor %}
+                <p>Price: {{ product_helper.getPrice(product) }}</p>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Post Add to cart</div>
+                    <div class="panel-body">
+                        <form method="post" action="{{ path('checkout_add') }}">
+                            <div id="configurableOptions"></div>
+                            <script type="text/x-init">
+                                {
+                                    "element": "configurableOptions",
+                                    "component": "ConfigurableAttributes",
+                                    "props": {
+                                        "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options)|raw }},
+                                        "anyUrl": "{{ base_url }}pub/media/catalog/product/"
+                                    }
                                 }
-                            }
-                        </script>
-                        <div class="form-group">
-                            <label for="qty">Qty</label>
-                            <input type="text" class="form-control" id="qty" name="_qty" value="1">
-                        </div>
-                        <input type="hidden" name="_sku" value="{{ product.sku }}">
-                        <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
-                    </form>
+                            </script>
+                            <div class="form-group">
+                                <label for="qty">Qty</label>
+                                <input type="text" class="form-control" id="qty" name="_qty" value="1">
+                            </div>
+                            <input type="hidden" name="_sku" value="{{ product.sku }}">
+                            <button type="submit" class="btn btn-primary pull-right">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Ajax Add to cart</div>
-                <div class="panel-body">
-                    <div id="addToCartButton"></div>
-                    <script type="text/x-init">
-                    {
-                        "element": "addToCartButton",
-                        "component": "AddToCartButton",
-                        "props": {
-                          "sku": "{{ product.sku }}",
-                          "qtyInputEnabled": true
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ajax Add to cart</div>
+                    <div class="panel-body">
+                        <div id="addToCartButton"></div>
+                        <script type="text/x-init">
+                        {
+                            "element": "addToCartButton",
+                            "component": "AddToCartButton",
+                            "props": {
+                              "sku": "{{ product.sku }}",
+                              "qtyInputEnabled": true
+                            }
                         }
-                    }
-                    </script>
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>

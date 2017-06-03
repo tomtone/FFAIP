@@ -42,6 +42,7 @@ class ProductHelper
 
     public function getConfigurableAttributesJson(array $attributes)
     {
+        dump($attributes);
         $options = [];
         foreach ($attributes as $attribute){
             $option = [
