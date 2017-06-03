@@ -13,10 +13,14 @@ module.exports = React.createClass({
     this.setState({
         disabled: true
     });
+      var configuredOptions = null;
+      try {
+          var configurableAttributes = Registry.getInstance("ConfigurableAttributes");
+          configuredOptions = configurableAttributes.getData();
+          var self = this;
+      }catch (err){
 
-    var configurableAttributes = Registry.getInstance("ConfigurableAttributes");
-    var configuredOptions = configurableAttributes.getData();
-    var self = this;
+      }
 
     Client.addItem(this.props.sku, this.state.qty, configuredOptions,  function() {
       var miniCartButton = Registry.getInstance("Minicart");

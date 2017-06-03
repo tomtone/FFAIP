@@ -3,17 +3,17 @@ var React = require('react');
 var Registry = require('./component/Registry');
 
 // TODO: make this more dynamic
+var ConfigurableAttributes = require('./product/ConfigurableAttributes');
 var Minicart = require('./minicart/Minicart');
 var AddToCartButton = require('./cart/AddButton');
 var ShoppingCart = require('./cart/ShoppingCart');
 var Checkout = require('./checkout/Checkout');
-var ConfigurableAttributes = require('./product/ConfigurableAttributes');
 
 Registry.addClass("Minicart", Minicart);
+Registry.addClass("ConfigurableAttributes", ConfigurableAttributes);
 Registry.addClass("ShoppingCart", ShoppingCart);
 Registry.addClass("AddToCartButton", AddToCartButton);
 Registry.addClass("Checkout", Checkout);
-Registry.addClass("ConfigurableAttributes", ConfigurableAttributes);
 
 $( document ).ready(function() {
   $.each($("script[type='text/x-init']"), function(index, value) {
