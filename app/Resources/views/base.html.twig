@@ -29,12 +29,9 @@
             <a class="navbar-brand" href="{{ path('homepage') }}">FFAIP-Project</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ path('catalog_categories') }}">Categories</a></li>
-            </ul>
+            {{ knp_menu_render('main', {'currentClass': 'active', 'template': 'menu/knp_menu.html.twig'}) }}
             <ul id="minicart" class="nav navbar-nav navbar-right">
             </ul>
-
             {% if not is_granted('ROLE_CUSTOMER') %}
             <ul class="nav navbar-nav navbar-right">
                 <li>

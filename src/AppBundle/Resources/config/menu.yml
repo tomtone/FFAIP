@@ -1,0 +1,6 @@
+services:
+  app.category_menu_builder:
+      class: AppBundle\Menu\CategoryMenuBuilder
+      arguments: ["@knp_menu.factory", "@app.strategy.generator"]
+      tags:
+          - { name: knp_menu.menu_builder, method: createCategoryMenu, alias: main } # The alias is what is used to retrieve the menu
