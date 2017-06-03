@@ -3,9 +3,12 @@
 {% block body %}
     <div class="col-md-12">
         <div class="col-md-4">
-            {% for image in product.media_gallery_entries %}
-                <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" style="max-width: 250px"/>
-            {% endfor %}
+            <img src="{{ base_url }}pub/media/catalog/product/{{ product.image }}" style="max-width: 250px"/>
+            <div class="media-gallery">
+                {% for image in product.media_gallery_entries %}
+                    <img src="{{ base_url }}pub/media/catalog/product/{{ image.file }}" style="max-width: 250px"/>
+                {% endfor %}
+            </div>
         </div>
         <div class="col-md-8">
             <h2>{{ product.name }}</h2>

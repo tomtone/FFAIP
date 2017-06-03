@@ -42,7 +42,7 @@ class GetResource
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 
         $response = $this->prepareImages($response);
-        
+
         if($response['type_id'] == "configurable"){
             $response["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
         }

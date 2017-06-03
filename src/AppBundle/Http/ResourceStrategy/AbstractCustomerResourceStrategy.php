@@ -27,7 +27,7 @@ abstract class AbstractCustomerResourceStrategy extends AbstractResourceStrategy
 
     private function setToken()
     {
-        if ($this->getScope()->getToken()) {
+        if (!$this->getScope()->isGuest() && $this->getScope()->getToken()) {
             $this->header['Authorization'] = 'Bearer ' . $this->getScope()->getToken()->getAttribute('bearerToken');
         }
     }
