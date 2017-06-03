@@ -73,14 +73,6 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
-  app.strategies.magento.get.checkout.customer.totals_information:
-    class: AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer\PostTotalsInformation
-    arguments:
-      - "@app.scope.context"
-      - "@app.strategy.generator"
-    tags:
-      - { name: 'strategies', type: 'magento' }
-
   # Catalog services
   app.strategies.magento.get.categories:
     class: AppBundle\Http\ResourceStrategy\Magento\Catalog\Categories\GetResource
