@@ -40,5 +40,25 @@ class CheckoutController extends Controller
             'customer' => $data,
         ]);
     }
-}
 
+
+    /**
+     * @Route("/api/checkout/totals_information",
+     *   name="api_checkout_totals_information"
+     * )
+     */
+    public function changeAddressAction(Request $request)
+    {
+        $payload = [
+            "addressInformation" => [
+                "address" => [
+                    "id" => 1
+                ]
+            ]
+        ];
+        $data = $this->generatorInterface->generate("checkout_totals_information", $payload);
+        return new JsonResponse([
+            'customer' => $data,
+        ]);
+    }
+}

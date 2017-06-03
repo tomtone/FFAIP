@@ -38,14 +38,13 @@ class PostResource
     /**
      * Add body for post request.
      *
-     * @param string $payload
+     * @param array $args
      *
      * @return mixed
      */
-    public function setBody(string $payload)
+    public function getBody(array $args)
     {
-        $this->body = $payload;
-        return $this;
+        return $args;
     }
 
     /**

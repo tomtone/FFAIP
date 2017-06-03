@@ -10,6 +10,7 @@ namespace AppBundle\Http\ResourceStrategy;
 
 
 use AppBundle\Http\MagentoResourceGenerator;
+use AppBundle\Http\ResourceStrategy\PostRequestInterface;
 use AppBundle\Service\Scope;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -20,6 +21,11 @@ class AbstractResourceStrategy
      * @var string resource
      */
     protected $resourceName = "";
+
+    /**
+     * @var string
+     */
+    protected $adminRequest = false;
 
     /**
      * @var string resource target uri
@@ -69,7 +75,7 @@ class AbstractResourceStrategy
         if (!$resourceMatches) {
             return false;
         }
-        return $this->getScope()->isGuest() == $this->isGuestResource();
+        return $this->getScope()->isGuest() == $this->isGuestResource() || $this->isAdminRequest();
     }
 
     /**
@@ -79,12 +85,28 @@ class AbstractResourceStrategy
     public function request($args = null) : array
     {
         $uri = $this->scopeContext->prepareUri(['global' => $this->uri]);
-        $request = new Request('GET', $uri, $this->header);
+        $body = null;
+        if ($this instanceof PostRequestInterface) {
+            $body = $this->getBody($args);
+            if (is_array($body) && sizeof($body) == 1) {
+                // some convenience, take first element if
+                // it is only one, to avoid wrapping it
+                $body = $body[0];
+            }
+            $body = json_encode($body);
+        }
+        $request = new Request($this->method, $uri, $this->header, $body);
+
         $client = new Client();
         $response = $client->send($request);
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 
         return $response;
+    }
+
+    public function isAdminRequest()
+    {
+        return $this->adminRequest;
     }
 
     /**
