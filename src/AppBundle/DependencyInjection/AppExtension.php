@@ -13,8 +13,8 @@ class AppExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $strategyConfiguration = new StrategyConfiguration();
-        $this->processConfiguration($strategyConfiguration, $configs);
+        $strategyConfig = new StrategyConfiguration();
+        $this->processConfiguration($strategyConfig, $configs);
         
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('strategies/magento.yml');
