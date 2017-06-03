@@ -43,4 +43,28 @@ class CheckoutController extends Controller
             'methods' => $data,
         ]);
     }
+
+    /**
+     * @Route("/api/checkout/payment_methods",
+     *   name="api_checkout_payment_methods"
+     * )
+     */
+    public function paymentMethodsAction(Request $request)
+    {
+        $data = $this->generatorInterface->generate("checkout_payment_methods");
+        return new JsonResponse($data);
+    }
+
+    /**
+     * @Route("/api/checkout/place_order",
+     *   name="api_checkout_place_order"
+     * )
+     * @Method("POST")
+     */
+    public function placeOrder(Request $request)
+    {
+        $payload = $request->get('order');
+        $data = $this->generatorInterface->generate("cart_order_put", $payload);
+        return new JsonResponse($data);
+    }
 }

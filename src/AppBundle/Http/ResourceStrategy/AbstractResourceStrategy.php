@@ -11,6 +11,7 @@ namespace AppBundle\Http\ResourceStrategy;
 
 use AppBundle\Http\MagentoResourceGenerator;
 use AppBundle\Http\ResourceStrategy\PostRequestInterface;
+use AppBundle\Http\ResourceStrategy\PutRequestInterface;
 use AppBundle\Service\Scope;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -86,7 +87,7 @@ class AbstractResourceStrategy
     {
         $uri = $this->scopeContext->prepareUri(['global' => $this->uri]);
         $body = null;
-        if ($this instanceof PostRequestInterface) {
+        if ($this instanceof PostRequestInterface || $this instanceof PutRequestInterface) {
             $body = $this->getBody($args);
             if (is_array($body) && sizeof($body) == 1) {
                 // some convenience, take first element if
@@ -100,6 +101,8 @@ class AbstractResourceStrategy
         $client = new Client();
         $response = $client->send($request);
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        var_dump($response);
+        die("...");
 
         return $response;
     }

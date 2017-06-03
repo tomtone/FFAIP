@@ -32,6 +32,14 @@ services:
     tags:
       - { name: 'strategies', type: 'magento' }
 
+  app.strategies.magento.cart.order.put:
+    class: AppBundle\Http\ResourceStrategy\Magento\Cart\Order\Customer\PutResource
+    arguments:
+      - "@app.scope.context"
+      - "@app.strategy.generator"
+    tags:
+      - { name: 'strategies', type: 'magento' }
+
   app.strategies.magento.get.customer.customer:
     class: AppBundle\Http\ResourceStrategy\Magento\Customer\GetCustomerResource
     arguments:

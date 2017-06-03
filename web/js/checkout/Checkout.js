@@ -4,9 +4,11 @@ var Payment  = require('./steps/Payment');
 var assign        = require('object-assign');
 var ReactDOM = require('react-dom');
 var Alert = require('react-bootstrap').Alert;
+var Client = require('../remote/Client');
 
 var fieldValues = {
   addressId: null,
+  paymentMethod: 'checkmo',
   name     : null,
   email    : null,
   password : null,
@@ -44,7 +46,7 @@ var Registration = React.createClass({
                               mediaUrl={this.props.mediaUrl} />
       case 2:
         return <Payment fieldValues={fieldValues}
-                             nextStep={this.nextStep}
+                             placeOrder={this.placeOrder}
                              previousStep={this.previousStep}
                              submitRegistration={this.submitRegistration}
                              mediaUrl={this.props.mediaUrl} />
@@ -79,6 +81,21 @@ var Registration = React.createClass({
         {this.showStep()}
       </main>
     )
+  },
+  placeOrder: function() {
+    var order = {
+      paymentMethod: {
+        method: fieldValues.paymentMethod
+      }
+    };
+    Client.placeOrder(
+      order,
+      function (data) {
+        alert("awesome");
+        // var newState = {shippingMethods: data.methods, loading: false};
+        // this.setState(newState);
+      }.bind(this)
+    );
   }
 });
 

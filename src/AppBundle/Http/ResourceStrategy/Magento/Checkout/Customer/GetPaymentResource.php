@@ -20,11 +20,7 @@ class GetPaymentResource
     protected $method = "GET";
 
     /**
-     * @param null $args
-     * @return array|string
+     * @var string
      */
-    public function request($args = null) : array
-    {
-        // TODO: Implement request() method.
-    }
+    protected $resourceName = "checkout_payment_methods";
 }
