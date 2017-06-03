@@ -9,16 +9,17 @@ module.exports = React.createClass({
     return {
       addressId: null,
       addresses: [],
-      isLoading: false
+      loading: false
     }
   },
   componentDidMount: function() {
     this.loadFromServer();
   },
   loadFromServer: function() {
+    this.setState({loading: true});
     Client.getCustomer(
       function (data) {
-        var newState = {addresses: data.customer.addresses};
+        var newState = {addresses: data.customer.addresses, loading: false};
         if (data.customer.addresses.length > 0 && this.state.addressId == null) {
           // init selected address
           newState['addressId'] = data.customer.addresses[0].id;
@@ -82,7 +83,7 @@ module.exports = React.createClass({
 
     return (
       <div>
-        { this.props.loading ? spinner : addresses  }
+        { this.state.loading ? spinner : addresses  }
       </div>
     );
   },

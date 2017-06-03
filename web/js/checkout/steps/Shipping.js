@@ -14,7 +14,8 @@ module.exports = React.createClass({
     return {
       shippingMethods: [],
       shippingAddress: null,
-      loading: false
+      shippingMethod: null,
+      loading: true
     }
   },
   render: function() {
@@ -26,13 +27,17 @@ module.exports = React.createClass({
       </div>
     );
 
-    return ( <div>
+    return (
       <Grid>
         <Row className="show-grid">
           <Col xs={12} md={8}>
             { addressPanel }
-            <ShippingMethodSelect methods={ this.state.shippingMethods } loading={this.state.loading} />
-            <button onClick={ this.saveAndContinue }>Next</button>
+            <ShippingMethodSelect
+              methods={ this.state.shippingMethods }
+              changedMethod={ this.changedShippingMethod }
+              loading={this.state.loading}
+            />
+            <button className="btn btn-primary pull-right" onClick={ this.saveAndContinue }>Next</button>
           </Col>
           <Col xs={6} md={4}>
             <h2>Order Summary</h2>
@@ -40,28 +45,14 @@ module.exports = React.createClass({
           </Col>
         </Row>
       </Grid>
-
-      <label>Name</label>
-      <input type="text"
-             ref="name"
-             defaultValue={ this.props.fieldValues.name } />
-
-      <label>Password</label>
-      <input type="password"
-             ref="password"
-             defaultValue={ this.props.fieldValues.password } />
-
-      <label>Email</label>
-      <input type="email"
-             ref="email"
-             defaultValue={ this.props.fieldValues.email } />
-      </div>
-
-    )
+    );
   },
-
+  changedShippingMethod: function(event) {
+    var method = $(event.target).val();
+    this.setState({shippingMethod: method});
+  },
   changedAddress: function(address) {
-    this.setState({shippingAddress: address});
+    this.setState({shippingAddress: address, shippingMethod: null});
     this.loadShippingMethods(address);
   },
   loadShippingMethods: function(address) {
@@ -76,16 +67,14 @@ module.exports = React.createClass({
   },
   saveAndContinue: function(e) {
     e.preventDefault()
-
-    // TODO
-    var data = {
-      // name     : this.refs.name.value,
-      // password : this.refs.password.value,
-      // email    : this.refs.email.value,
-      shippingMethod: this.refs.shippingMethod.value,
-      addressId: this.state.addressId
+    if (this.state.shippingMethod == null || this.state.shippingAddress == null) {
+      alert("please select something");
+      return;
     }
-
+    var data = {
+      shippingMethod: this.state.shippingMethod,
+      shippingAddress: this.state.shippingAddress
+    }
     this.props.saveValues(data)
     this.props.nextStep()
   }
