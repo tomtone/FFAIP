@@ -4,7 +4,7 @@ namespace AppBundle\Http\ResourceStrategy\Magento\Checkout\Customer;
 use AppBundle\Http\ResourceStrategy\AbstractCustomerResourceStrategy;
 use AppBundle\Http\ResourceStrategy\ResourceStrategyInterface;
 
-class GetPaymentResource
+class GetShippingMethodsResource
     extends AbstractCustomerResourceStrategy
     implements
     ResourceStrategyInterface
@@ -12,19 +12,15 @@ class GetPaymentResource
     /**
      * @var string resource target uri
      */
-    protected $uri = "V1/carts/mine/payment-information";
+    protected $uri = "V1/carts/mine/shipping-methods";
 
     /**
      * @var string Request Method
      */
-    protected $method = "GET";
+    protected $method = "POST";
 
     /**
-     * @param null $args
-     * @return array|string
+     * @var string
      */
-    public function request($args = null) : array
-    {
-        // TODO: Implement request() method.
-    }
+    protected $resourceName = "checkout_shipping_methods";
 }

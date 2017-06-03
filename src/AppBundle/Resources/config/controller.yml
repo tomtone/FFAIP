@@ -8,4 +8,6 @@ services:
   app.controller.api.customer:
     class: AppBundle\Controller\Api\CustomerController
     arguments: ["@app.strategy.generator"]
-
+  app.controller.api.checkout:
+    class: AppBundle\Controller\Api\CheckoutController
+    arguments: ["@app.strategy.generator"]

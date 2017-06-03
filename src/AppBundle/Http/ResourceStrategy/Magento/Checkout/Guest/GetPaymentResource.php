@@ -27,14 +27,4 @@ class GetPaymentResource
     {
         // TODO: Implement request() method.
     }
-
-    /**
-     * @param $resource
-     * @return bool checks for resource support for given request
-     */
-    public function supports($resource) : bool
-    {
-        return false;
-    }
-
 }

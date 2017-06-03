@@ -125,10 +125,11 @@ module.exports = React.createClass({
 
     // TODO
     var data = {
-      name     : this.refs.name.value,
-      password : this.refs.password.value,
-      email    : this.refs.email.value,
-      shippingMethod: this.refs.shippingMethod.value
+      // name     : this.refs.name.value,
+      // password : this.refs.password.value,
+      // email    : this.refs.email.value,
+      shippingMethod: this.refs.shippingMethod.value,
+      addressId: this.state.addressId
     }
 
     this.props.saveValues(data)
