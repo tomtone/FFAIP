@@ -41,10 +41,26 @@ class GetResource
         $response = $client->send($request);
         $response = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 
+        $response = $this->prepareImages($response);
+        
         if($response['type_id'] == "configurable"){
             $response["child_products"] = $this->resourceGenerator->generate("catalog_product_type_configurable_children", $response['sku']);
         }
 
         return $response;
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function prepareImages(array $product) : array
+    {
+        foreach ($product['custom_attributes'] as $attribute){
+            if(in_array($attribute['attribute_code'], ['image','small_image','thumbnail'])){
+                $product[$attribute['attribute_code']] = $attribute['value'];
+            }
+        }
+        return $product;
     }
 }
