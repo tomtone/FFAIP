@@ -37,16 +37,18 @@
                             }
                         }
                         </script>
-                        <script type="text/x-init">
-                            {
-                                "element": "configurableOptions",
-                                "component": "ConfigurableAttributes",
-                                "props": {
-                                "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options, product.child_products)|raw }},
-                                "product_base_url": "{{ base_url }}pub/media/catalog/product/"
-                            }
-                            }
-                        </script>
+                        {% if product.type_id == 'configurable' %}
+                            <script type="text/x-init">
+                                {
+                                    "element": "configurableOptions",
+                                    "component": "ConfigurableAttributes",
+                                    "props": {
+                                    "configurableAttributes": {{ product_helper.getConfigurableAttributesJson(product.extension_attributes.configurable_product_options, product.child_products)|raw }},
+                                    "product_base_url": "{{ base_url }}pub/media/catalog/product/"
+                                }
+                                }
+                            </script>
+                        {% endif %}
                     </div>
                 </div>
             </div>
