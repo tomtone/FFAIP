@@ -35,36 +35,36 @@
     "shipping_address": {
       "customer_id": null,
       "prefix": null,
-      "firstname": "Thomas",
+      "firstname": "Max",
       "middlename": null,
-      "lastname": "von Gostomski",
+      "lastname": "Mustermann",
       "company": null,
       "street": {
-        "0": "Kulmer Stra\u00dfe"
+        "0": "Street"
       },
-      "city": "Bremen",
+      "city": "Musterhausen",
       "country_id": "DE",
       "region": null,
-      "postcode": "28237",
-      "telephone": "1728725537",
+      "postcode": "12345",
+      "telephone": "1123456789",
       "fax": null,
       "vat_id": null
     },
     "billing_address": {
       "customer_id": null,
       "prefix": null,
-      "firstname": "Thomas",
+      "firstname": "Max",
       "middlename": null,
-      "lastname": "von Gostomski",
+      "lastname": "Mustermann",
       "company": null,
       "street": {
-        "0": "Kulmer Stra\u00dfe"
+        "0": "Street"
       },
-      "city": "Bremen",
+      "city": "Musterhausen",
       "country_id": "DE",
       "region": null,
-      "postcode": "28237",
-      "telephone": "1728725537",
+      "postcode": "12345",
+      "telephone": "1123456789",
       "fax": null,
       "vat_id": null
     }
