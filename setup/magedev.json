@@ -1,0 +1,41 @@
+{
+  "magento_version": "2",
+  "ffaip_path": "~/projects/FFAIP",
+  "domain": "magento2.local",
+  "docker": {
+    "build_strategy": "pull",
+    "containers": [
+      "ElasticSearch",
+      "Mailcatcher",
+      "Main",
+      "Mysql",
+      "Redis",
+      "Varnish",
+      "FFAIP"
+    ],
+    "links": {
+      "main": ["mysql", "redis", "elasticsearch"],
+      "ffaip": ["main"]
+    },
+    "ports": {
+      "main": {
+        "80": "80",
+        "35729": "35729"
+      },
+      "ffaip": {
+        "80": "8080"
+      },
+      "mysql": {
+        "3306": "3306"
+      },
+      "elasticsearch": {
+        "9200": "9200",
+        "9300": "9300"
+      },
+      "mailcatcher": {
+        "1080": "1080",
+        "1025": "1025"
+      }
+    }
+  }
+}

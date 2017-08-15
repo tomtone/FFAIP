@@ -40,3 +40,33 @@ Compile all javascript
 Watch for javascript changes and rebuild stuff
 
     npm run watch
+
+
+
+# Setup with magedev
+
+This is a basic guide, on how to install FFAIP with [Magedev](https://github.com/teamneusta/php-cli-magedev/).
+
+Make sure you have `magedev` installed.
+
+    git clone https://github.com/teamneusta/php-cli-magedev.git && cd php-cli-magedev && git checkout composer-loading
+    composer install --no-dev
+    ln -s $(pwd)/bin/magedev ~/bin/magedev
+    magedev
+
+Suppose we are working in `~/projects`. In fact, some paths are coded into configuration files `setup`.
+
+    git clone https://github.com/magento/magento2.git
+    git clone https://github.com/tomtone/FFAIP.git
+
+    cd ~/projects/FFAIP
+    cp -R setup/.magedev ~/projects/magento2
+    cp setup/magedev.json ~/projects/magento2
+    cp setup/parameters.yml app/config
+
+    cd ~/projects/magento2
+    magedev docker:start -v
+    magedev magento:install
+    docker exec magedev-magento2-ffaip bash -c "chmod +x /root/init.sh && /root/init.sh"
+
+    curl http://localhost:8080
