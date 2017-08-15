@@ -75,7 +75,7 @@ Suppose we are working in `~/projects`. In fact, some paths are coded into confi
 
 # Install Sampledata
 
-docker exec -it magedev-magento2-main bash -c "git clone https://github.com/magento/magento2-sample-data.git /var/www/magento2-sample-data"
-docker exec -it magedev-magento2-main bash -c "cd /var/www/magento2-sample-data && git checkout 2.1.8-rc"
-docker exec -it magedev-magento2-main bash -c "php -f /var/www/magento2-sample-data/dev/tools/build-sample-data.php -- --ce-source=\"/var/www/html\""
-magedev magento:upgrade
+    docker exec -it magedev-magento2-main bash -c "git clone https://github.com/magento/magento2-sample-data.git /var/www/magento2-sample-data"
+    docker exec -it magedev-magento2-main bash -c "cd /var/www/magento2-sample-data && git checkout 2.1.8-rc"
+    docker exec -it magedev-magento2-main bash -c "php -f /var/www/magento2-sample-data/dev/tools/build-sample-data.php -- --ce-source=\"/var/www/html\""
+    magedev magento:upgrade
