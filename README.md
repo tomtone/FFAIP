@@ -65,17 +65,18 @@ Suppose we are working in `~/projects`. In fact, some paths are coded into confi
     cp setup/parameters.yml app/config
 
     cd ~/projects/magento2
-    git checkout 2.1.8
+    git checkout 2.1.7
     magedev docker:start -v
     magedev magento:install
-    docker exec magedev-magento2-ffaip bash -c "chmod +x /root/init.sh && /root/init.sh"
+    docker exec magedev-magento2-ffaip bash -c "chmod +x /root/init.sh && /bin/bash /root/init.sh main"
 
     curl http://localhost:8080
 
 
 # Install Sampledata
 
-    docker exec -it magedev-magento2-main bash -c "git clone https://github.com/magento/magento2-sample-data.git /var/www/magento2-sample-data"
-    docker exec -it magedev-magento2-main bash -c "cd /var/www/magento2-sample-data && git checkout 2.1.8-rc"
-    docker exec -it magedev-magento2-main bash -c "php -f /var/www/magento2-sample-data/dev/tools/build-sample-data.php -- --ce-source=\"/var/www/html\""
+    docker exec -it --user=www-data magedev-magento2-main bash -c "git clone https://github.com/magento/magento2-sample-data.git /var/www/magento2-sample-data"
+    docker exec -it --user=www-data magedev-magento2-main bash -c "cd /var/www/magento2-sample-data && git checkout 2.1.7"
+    docker exec -it --user=www-data magedev-magento2-main bash -c "php -f /var/www/magento2-sample-data/dev/tools/build-sample-data.php -- --ce-source=\"/var/www/html\""
+    docker exec -it magedev-magento2-main bash -c "chmod -R 777 /var/www/magento2-sample-data"
     magedev magento:upgrade
